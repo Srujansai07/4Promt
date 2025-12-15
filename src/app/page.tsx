@@ -170,13 +170,14 @@ function HowItWorks() {
 
 function PromptCard({ prompt, onUnlock }: { prompt: typeof PROMPTS[0], onUnlock: (id: number, type: string) => void }) {
     const isComingSoon = prompt.unlockType === 'coming-soon'
+    const isFree = prompt.unlockType === 'free' || prompt.unlockType === 'form'
 
     const getButtonText = () => {
         switch (prompt.unlockType) {
             case 'free': return '🎁 Get FREE Now'
-            case 'form': return '📝 Fill Form to Unlock'
-            case 'referral': return '🔓 Unlock ($3 or Refer)'
-            case 'paid': return `💳 Unlock $${prompt.price}`
+            case 'form': return '⚡ Instant Unlock (Free)'
+            case 'referral': return '🔓 Unlock (₹249 or Refer)'
+            case 'paid': return `💳 Unlock ₹${prompt.price}`
             case 'coming-soon': return '🔔 Coming Soon'
             default: return '🔓 Unlock'
         }
@@ -184,7 +185,7 @@ function PromptCard({ prompt, onUnlock }: { prompt: typeof PROMPTS[0], onUnlock:
 
     const getButtonClass = () => {
         if (isComingSoon) return 'btn btn-secondary opacity-60 cursor-not-allowed'
-        if (prompt.unlockType === 'free') return 'btn bg-green-600 hover:bg-green-700 text-white'
+        if (isFree) return 'btn bg-green-600 hover:bg-green-700 text-white'
         if (prompt.isMaster) return 'btn btn-master'
         return 'btn btn-unlock'
     }
@@ -196,7 +197,7 @@ function PromptCard({ prompt, onUnlock }: { prompt: typeof PROMPTS[0], onUnlock:
                     🔥 Popular
                 </div>
             )}
-            {prompt.unlockType === 'free' && (
+            {isFree && (
                 <div className="absolute -top-3 left-4 px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
                     🎁 FREE
                 </div>
