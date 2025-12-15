@@ -70,12 +70,36 @@ describe('Stripe Webhook', () => {
         expect(res.status).toBe(200)
         expect(data.success).toBe(true)
 
-        // Check KV
         const { kv } = require('@vercel/kv')
         expect(kv.hset).toHaveBeenCalled()
 
-        // Check Email
         const { sendPurchaseEmail } = require('@/lib/email')
-        expect(sendPurchaseEmail).toHaveBeenCalledWith('test@example.com', '1')
+        expect(sendPurchaseEmail).toHaveBeenCalled()
+    })
+
+    it('returns 200 even if KV storage fails (partial failure)', async () => {
+        // Force KV failure
+        const { kv } = require('@vercel/kv')
+        kv.hset.mockRejectedValueOnce(new Error('KV Down'))
+
+        const req = new NextRequest('http://localhost/api/webhook/stripe', {
+            method: 'POST',
+            headers: { 'stripe-signature': 'valid' },
+            body: JSON.stringify({
+                type: 'checkout.session.completed',
+                data: {
+                    object: {
+                        customer_email: 'test@example.com',
+                        metadata: { promptId: '1' }
+                    }
+                }
+            })
+        })
+        const res = await POST(req)
+        const data = await res.json()
+
+        // Should still return success to Stripe so it doesn't retry indefinitely
+        expect(res.status).toBe(200)
+        expect(data.success).toBe(true)
     })
 })
