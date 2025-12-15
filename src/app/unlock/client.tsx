@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 interface UnlockClientProps {
     prompt: {
+        id: number
         name: string
         icon: string
         content: string
@@ -16,9 +17,35 @@ interface UnlockClientProps {
 
 export default function UnlockClient({ prompt, email, promptId }: UnlockClientProps) {
     const [copied, setCopied] = useState(false)
+    const [activeTab, setActiveTab] = useState('main')
+    const [viewMode, setViewMode] = useState<'rendered' | 'code'>('rendered')
+
+    // Helper to extract sections from the big Prompt 6 text
+    const extractSection = (text: string, startMarker: string, endMarker?: string) => {
+        const startIndex = text.indexOf(startMarker)
+        if (startIndex === -1) return text // Fallback
+
+        let endIndex = text.length
+        if (endMarker) {
+            const foundEnd = text.indexOf(endMarker, startIndex + startMarker.length)
+            if (foundEnd !== -1) endIndex = foundEnd
+        }
+
+        return text.substring(startIndex, endIndex).trim()
+    }
+
+    const getContentToCopy = () => {
+        if (prompt.id === 6) {
+            if (activeTab === 'markdown') return extractSection(prompt.content, 'MARKDOWN MASTER SUPER')
+            if (activeTab === 'json') return extractSection(prompt.content, 'JSON MASTER SUPER')
+            if (activeTab === 'main') return extractSection(prompt.content, 'HIGH - LEVEL SUMMARY', 'BONUS:')
+        }
+        return prompt.content
+    }
 
     const handleCopy = async () => {
-        await navigator.clipboard.writeText(prompt.content)
+        const content = getContentToCopy()
+        await navigator.clipboard.writeText(content)
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
     }
@@ -29,25 +56,43 @@ export default function UnlockClient({ prompt, email, promptId }: UnlockClientPr
     }
 
     const handleDownload = () => {
-        const blob = new Blob([prompt.content], { type: 'text/plain' })
+        const content = getContentToCopy()
+        const blob = new Blob([content], { type: 'text/plain' })
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
-        a.download = `PromptOS-${prompt.name.replace(/\s+/g, '-')}.txt`
+        a.download = `PromptOS-${prompt.name.replace(/\s+/g, '-')}-${activeTab}.txt`
         a.click()
         URL.revokeObjectURL(url)
     }
 
+    const renderContent = () => {
+        let contentToShow = prompt.content
+
+        if (prompt.id === 6) {
+            if (activeTab === 'main') contentToShow = extractSection(prompt.content, 'HIGH - LEVEL SUMMARY', 'BONUS:')
+            else if (activeTab === 'markdown') contentToShow = extractSection(prompt.content, 'MARKDOWN MASTER SUPER')
+            else if (activeTab === 'json') contentToShow = extractSection(prompt.content, 'JSON MASTER SUPER')
+        }
+
+        return (
+            <pre className={`w-full overflow-x-auto p-6 text-sm font-mono leading-relaxed whitespace-pre-wrap ${viewMode === 'code' ? 'text-green-400 bg-[#0d1117]' : 'text-gray-300 bg-black'}`}>
+                {contentToShow}
+            </pre>
+        )
+    }
+
     return (
         <main className="min-h-screen py-20 px-4">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-5xl mx-auto">
                 {/* Back Link */}
                 <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8">
                     <ArrowLeft className="w-4 h-4" /> Back to PromptOS
                 </Link>
 
                 {/* Success Message */}
-                <div className="glass rounded-2xl p-8 mb-8 text-center">
+                <div className="thick-card p-8 mb-8 text-center relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-blue-500"></div>
                     <div className="text-6xl mb-4">{prompt.icon}</div>
                     <h1 className="text-3xl font-bold mb-2">🎉 You've Unlocked It!</h1>
                     <h2 className="text-xl text-gradient font-semibold mb-4">{prompt.name}</h2>
@@ -58,35 +103,89 @@ export default function UnlockClient({ prompt, email, promptId }: UnlockClientPr
                     )}
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-4 mb-6">
-                    <button onClick={handleCopy} className="btn btn-primary flex-1">
-                        {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-                        {copied ? 'Copied!' : 'Copy to Clipboard'}
-                    </button>
-                    <button onClick={handleDownload} className="btn btn-secondary flex-1">
-                        <Download className="w-5 h-5" /> Download
-                    </button>
-                </div>
+                {/* Prompt Content Area */}
+                <div className="bg-black border-2 border-gray-800 rounded-2xl overflow-hidden shadow-2xl mb-8">
+                    {/* Toolbar */}
+                    <div className="border-b-2 border-gray-800 p-4 flex flex-col md:flex-row items-center justify-between gap-4 bg-dark-900">
 
-                {/* Prompt Content */}
-                <div className="glass rounded-2xl p-6 mb-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-semibold">Your Prompt</h3>
-                        <button
-                            onClick={handleCopy}
-                            className="text-gray-400 hover:text-white transition"
-                        >
-                            <Copy className="w-5 h-5" />
-                        </button>
+                        {/* Tabs for Prompt 6 */}
+                        {prompt.id === 6 ? (
+                            <div className="flex bg-dark-800 rounded-lg p-1 border border-gray-700">
+                                <button
+                                    onClick={() => setActiveTab('main')}
+                                    className={`px-4 py-2 rounded-md text-sm font-medium transition ${activeTab === 'main' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'}`}
+                                >
+                                    Strategy
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('markdown')}
+                                    className={`px-4 py-2 rounded-md text-sm font-medium transition ${activeTab === 'markdown' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'}`}
+                                >
+                                    Markdown
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('json')}
+                                    className={`px-4 py-2 rounded-md text-sm font-medium transition ${activeTab === 'json' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'}`}
+                                >
+                                    JSON
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-2">
+                                <div className="flex gap-1.5">
+                                    <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                                    <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                                    <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                                </div>
+                                <span className="text-sm text-gray-500 font-mono ml-2">prompt.txt</span>
+                            </div>
+                        )}
+
+                        <div className="flex items-center gap-3">
+                            {/* View Mode Toggle */}
+                            <div className="flex items-center gap-2 mr-4 border-r border-gray-700 pr-4">
+                                <span className="text-xs text-gray-500">VIEW:</span>
+                                <button
+                                    onClick={() => setViewMode('rendered')}
+                                    className={`p-1.5 rounded ${viewMode === 'rendered' ? 'bg-gray-700 text-white' : 'text-gray-400'}`}
+                                    title="Reader View"
+                                >
+                                    <div className="w-4 h-4 border-2 border-current rounded-sm" />
+                                </button>
+                                <button
+                                    onClick={() => setViewMode('code')}
+                                    className={`p-1.5 rounded ${viewMode === 'code' ? 'bg-gray-700 text-white' : 'text-gray-400'}`}
+                                    title="Code View"
+                                >
+                                    <div className="w-4 h-4 font-mono text-xs flex items-center justify-center">{'<>'}</div>
+                                </button>
+                            </div>
+
+                            <button
+                                onClick={handleCopy}
+                                className="btn bg-white text-black hover:bg-gray-200 flex items-center gap-2 px-4 py-2 text-sm"
+                            >
+                                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                                {copied ? 'Copied!' : 'Copy'}
+                            </button>
+                            <button
+                                onClick={handleDownload}
+                                className="btn btn-secondary p-2"
+                                title="Download .txt"
+                            >
+                                <Download className="w-4 h-4" />
+                            </button>
+                        </div>
                     </div>
-                    <pre className="bg-dark-900 rounded-xl p-6 overflow-x-auto text-sm font-mono text-gray-300 whitespace-pre-wrap">
-                        {prompt.content}
-                    </pre>
+
+                    {/* Content */}
+                    <div className={`relative min-h-[400px] ${viewMode === 'code' ? 'bg-[#0d1117]' : 'bg-black'}`}>
+                        {renderContent()}
+                    </div>
                 </div>
 
                 {/* Share Button */}
-                <div className="text-center">
+                <div className="text-center mb-12">
                     <p className="text-gray-400 text-sm mb-4">
                         Love PromptOS? Share it with your friends!
                     </p>

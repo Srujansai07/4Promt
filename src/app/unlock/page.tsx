@@ -9,8 +9,7 @@ const PROMPT_CONTENT: Record<number, { name: string; icon: string; content: stri
     1: {
         name: 'Starter Format',
         icon: '🌱',
-        content: `# FORMAT 1: YOUR STYLE (Minimal → Expand Everything)
-RAW IDEA: IDEAK
+        content: `RAW IDEA: IDEAK
 
 INSTRUCTIONS TO LLM:
 Expand this raw idea into a complete structured breakdown including:
@@ -34,8 +33,7 @@ Return all output in crisp, clean, simple structure.`
     2: {
         name: 'Pro Builder Format',
         icon: '⚡',
-        content: `# FORMAT 2: TOP WEBSITE-BUILDER STYLE (Industry Standard)
-PROJECT IDEA: IDEAK
+        content: `PROJECT IDEA: IDEAK
 
 TASK:
 Convert this idea into a full website-builder-ready specification.
@@ -57,8 +55,7 @@ Ensure the final output can be directly used by an automated no-code/AI website 
     3: {
         name: 'Industry Engineer Format',
         icon: '🏭',
-        content: `# FORMAT 3: OFFICIAL LLM UNDERSTANDING TEMPLATE (Maximum Clarity for Any AI)
-IDEA INPUT:
+        content: `IDEA INPUT:
 IDEAK
 
 YOUR TASK:
@@ -87,8 +84,7 @@ Rules:
     4: {
         name: 'Universal Architecture',
         icon: '🌐',
-        content: `# FORMAT 4: UNIVERSAL LLM FORMAT (Works on ANY Model, ANY Platform)
-INPUT IDEA: IDEAK
+        content: `INPUT IDEA: IDEAK
 
 OUTPUT REQUIREMENT:
 Generate a universal specification that includes:
@@ -97,39 +93,38 @@ Generate a universal specification that includes:
 2. PRD (Product Requirements Document)
 3. System Architecture Overview
 4. Data Flow Diagram (written description)
-5. API Blueprint
-6. UI/UX Layout (textual, not visual)
+5. API Blueprint`
+6. UI / UX Layout(textual, not visual)
 7. Tasks & Milestones
-8. Final Deliverable Specification (for handoff to builder models)
-9. Additional Insights & Recommendations
+8. Final Deliverable Specification(for handoff to builder models)
+        9. Additional Insights & Recommendations
 
 
 ADDITIONAL RULES:
-- Always maintain numbered lists
+        - Always maintain numbered lists
 - Always include JSON where needed
 - Keep consistent section names for easy parsing
-- Output must be comprehensive, expertly structured, and immediately actionable.
+    - Output must be comprehensive, expertly structured, and immediately actionable.
 - Maintain a confident, structured tone throughout`
     },
     5: {
         name: 'Ultimate A→Z Blueprint',
         icon: '🗺️',
-        content: `# FORMAT 5: ULTIMATE A-TO-Z EXTREME DEPTH FORMAT (For Full System Generation)
-This one forces the LLM to output EVERYTHING needed for a full app build.
-IDEA: IDEAK
+        content: `This one forces the LLM to output EVERYTHING needed for a full app build.
+    IDEA: IDEAK
 
 TASK:
 Expand this idea into a complete A→Z system blueprint ready for automated development.
 
-OUTPUT REQUIRED (MANDATORY):
+OUTPUT REQUIRED(MANDATORY):
 
 1. EXECUTIVE SUMMARY
 2. FULL PRD
-3. USER STORIES (detailed)
-4. FEATURE SPECIFICATIONS (each with acceptance criteria)
+3. USER STORIES(detailed)
+4. FEATURE SPECIFICATIONS(each with acceptance criteria)
 5. DATA MODEL
     - JSON schema
-    - Relations explained
+        - Relations explained
 6. SYSTEM ARCHITECTURE
     - frontend
     - backend
@@ -137,41 +132,39 @@ OUTPUT REQUIRED (MANDATORY):
     - integration points
 7. API DESIGN
     - endpoints
-    - request/response examples
+    - request / response examples
 8. WORKFLOWS
     - user flows
-    - system flows
+        - system flows
 9. COMPLETE IMPLEMENTATION PLAN
-    - sprint-wise tasks
-    - Git branch naming
-    - commit messages
+    - sprint - wise tasks
+        - Git branch naming
+            - commit messages
 10. DEPLOYMENT GUIDE
     - environment setup
-    - hosting steps
-    - CI/CD pipeline
+        - hosting steps
+            - CI / CD pipeline
 11. TEST PLAN
     - unit test list
-    - integration test list
+        - integration test list
 12. SECURITY + PERFORMANCE RULES
 13. FINAL HANDOFF PACKAGE
     - list of files the automated builder must generate
 
-Output everything in clean structured text. No missing sections.`
+Output everything in clean structured text.No missing sections.`
     },
     6: {
         name: 'Master Super Pack',
         icon: '💎',
-        content: `# MASTER SUPER FORMAT 
-
-RAW IDEA: “IDEAK”
+        content: `RAW IDEA: “IDEAK”
 
 INSTRUCTIONS TO LLM:
-Expand the RAW IDEA into a full, combined, multi-layer specification that merges:
-- Simple expansion clarity (Format 1)
-- Industry website-builder style (Format 2)
-- Engineering interpretation style (Format 3)
-- Universal LLM structure (Format 4)
-- Ultimate deep A→Z system design (Format 5)
+Expand the RAW IDEA into a full, combined, multi - layer specification that merges:
+- Simple expansion clarity(Format 1)
+    - Industry website - builder style(Format 2)
+        - Engineering interpretation style(Format 3)
+            - Universal LLM structure(Format 4)
+                - Ultimate deep A→Z system design(Format 5)
 
 Your output MUST include ALL SECTIONS BELOW.
 Do NOT remove or merge sections.  
@@ -180,160 +173,160 @@ Do NOT skip any part.
 Produce the FULL expanded version.
 
 ------------------------------------------------------------------
-1. HIGH-LEVEL SUMMARY (Format 1)
+    1. HIGH - LEVEL SUMMARY(Format 1)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-2. CORE FEATURES (Simple + Industry + Deep Acceptance Criteria)
+    2. CORE FEATURES(Simple + Industry + Deep Acceptance Criteria)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-3. PRODUCT DESCRIPTION (Industry Standard)
+    3. PRODUCT DESCRIPTION(Industry Standard)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-4. USER PERSONAS
+    4. USER PERSONAS
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-5. USER STORIES (Basic + Detailed)
+    5. USER STORIES(Basic + Detailed)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-6. SCREEN / PAGE MAP (Website Builder Format)
+    6. SCREEN / PAGE MAP(Website Builder Format)
+------------------------------------------------------------------`
+
+------------------------------------------------------------------
+    7. USER FLOW(Simple) + SYSTEM FLOW(Advanced)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-7. USER FLOW (Simple) + SYSTEM FLOW (Advanced)
+    8. OBJECTIVES(Primary, Secondary, Tertiary)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-8. OBJECTIVES (Primary, Secondary, Tertiary)
+    9. FULL FEATURE SPECIFICATIONS(With Acceptance Criteria)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-9. FULL FEATURE SPECIFICATIONS (With Acceptance Criteria)
+    10. DATA MODEL(JSON + Relationships)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-10. DATA MODEL (JSON + Relationships)
+    11. API BLUEPRINT
+        - Endpoints
+        - Request / Response
+        - Auth flows
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-11. API BLUEPRINT 
-- Endpoints
-- Request/Response
-- Auth flows
+    12. SYSTEM ARCHITECTURE(Frontend + Backend + DB + Integrations)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-12. SYSTEM ARCHITECTURE (Frontend + Backend + DB + Integrations)
+    13. LOGIC FLOW(Engineering Format)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-13. LOGIC FLOW (Engineering Format)
+    14. PRD(Product Requirements Document)
+        - Problem
+        - Solution
+        - Constraints
+        - KPIs
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-14. PRD (Product Requirements Document)
-- Problem
-- Solution
-- Constraints
-- KPIs
+    15. TECH STACK RECOMMENDATIONS
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-15. TECH STACK RECOMMENDATIONS
+    16. IMPLEMENTATION PLAN(Phases + Sprints + Tasks)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-16. IMPLEMENTATION PLAN (Phases + Sprints + Tasks)
+    17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
+    18. DEVELOPMENT ROADMAP(Timeline)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-18. DEVELOPMENT ROADMAP (Timeline)
+    19. DEPLOYMENT & HOSTING PLAN(with CI / CD)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-19. DEPLOYMENT & HOSTING PLAN (with CI/CD)
+    20. TEST PLAN(Unit + Integration + End - to - end)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-20. TEST PLAN (Unit + Integration + End-to-end)
+    21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
+    22. NON - FUNCTIONAL REQUIREMENTS(Speed, UX, Privacy)
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-22. NON-FUNCTIONAL REQUIREMENTS (Speed, UX, Privacy)
+    23. RISKS & MITIGATION STRATEGIES
 ------------------------------------------------------------------
 
 ------------------------------------------------------------------
-23. RISKS & MITIGATION STRATEGIES
+    24. FINAL HANDOFF PACKAGE
+        - All files / components the builder must generate
+            - Folder structure
+                - Key deliverables
 ------------------------------------------------------------------
 
-------------------------------------------------------------------
-24. FINAL HANDOFF PACKAGE
-- All files/components the builder must generate
-- Folder structure
-- Key deliverables
-------------------------------------------------------------------
-
-OUTPUT RULES:
+    OUTPUT RULES:
 - Follow the exact order above.
 - Use clear headings.
 - Use numbered lists where they are logical.
 - Provide detailed content under every section.
 - Never shorten or summarise unless asked.
-- The output should be complete enough for an automated website-building LLM to generate the entire application end-to-end.
+- The output should be complete enough for an automated website - building LLM to generate the entire application end - to - end.
 
 
 ---
 
-# BONUS: MARKDOWN MASTER SUPER-PROMPT (Format 6.1)
-(Perfect for human readability + most dev tools)
+# BONUS: MARKDOWN MASTER SUPER - PROMPT(Format 6.1)
+    (Perfect for human readability + most dev tools)
 
-# MASTER SUPER FORMAT (Markdown Output)
+# MASTER SUPER FORMAT(Markdown Output)
 Raw Idea: “IDEAK”
 
 ## INSTRUCTIONS TO LLM
-Expand the raw idea into a complete multi-layer specification containing ALL sections below.  
-Output MUST be in **Markdown format only**.  
+Expand the raw idea into a complete multi - layer specification containing ALL sections below.  
+Output MUST be in ** Markdown format only **.  
 Do NOT skip any section.
 
 ---
 
-# 1. High-Level Summary
+# 1. High - Level Summary
 
 # 2. Core Features
-- With basic description
-- With acceptance criteria
+    - With basic description
+        - With acceptance criteria
 
 # 3. Product Description
 
 # 4. User Personas
 
 # 5. User Stories
-- Simple
-- Detailed
+    - Simple
+    - Detailed
 
 # 6. Screen / Page Map
 
 # 7. User Flow & System Flow
 
 # 8. Objectives
-- Primary
-- Secondary
-- Tertiary
+    - Primary
+    - Secondary
+    - Tertiary
 
 # 9. Full Feature Specifications
-- With acceptance criteria
+    - With acceptance criteria
 
 # 10. Data Model
 \`\`\`json
@@ -455,10 +448,10 @@ Deliverables
 }
 \`\`\``
     },
-    7: {
-        name: 'Debug & Optimize',
+7: {
+    name: 'Debug & Optimize',
         icon: '🔧',
-        content: `# DEBUG & OPTIMIZE PROMPT
+            content: `# DEBUG & OPTIMIZE PROMPT
         
 🚧 COMING SOON 🚧
 
@@ -467,11 +460,11 @@ Stay tuned for updates!
 
 ---
 © PromptOS`
-    },
-    8: {
-        name: 'UI/UX Designer',
+},
+8: {
+    name: 'UI/UX Designer',
         icon: '🎨',
-        content: `# UI/UX DESIGNER PROMPT
+            content: `# UI/UX DESIGNER PROMPT
 
 🚧 COMING SOON 🚧
 
@@ -480,11 +473,11 @@ Stay tuned for updates!
 
 ---
 © PromptOS`
-    },
-    9: {
-        name: 'Launch & Scale',
+},
+9: {
+    name: 'Launch & Scale',
         icon: '🚀',
-        content: `# LAUNCH & SCALE PROMPT
+            content: `# LAUNCH & SCALE PROMPT
 
 🚧 COMING SOON 🚧
 
@@ -493,13 +486,14 @@ Stay tuned for updates!
 
 ---
 © PromptOS`
-    },
+},
 }
 
 interface PageProps {
     searchParams: {
         prompt?: string
         email?: string
+        paid?: string
     }
 }
 
@@ -526,8 +520,13 @@ async function UnlockContent({ searchParams }: PageProps) {
     // BUT, the goal is to capture email.
     // So we check if they "purchased" (registered) it.
 
-    if (promptId === 1) {
-        hasAccess = true // Free tier is always accessible
+    // Check for "paid" flag from UPI flow (simulated)
+    const isPaid = searchParams.paid === 'true'
+
+    if (promptId === 1 || promptId === 2) {
+        hasAccess = true // Tier 1 and Tier 2 are free/instant
+    } else if (isPaid) {
+        hasAccess = true // Simulated payment success
     } else if (email) {
         hasAccess = await hasUserPurchased(email, promptId)
     }

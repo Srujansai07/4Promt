@@ -7,8 +7,7 @@ import {
     Mail, User, Lock, Shield
 } from 'lucide-react'
 import Link from 'next/link'
-import { PROMPTS, FAQ_ITEMS } from '@/config/constants'
-import { getGumroadLink, getStripeLink } from '@/config/products'
+import { UPIModal } from '@/components/UPIModal'
 
 
 // ============================================
@@ -19,7 +18,7 @@ function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-black border-b-2 border-gray-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <a href="#" className="flex items-center gap-2">
@@ -40,7 +39,7 @@ function Navbar() {
                 </div>
             </div>
             {isOpen && (
-                <div className="md:hidden glass border-t border-white/5">
+                <div className="md:hidden bg-black border-t-2 border-gray-800">
                     <div className="px-4 py-4 space-y-3">
                         <a href="#prompts" className="block py-2 text-gray-400 hover:text-white">Prompts</a>
                         <a href="#pricing" className="block py-2 text-gray-400 hover:text-white">Pricing</a>
@@ -59,7 +58,7 @@ function Hero() {
             <div className="max-w-7xl mx-auto w-full">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 border-gray-800 bg-black text-sm">
                             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                             <span className="text-gray-400">First Prompt is FREE!</span>
                         </div>
@@ -116,7 +115,7 @@ function Hero() {
                             </div>
                         </div>
                         <div className="glass rounded-2xl overflow-hidden">
-                            <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+                            <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-gray-800">
                                 <span className="w-3 h-3 rounded-full bg-red-500"></span>
                                 <span className="w-3 h-3 rounded-full bg-yellow-500"></span>
                                 <span className="w-3 h-3 rounded-full bg-green-500"></span>
@@ -148,7 +147,7 @@ function HowItWorks() {
         <section id="how-it-works" className="py-24 px-4">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
-                    <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
+                    <span className="inline-block px-4 py-2 rounded-full border-2 border-gray-800 bg-black text-sm text-gray-400 mb-4">
                         Simple Process
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
@@ -243,7 +242,7 @@ function PromptsSection({ onUnlock }: { onUnlock: (id: number, type: string) => 
         <section id="prompts" className="py-24 px-4">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
-                    <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
+                    <span className="inline-block px-4 py-2 rounded-full border-2 border-gray-800 bg-black text-sm text-gray-400 mb-4">
                         🔥 The Framework
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">9 Unlockable Prompt Modules</h2>
@@ -264,7 +263,7 @@ function PricingSection({ onUnlock }: { onUnlock: (id: number, type: string) => 
         <section id="pricing" className="py-24 px-4">
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-16">
-                    <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
+                    <span className="inline-block px-4 py-2 rounded-full border-2 border-gray-800 bg-black text-sm text-gray-400 mb-4">
                         💰 Unlock Options
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">Choose Your Path</h2>
@@ -273,7 +272,7 @@ function PricingSection({ onUnlock }: { onUnlock: (id: number, type: string) => 
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {/* Tier 1 - FREE */}
-                    <div className="prompt-card text-center border-green-500/30">
+                    <div className="prompt-card text-center border-2 border-green-500">
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
                             Start Here!
                         </div>
@@ -302,29 +301,28 @@ function PricingSection({ onUnlock }: { onUnlock: (id: number, type: string) => 
                     <div className="prompt-card text-center">
                         <h3 className="text-xl font-semibold mb-4">Tier 2: Pro Builder</h3>
                         <div className="mb-4">
-                            <span className="text-4xl font-bold text-blue-400">FREE</span>
-                            <span className="text-gray-500 text-sm ml-2">with form</span>
+                            <span className="text-4xl font-bold text-white">FREE</span>
                         </div>
-                        <p className="text-gray-400 text-sm mb-6">Fill a quick form to unlock</p>
+                        <p className="text-gray-400 text-sm mb-6">Instant access. No forms required.</p>
                         <ul className="space-y-2 text-left mb-6">
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-blue-500" /> Name & email required
+                                <Check className="w-4 h-4 text-white" /> Instant Access
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-blue-500" /> LLM shortcuts included
+                                <Check className="w-4 h-4 text-white" /> LLM shortcuts included
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-blue-500" /> JSON templates
+                                <Check className="w-4 h-4 text-white" /> JSON templates
                             </li>
                         </ul>
                         <button onClick={() => onUnlock(2, 'form')} className="btn btn-primary w-full">
-                            📝 Fill Form to Unlock
+                            ⚡ Instant Unlock (Free)
                         </button>
                     </div>
 
                     {/* Tier 3 - Referral */}
                     <div className="prompt-card featured text-center relative">
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full">
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-white text-black text-xs font-bold rounded-full">
                             🔥 Popular
                         </div>
                         <h3 className="text-xl font-semibold mb-4">Tier 3: Industry Pro</h3>
@@ -335,17 +333,17 @@ function PricingSection({ onUnlock }: { onUnlock: (id: number, type: string) => 
                         <p className="text-gray-400 text-sm mb-6">Pay OR invite 3 friends who each invite 3</p>
                         <ul className="space-y-2 text-left mb-6">
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-amber-500" /> Enterprise-ready
+                                <Check className="w-4 h-4 text-white" /> Enterprise-ready
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-amber-500" /> 3-level referral unlock
+                                <Check className="w-4 h-4 text-white" /> 3-level referral unlock
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-amber-500" /> Production-grade
+                                <Check className="w-4 h-4 text-white" /> Production-grade
                             </li>
                         </ul>
                         <button onClick={() => onUnlock(3, 'referral')} className="btn btn-unlock w-full">
-                            🔓 Unlock Now
+                            🔓 Unlock with UPI
                         </button>
                     </div>
                 </div>
@@ -375,7 +373,7 @@ function Testimonials() {
         <section className="py-24 px-4">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
-                    <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
+                    <span className="inline-block px-4 py-2 rounded-full border-2 border-gray-800 bg-black text-sm text-gray-400 mb-4">
                         💬 What People Say
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold">Built With PromptOS</h2>
@@ -443,7 +441,7 @@ function CTASection() {
     return (
         <section className="py-24 px-4">
             <div className="max-w-4xl mx-auto text-center">
-                <div className="glass rounded-3xl p-12">
+                <div className="thick-card p-12">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
                         Start Building for FREE Right Now
                     </h2>
@@ -461,7 +459,7 @@ function CTASection() {
 
 function Footer() {
     return (
-        <footer className="border-t border-white/5 py-12 px-4">
+        <footer className="border-t-2 border-gray-800 py-12 px-4">
             <div className="max-w-7xl mx-auto">
                 <div className="grid md:grid-cols-4 gap-8 mb-8">
                     <div>
@@ -496,7 +494,7 @@ function Footer() {
                         </ul>
                     </div>
                 </div>
-                <div className="border-t border-white/5 pt-8 text-center text-gray-500 text-sm">
+                <div className="border-t-2 border-gray-800 pt-8 text-center text-gray-500 text-sm">
                     © 2024 PromptOS. All rights reserved. Built with ❤️ and AI.
                 </div>
             </div>
@@ -508,110 +506,25 @@ function Footer() {
 // MODALS
 // ============================================
 
-function FreeUnlockModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
-    if (!isOpen || !prompt) return null
+// Modals removed
 
-    return (
-        <div className="modal-overlay active" onClick={onClose}>
-            <div className="modal" onClick={e => e.stopPropagation()}>
-                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <X className="w-6 h-6" />
-                </button>
-                <div className="text-center">
-                    <div className="text-6xl mb-4">🎁</div>
-                    <h3 className="text-2xl font-bold mb-2">It&apos;s FREE!</h3>
-                    <p className="text-gray-400 mb-6">Click below to access your free prompt instantly</p>
-                    <Link
-                        href={`/unlock?prompt=${prompt.id}`}
-                        className="btn btn-primary w-full text-lg py-4"
-                    >
-                        ✨ Access Free Prompt
-                    </Link>
-                </div>
-            </div>
-        </div>
-    )
-}
 
-function FormUnlockModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [submitted, setSubmitted] = useState(false)
+// FormUnlockModal removed as per new requirements
 
-    if (!isOpen || !prompt) return null
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        if (name && email) {
-            setSubmitted(true)
-        }
-    }
-
-    if (submitted) {
-        return (
-            <div className="modal-overlay active" onClick={onClose}>
-                <div className="modal" onClick={e => e.stopPropagation()}>
-                    <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
-                        <X className="w-6 h-6" />
-                    </button>
-                    <div className="text-center">
-                        <div className="text-6xl mb-4">✅</div>
-                        <h3 className="text-2xl font-bold mb-2">Unlocked!</h3>
-                        <p className="text-gray-400 mb-6">Thank you, {name}! Your prompt is ready.</p>
-                        <Link
-                            href={`/unlock?prompt=${prompt.id}&email=${encodeURIComponent(email)}`}
-                            className="btn btn-primary w-full text-lg py-4"
-                        >
-                            ✨ Access Your Prompt
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    return (
-        <div className="modal-overlay active" onClick={onClose}>
-            <div className="modal" onClick={e => e.stopPropagation()}>
-                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <X className="w-6 h-6" />
-                </button>
-                <div className="text-center">
-                    <div className="text-5xl mb-4">{prompt.icon}</div>
-                    <h3 className="text-2xl font-bold mb-2">Unlock {prompt.name}</h3>
-                    <p className="text-gray-400 mb-6">Fill the form below to unlock for FREE</p>
-
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="relative">
-                            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                            <input
-                                type="text"
-                                placeholder="Your name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                                className="w-full bg-dark-800 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500"
-                            />
-                        </div>
-                        <div className="relative">
-                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                            <input
-                                type="email"
-                                placeholder="Your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                className="w-full bg-dark-800 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500"
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary w-full text-lg py-4">
-                            📝 Unlock Now
-                        </button>
-                    </form>
-                    <p className="text-xs text-gray-500 mt-4">We respect your privacy. No spam.</p>
-                </div>
-            </div>
-        </div>
+value = { email }
+onChange = {(e) => setEmail(e.target.value)}
+required
+className = "w-full bg-dark-800 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500"
+    />
+                        </div >
+    <button type="submit" className="btn btn-primary w-full text-lg py-4">
+        📝 Unlock Now
+    </button>
+                    </form >
+    <p className="text-xs text-gray-500 mt-4">We respect your privacy. No spam.</p>
+                </div >
+            </div >
+        </div >
     )
 }
 
@@ -730,19 +643,29 @@ function PaymentModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: (
 
 export default function Home() {
     const [selectedPrompt, setSelectedPrompt] = useState<typeof PROMPTS[0] | null>(null)
-    const [modalType, setModalType] = useState<'free' | 'form' | 'referral' | 'paid' | null>(null)
+    const [showUPI, setShowUPI] = useState(false)
+    const [freeModalOpen, setFreeModalOpen] = useState(false)
 
     const handleUnlock = (id: number, type: string) => {
         const prompt = PROMPTS.find(p => p.id === id)
-        if (prompt && type !== 'coming-soon') {
+        if (!prompt) return
+
+        if (type === 'free') {
             setSelectedPrompt(prompt)
-            setModalType(type as 'free' | 'form' | 'referral' | 'paid')
+            setFreeModalOpen(true)
+        } else if (type === 'form') {
+            // Instant unlock for Tier 2
+            window.location.href = `/unlock?prompt=${id}`
+        } else if (type === 'referral' || type === 'paid') {
+            setSelectedPrompt(prompt)
+            setShowUPI(true)
         }
     }
 
-    const closeModal = () => {
-        setSelectedPrompt(null)
-        setModalType(null)
+    const handleUPISuccess = () => {
+        if (selectedPrompt) {
+            window.location.href = `/unlock?prompt=${selectedPrompt.id}&paid=true`
+        }
     }
 
     return (
@@ -757,11 +680,41 @@ export default function Home() {
             <CTASection />
             <Footer />
 
-            <FreeUnlockModal isOpen={modalType === 'free'} onClose={closeModal} prompt={selectedPrompt} />
-            <FormUnlockModal isOpen={modalType === 'form'} onClose={closeModal} prompt={selectedPrompt} />
-            <ReferralModal isOpen={modalType === 'referral'} onClose={closeModal} prompt={selectedPrompt} />
-            <PaymentModal isOpen={modalType === 'paid'} onClose={closeModal} prompt={selectedPrompt} />
+            <FreeUnlockModal isOpen={freeModalOpen} onClose={() => setFreeModalOpen(false)} prompt={selectedPrompt} />
+
+            <UPIModal
+                isOpen={showUPI}
+                onClose={() => setShowUPI(false)}
+                onSuccess={handleUPISuccess}
+                amount={selectedPrompt?.price || 3}
+                tierName={selectedPrompt?.name || 'Tier'}
+            />
         </main>
+    )
+}
+
+function FreeUnlockModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
+    if (!isOpen || !prompt) return null
+
+    return (
+        <div className="modal-overlay active" onClick={onClose}>
+            <div className="modal" onClick={e => e.stopPropagation()}>
+                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                </button>
+                <div className="text-center">
+                    <div className="text-6xl mb-4">🎁</div>
+                    <h3 className="text-2xl font-bold mb-2">It&apos;s FREE!</h3>
+                    <p className="text-gray-400 mb-6">Click below to access your free prompt instantly</p>
+                    <Link
+                        href={`/unlock?prompt=${prompt.id}`}
+                        className="btn btn-primary w-full text-lg py-4"
+                    >
+                        ✨ Access Free Prompt
+                    </Link>
+                </div>
+            </div>
+        </div>
     )
 }
 

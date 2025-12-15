@@ -60,10 +60,6 @@ export default function RootLayout({
                 {/* Animated Background Grid */}
                 <div className="bg-grid" aria-hidden="true" />
 
-                {/* Animated Glow Effects */}
-                <div className="bg-glow bg-glow-1" aria-hidden="true" />
-                <div className="bg-glow bg-glow-2" aria-hidden="true" />
-
                 {/* Main Content */}
                 {children}
             </body>
