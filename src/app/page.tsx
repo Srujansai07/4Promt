@@ -1,13 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import {
     Zap, Sparkles, Rocket, Code, Copy, Download, Share2,
-    ChevronDown, Check, Star, ArrowRight, Menu, X
+    ChevronDown, Check, Star, ArrowRight, Menu, X, Mail, User, Clock
 } from 'lucide-react'
 
 // ============================================
-// PROMPT DATA
+// PROMPT DATA - Updated Unlock Types
 // ============================================
 
 const PROMPTS = [
@@ -15,119 +16,133 @@ const PROMPTS = [
         id: 1,
         name: 'Starter Format',
         tier: 'Tier 1',
-        price: 1,
+        price: 0,
+        priceLabel: 'FREE',
         icon: '🌱',
         description: 'The foundation prompt for simple apps and quick prototypes. Perfect for beginners.',
         features: ['Instant access', 'Copy-to-clipboard'],
         popular: false,
+        unlockType: 'free' as const,
     },
     {
         id: 2,
         name: 'Pro Builder Format',
         tier: 'Tier 2',
-        price: 2,
+        price: 0,
+        priceLabel: 'FREE',
         icon: '⚡',
         description: 'Advanced structure with shortcuts for LLM, JSON, and RAG configurations.',
-        features: ['LLM shortcuts', 'JSON templates'],
+        features: ['LLM shortcuts', 'JSON templates', 'Fill form to unlock'],
         popular: false,
+        unlockType: 'form' as const,
     },
     {
         id: 3,
         name: 'Industry Engineer Format',
         tier: 'Tier 3',
         price: 3,
+        priceLabel: '$3 or Referral',
         icon: '🏭',
         description: 'Production-grade prompt for enterprise-level applications.',
-        features: ['Enterprise-ready', 'Share to unlock option'],
+        features: ['Enterprise-ready', '3-level referral unlock'],
         popular: true,
+        unlockType: 'referral' as const,
     },
     {
         id: 4,
         name: 'Universal Architecture',
         tier: 'Tier 4',
         price: 4.30,
+        priceLabel: '$4.30',
         icon: '🌐',
         description: 'Multi-platform prompt that works across web, mobile, and desktop.',
         features: ['Cross-platform', 'Architecture docs'],
         popular: false,
+        unlockType: 'paid' as const,
     },
     {
         id: 5,
         name: 'Ultimate A→Z Blueprint',
         tier: 'Tier 5',
         price: 6.90,
+        priceLabel: '$6.90',
         icon: '🗺️',
         description: 'Complete end-to-end application blueprint from idea to deployment.',
         features: ['Full roadmap', 'Deployment guide'],
         popular: false,
+        unlockType: 'paid' as const,
     },
     {
         id: 6,
         name: 'Master Super Pack',
         tier: 'Master Tier',
         price: 12,
+        priceLabel: '$12',
         icon: '💎',
         description: 'All prompts in one bundle. Includes Markdown, JSON & TOML formats.',
         features: ['All formats included', 'Future updates', 'Priority support'],
         popular: false,
         isMaster: true,
+        unlockType: 'paid' as const,
     },
     {
         id: 7,
         name: 'Debug & Optimize',
         tier: 'Tier 7',
         price: 4,
+        priceLabel: 'Coming Soon',
         icon: '🔧',
         description: 'Specialized prompt for debugging and optimizing AI-generated code.',
         features: ['Error fixing', 'Performance tips'],
         popular: false,
+        unlockType: 'coming-soon' as const,
     },
     {
         id: 8,
         name: 'UI/UX Designer',
         tier: 'Tier 8',
         price: 5,
+        priceLabel: 'Coming Soon',
         icon: '🎨',
         description: 'Create stunning, modern interfaces with this design-focused prompt.',
         features: ['Modern aesthetics', 'Responsive design'],
         popular: false,
+        unlockType: 'coming-soon' as const,
     },
     {
         id: 9,
         name: 'Launch & Scale',
         tier: 'Tier 9',
         price: 5,
+        priceLabel: 'Coming Soon',
         icon: '🚀',
         description: 'Final prompt for deployment, scaling, and production optimization.',
         features: ['Hosting guides', 'Scaling strategies'],
         popular: false,
+        unlockType: 'coming-soon' as const,
     },
 ]
 
 const FAQ_ITEMS = [
     {
-        q: 'What exactly do I get after payment?',
-        a: 'Instant access to your purchased prompt(s). You\'ll see the full prompt text with a copy-to-clipboard button. Use it unlimited times with ChatGPT, Claude, or any AI.',
+        q: 'What exactly do I get after unlocking?',
+        a: 'Instant access to the prompt text. You\'ll see the full prompt with a copy-to-clipboard button. Use it unlimited times with ChatGPT, Claude, or any AI.',
+    },
+    {
+        q: 'How does the referral unlock work?',
+        a: 'For Tier 3, you can either pay $3 OR invite people using your referral link. When 3 people you invited also get 3 people each (9 total through your chain), Tier 3 unlocks for free!',
     },
     {
         q: 'Which AI does this work with?',
         a: 'All major AI models: ChatGPT (GPT-4), Claude, Gemini, and any other LLM. The prompts are engineered to work universally.',
     },
     {
-        q: 'Can I get a refund?',
-        a: 'Due to the digital nature of the product, we don\'t offer refunds once the prompt is revealed. But we\'re confident you\'ll love it!',
-    },
-    {
-        q: 'What\'s the difference between tiers?',
-        a: 'Each tier builds on the previous. Tier 1 is for simple apps, while higher tiers handle complex architectures, deployment, and scaling. The Master Pack includes everything.',
-    },
-    {
-        q: 'How is this different from free prompts online?',
-        a: 'These aren\'t generic prompts. Each is a carefully engineered SYSTEM with proper structure, context, and output formatting. They\'re designed to produce production-ready code, not demos.',
+        q: 'When will the other prompts be available?',
+        a: 'Tiers 4-9 and the Master Pack are coming soon! Join the waitlist to be notified when they launch.',
     },
     {
         q: 'Do I need coding experience?',
-        a: 'No! The prompts are designed so that the AI does the coding. You just describe what you want. Basic understanding helps, but it\'s not required.',
+        a: 'No! The prompts are designed so that the AI does the coding. You just describe what you want.',
     },
 ]
 
@@ -142,40 +157,30 @@ function Navbar() {
         <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
-                    {/* Logo */}
                     <a href="#" className="flex items-center gap-2">
                         <span className="text-2xl">⚡</span>
                         <span className="font-bold text-xl">PromptOS</span>
                     </a>
-
-                    {/* Desktop Links */}
                     <div className="hidden md:flex items-center gap-8">
                         <a href="#prompts" className="text-gray-400 hover:text-white transition">Prompts</a>
                         <a href="#pricing" className="text-gray-400 hover:text-white transition">Pricing</a>
                         <a href="#faq" className="text-gray-400 hover:text-white transition">FAQ</a>
                         <a href="#prompts" className="btn btn-primary text-sm py-2 px-4">
-                            Unlock Now <ArrowRight className="w-4 h-4" />
+                            Get Free Prompt <ArrowRight className="w-4 h-4" />
                         </a>
                     </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden p-2"
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
+                    <button className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
                 </div>
             </div>
-
-            {/* Mobile Menu */}
             {isOpen && (
                 <div className="md:hidden glass border-t border-white/5">
                     <div className="px-4 py-4 space-y-3">
                         <a href="#prompts" className="block py-2 text-gray-400 hover:text-white">Prompts</a>
                         <a href="#pricing" className="block py-2 text-gray-400 hover:text-white">Pricing</a>
                         <a href="#faq" className="block py-2 text-gray-400 hover:text-white">FAQ</a>
-                        <a href="#prompts" className="btn btn-primary w-full mt-2">Unlock Now</a>
+                        <a href="#prompts" className="btn btn-primary w-full mt-2">Get Free Prompt</a>
                     </div>
                 </div>
             )}
@@ -188,37 +193,27 @@ function Hero() {
         <header className="relative pt-32 pb-20 px-4 min-h-screen flex items-center">
             <div className="max-w-7xl mx-auto w-full">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left Content */}
                     <div className="space-y-8">
-                        {/* Badge */}
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm">
                             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            <span className="text-gray-400">The Future of AI App Building</span>
+                            <span className="text-gray-400">First Prompt is FREE!</span>
                         </div>
-
-                        {/* Headline */}
                         <h1 className="text-5xl md:text-7xl font-bold leading-tight">
                             Build Complete Apps<br />
                             <span className="text-gradient">With One Prompt.</span>
                         </h1>
-
-                        {/* Subheadline */}
                         <p className="text-xl text-gray-400 max-w-lg">
                             The 9-Prompt Framework that transforms ChatGPT into your personal
-                            full-stack developer. No coding required. Just prompts that work.
+                            full-stack developer. Start FREE. No coding required.
                         </p>
-
-                        {/* CTA Buttons */}
                         <div className="flex flex-wrap gap-4">
                             <a href="#prompts" className="btn btn-primary">
-                                <Zap className="w-5 h-5" /> Unlock All Prompts
+                                <Zap className="w-5 h-5" /> Get Free Prompt
                             </a>
                             <a href="#how-it-works" className="btn btn-secondary">
                                 <Sparkles className="w-5 h-5" /> See How It Works
                             </a>
                         </div>
-
-                        {/* Stats */}
                         <div className="flex items-center gap-8 pt-4">
                             <div className="text-center">
                                 <div className="text-3xl font-bold text-gradient">9</div>
@@ -226,8 +221,8 @@ function Hero() {
                             </div>
                             <div className="w-px h-12 bg-white/10"></div>
                             <div className="text-center">
-                                <div className="text-3xl font-bold text-gradient">∞</div>
-                                <div className="text-sm text-gray-500">Apps Possible</div>
+                                <div className="text-3xl font-bold text-gradient">2</div>
+                                <div className="text-sm text-gray-500">Free Tiers</div>
                             </div>
                             <div className="w-px h-12 bg-white/10"></div>
                             <div className="text-center">
@@ -236,32 +231,25 @@ function Hero() {
                             </div>
                         </div>
                     </div>
-
-                    {/* Right Visual */}
                     <div className="relative hidden lg:block">
-                        {/* Floating Cards */}
                         <div className="absolute -top-8 -left-8 p-4 glass rounded-2xl animate-float">
                             <div className="flex items-center gap-3">
-                                <span className="text-3xl">🚀</span>
-                                <span className="font-medium">Full-Stack Apps</span>
+                                <span className="text-3xl">🎁</span>
+                                <span className="font-medium">Tier 1 FREE</span>
                             </div>
                         </div>
-
                         <div className="absolute top-1/2 -right-4 p-4 glass rounded-2xl animate-float" style={{ animationDelay: '1s' }}>
                             <div className="flex items-center gap-3">
-                                <span className="text-3xl">🤖</span>
-                                <span className="font-medium">AI-Powered</span>
+                                <span className="text-3xl">📝</span>
+                                <span className="font-medium">Fill Form = Tier 2</span>
                             </div>
                         </div>
-
                         <div className="absolute -bottom-4 left-12 p-4 glass rounded-2xl animate-float" style={{ animationDelay: '2s' }}>
                             <div className="flex items-center gap-3">
-                                <span className="text-3xl">⚡</span>
-                                <span className="font-medium">Instant Results</span>
+                                <span className="text-3xl">👥</span>
+                                <span className="font-medium">Refer = Tier 3</span>
                             </div>
                         </div>
-
-                        {/* Code Window */}
                         <div className="glass rounded-2xl overflow-hidden">
                             <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
                                 <span className="w-3 h-3 rounded-full bg-red-500"></span>
@@ -286,15 +274,14 @@ function Hero() {
 
 function HowItWorks() {
     const steps = [
-        { num: '01', icon: '🔓', title: 'Unlock Your Prompt', desc: 'Choose the prompt tier that matches your project complexity. Instant access after payment.' },
-        { num: '02', icon: '📋', title: 'Copy & Customize', desc: 'Copy the prompt, fill in your app idea, and paste it into ChatGPT or Claude.' },
-        { num: '03', icon: '🚀', title: 'Build Your App', desc: 'Watch the AI generate complete, production-ready code for your entire application.' },
+        { num: '01', icon: '🎁', title: 'Get Free Prompt', desc: 'Tier 1 is completely FREE. Just click and access instantly!' },
+        { num: '02', icon: '📝', title: 'Unlock More', desc: 'Fill a simple form to unlock Tier 2. Or invite friends for Tier 3!' },
+        { num: '03', icon: '🚀', title: 'Build Your App', desc: 'Paste the prompt into ChatGPT or Claude and watch the magic happen.' },
     ]
 
     return (
         <section id="how-it-works" className="py-24 px-4">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
                         Simple Process
@@ -302,8 +289,6 @@ function HowItWorks() {
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
                     <p className="text-gray-400">Three steps to build any app you can imagine</p>
                 </div>
-
-                {/* Steps */}
                 <div className="grid md:grid-cols-3 gap-8">
                     {steps.map((step, i) => (
                         <div key={i} className="prompt-card text-center">
@@ -319,43 +304,65 @@ function HowItWorks() {
     )
 }
 
-function PromptCard({ prompt, onUnlock }: { prompt: typeof PROMPTS[0], onUnlock: (id: number) => void }) {
+function PromptCard({ prompt, onUnlock }: { prompt: typeof PROMPTS[0], onUnlock: (id: number, type: string) => void }) {
+    const isComingSoon = prompt.unlockType === 'coming-soon'
+
+    const getButtonText = () => {
+        switch (prompt.unlockType) {
+            case 'free': return '🎁 Get FREE Now'
+            case 'form': return '📝 Fill Form to Unlock'
+            case 'referral': return '🔓 Unlock ($3 or Refer)'
+            case 'paid': return `💳 Unlock $${prompt.price}`
+            case 'coming-soon': return '🔔 Coming Soon'
+            default: return '🔓 Unlock'
+        }
+    }
+
+    const getButtonClass = () => {
+        if (isComingSoon) return 'btn btn-secondary opacity-60 cursor-not-allowed'
+        if (prompt.unlockType === 'free') return 'btn bg-green-600 hover:bg-green-700 text-white'
+        if (prompt.isMaster) return 'btn btn-master'
+        return 'btn btn-unlock'
+    }
+
     return (
-        <div className={`prompt-card ${prompt.popular ? 'featured' : ''} ${prompt.isMaster ? 'master' : ''}`}>
-            {/* Badge */}
+        <div className={`prompt-card ${prompt.popular ? 'featured' : ''} ${prompt.isMaster ? 'master' : ''} ${isComingSoon ? 'opacity-70' : ''}`}>
             {prompt.popular && (
                 <div className="absolute -top-3 left-4 px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full">
                     🔥 Popular
                 </div>
             )}
-            {prompt.isMaster && (
-                <div className="absolute -top-3 left-4 px-3 py-1 bg-amber-500 text-white text-xs font-semibold rounded-full">
-                    👑 Best Value
+            {prompt.unlockType === 'free' && (
+                <div className="absolute -top-3 left-4 px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
+                    🎁 FREE
+                </div>
+            )}
+            {isComingSoon && (
+                <div className="absolute -top-3 left-4 px-3 py-1 bg-gray-600 text-white text-xs font-semibold rounded-full flex items-center gap-1">
+                    <Clock className="w-3 h-3" /> Coming Soon
                 </div>
             )}
 
-            {/* Content */}
             <div className="space-y-4">
                 <div className="text-xs font-mono text-gray-500">{prompt.tier}</div>
                 <div className="text-4xl">{prompt.icon}</div>
                 <h3 className="text-xl font-semibold">{prompt.name}</h3>
                 <p className="text-gray-400 text-sm">{prompt.description}</p>
 
-                {/* Price */}
                 <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-bold">${prompt.price}</span>
-                    <span className="text-gray-500 text-sm">one-time</span>
+                    <span className={`text-2xl font-bold ${prompt.unlockType === 'free' || prompt.unlockType === 'form' ? 'text-green-400' : ''}`}>
+                        {prompt.priceLabel}
+                    </span>
                 </div>
 
-                {/* Button */}
                 <button
-                    onClick={() => onUnlock(prompt.id)}
-                    className={`btn ${prompt.isMaster ? 'btn-master' : 'btn-unlock'} w-full`}
+                    onClick={() => !isComingSoon && onUnlock(prompt.id, prompt.unlockType)}
+                    disabled={isComingSoon}
+                    className={`${getButtonClass()} w-full`}
                 >
-                    {prompt.isMaster ? '👑 Unlock Master Pack' : '🔓 Unlock Now'}
+                    {getButtonText()}
                 </button>
 
-                {/* Features */}
                 <div className="flex flex-wrap gap-2 pt-2">
                     {prompt.features.map((f, i) => (
                         <span key={i} className="text-xs text-gray-400">✓ {f}</span>
@@ -366,20 +373,17 @@ function PromptCard({ prompt, onUnlock }: { prompt: typeof PROMPTS[0], onUnlock:
     )
 }
 
-function PromptsSection({ onUnlock }: { onUnlock: (id: number) => void }) {
+function PromptsSection({ onUnlock }: { onUnlock: (id: number, type: string) => void }) {
     return (
         <section id="prompts" className="py-24 px-4">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
                         🔥 The Framework
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">9 Unlockable Prompt Modules</h2>
-                    <p className="text-gray-400">Each prompt is engineered for maximum AI output quality</p>
+                    <p className="text-gray-400">Start FREE • Earn more by inviting friends</p>
                 </div>
-
-                {/* Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {PROMPTS.map(prompt => (
                         <PromptCard key={prompt.id} prompt={prompt} onUnlock={onUnlock} />
@@ -390,98 +394,104 @@ function PromptsSection({ onUnlock }: { onUnlock: (id: number) => void }) {
     )
 }
 
-function PricingSection({ onUnlock }: { onUnlock: (id: number) => void }) {
+function PricingSection({ onUnlock }: { onUnlock: (id: number, type: string) => void }) {
     return (
         <section id="pricing" className="py-24 px-4">
             <div className="max-w-5xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
-                        💰 Simple Pricing
+                        💰 Unlock Options
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">Choose Your Path</h2>
-                    <p className="text-gray-400">No subscriptions. Pay once, own forever.</p>
+                    <p className="text-gray-400">Start free, unlock more as you grow</p>
                 </div>
 
-                {/* Pricing Cards */}
                 <div className="grid md:grid-cols-3 gap-8">
-                    {/* Individual */}
-                    <div className="prompt-card text-center">
-                        <h3 className="text-xl font-semibold mb-4">Individual Prompts</h3>
-                        <div className="mb-4">
-                            <span className="text-4xl font-bold">$1</span>
-                            <span className="text-gray-500"> - $6.90</span>
+                    {/* Tier 1 - FREE */}
+                    <div className="prompt-card text-center border-green-500/30">
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
+                            Start Here!
                         </div>
-                        <p className="text-gray-400 text-sm mb-6">Buy only what you need</p>
+                        <h3 className="text-xl font-semibold mb-4">Tier 1: Starter</h3>
+                        <div className="mb-4">
+                            <span className="text-4xl font-bold text-green-400">FREE</span>
+                        </div>
+                        <p className="text-gray-400 text-sm mb-6">Instant access, no strings</p>
                         <ul className="space-y-2 text-left mb-6">
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-green-500" /> Single prompt access
-                            </li>
-                            <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-green-500" /> Instant delivery
+                                <Check className="w-4 h-4 text-green-500" /> Instant unlock
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
                                 <Check className="w-4 h-4 text-green-500" /> Copy-to-clipboard
                             </li>
-                        </ul>
-                        <a href="#prompts" className="btn btn-secondary w-full">Browse Prompts</a>
-                    </div>
-
-                    {/* Master Pack */}
-                    <div className="prompt-card master text-center relative">
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-amber-500 text-white text-xs font-semibold rounded-full">
-                            Best Value
-                        </div>
-                        <h3 className="text-xl font-semibold mb-4">Master Pack</h3>
-                        <div className="mb-4">
-                            <span className="text-4xl font-bold">$12</span>
-                            <span className="text-gray-500"> one-time</span>
-                        </div>
-                        <p className="text-gray-400 text-sm mb-6">Everything included</p>
-                        <ul className="space-y-2 text-left mb-6">
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-amber-500" /> All 9 prompts
-                            </li>
-                            <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-amber-500" /> Markdown format
-                            </li>
-                            <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-amber-500" /> JSON format
-                            </li>
-                            <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-amber-500" /> TOML format
-                            </li>
-                            <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-amber-500" /> Future updates
+                                <Check className="w-4 h-4 text-green-500" /> Basic app prompts
                             </li>
                         </ul>
-                        <button onClick={() => onUnlock(6)} className="btn btn-master w-full">
-                            👑 Get Master Pack
+                        <button onClick={() => onUnlock(1, 'free')} className="btn bg-green-600 hover:bg-green-700 text-white w-full">
+                            🎁 Get Free Now
                         </button>
                     </div>
 
-                    {/* Share & Unlock */}
+                    {/* Tier 2 - Form */}
                     <div className="prompt-card text-center">
-                        <h3 className="text-xl font-semibold mb-4">Share & Unlock</h3>
+                        <h3 className="text-xl font-semibold mb-4">Tier 2: Pro Builder</h3>
                         <div className="mb-4">
-                            <span className="text-4xl font-bold">FREE</span>
-                            <span className="text-gray-500"> with shares</span>
+                            <span className="text-4xl font-bold text-blue-400">FREE</span>
+                            <span className="text-gray-500 text-sm ml-2">with form</span>
                         </div>
-                        <p className="text-gray-400 text-sm mb-6">Share with 3 friends</p>
+                        <p className="text-gray-400 text-sm mb-6">Fill a quick form to unlock</p>
                         <ul className="space-y-2 text-left mb-6">
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-green-500" /> Tier 3 prompt free
+                                <Check className="w-4 h-4 text-blue-500" /> Name & email required
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-green-500" /> Share on X/Twitter
+                                <Check className="w-4 h-4 text-blue-500" /> LLM shortcuts included
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Check className="w-4 h-4 text-green-500" /> Instant unlock
+                                <Check className="w-4 h-4 text-blue-500" /> JSON templates
                             </li>
                         </ul>
-                        <button className="btn btn-secondary w-full">
-                            <Share2 className="w-4 h-4" /> Share to Unlock
+                        <button onClick={() => onUnlock(2, 'form')} className="btn btn-primary w-full">
+                            📝 Fill Form to Unlock
                         </button>
+                    </div>
+
+                    {/* Tier 3 - Referral */}
+                    <div className="prompt-card featured text-center relative">
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full">
+                            🔥 Popular
+                        </div>
+                        <h3 className="text-xl font-semibold mb-4">Tier 3: Industry Pro</h3>
+                        <div className="mb-4">
+                            <span className="text-4xl font-bold">$3</span>
+                            <span className="text-gray-500 text-sm ml-2">or referral</span>
+                        </div>
+                        <p className="text-gray-400 text-sm mb-6">Pay OR invite 3 friends who each invite 3</p>
+                        <ul className="space-y-2 text-left mb-6">
+                            <li className="flex items-center gap-2 text-sm text-gray-400">
+                                <Check className="w-4 h-4 text-amber-500" /> Enterprise-ready
+                            </li>
+                            <li className="flex items-center gap-2 text-sm text-gray-400">
+                                <Check className="w-4 h-4 text-amber-500" /> 3-level referral unlock
+                            </li>
+                            <li className="flex items-center gap-2 text-sm text-gray-400">
+                                <Check className="w-4 h-4 text-amber-500" /> Production-grade
+                            </li>
+                        </ul>
+                        <button onClick={() => onUnlock(3, 'referral')} className="btn btn-unlock w-full">
+                            🔓 Unlock Now
+                        </button>
+                    </div>
+                </div>
+
+                {/* Coming Soon */}
+                <div className="mt-12 text-center">
+                    <div className="glass rounded-2xl p-8">
+                        <Clock className="w-12 h-12 mx-auto mb-4 text-gray-500" />
+                        <h3 className="text-2xl font-bold mb-2">Tiers 4-9 Coming Soon</h3>
+                        <p className="text-gray-400 mb-4">Master Pack, UI/UX Designer, Launch & Scale, and more!</p>
+                        <p className="text-sm text-gray-500">Get Tier 1 FREE now and be the first to know when new tiers launch</p>
                     </div>
                 </div>
             </div>
@@ -491,23 +501,20 @@ function PricingSection({ onUnlock }: { onUnlock: (id: number) => void }) {
 
 function Testimonials() {
     const reviews = [
-        { rating: 5, text: "Built my entire SaaS in 2 days using the Master Pack. The prompts are insanely detailed.", name: "Alex K.", title: "Indie Hacker", avatar: "👨‍💻" },
-        { rating: 5, text: "These prompts saved me 100+ hours. Worth every penny. The A→Z Blueprint is 🔥", name: "Sarah M.", title: "Designer & Developer", avatar: "👩‍🎨" },
-        { rating: 5, text: "Finally, prompts that actually work. Not generic garbage. Pure engineering gold.", name: "Dev R.", title: "AI Engineer", avatar: "🧑‍🔬" },
+        { rating: 5, text: "Built my entire SaaS in 2 days. The free tier alone is insanely valuable!", name: "Alex K.", title: "Indie Hacker", avatar: "👨‍💻" },
+        { rating: 5, text: "Invited 3 friends, they invited 3 more, got Tier 3 for free. Genius model!", name: "Sarah M.", title: "Designer", avatar: "👩‍🎨" },
+        { rating: 5, text: "Finally, prompts that actually work. Pure engineering gold.", name: "Dev R.", title: "AI Engineer", avatar: "🧑‍🔬" },
     ]
 
     return (
         <section className="py-24 px-4">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
                         💬 What People Say
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold">Built With PromptOS</h2>
                 </div>
-
-                {/* Reviews */}
                 <div className="grid md:grid-cols-3 gap-8">
                     {reviews.map((r, i) => (
                         <div key={i} className="prompt-card">
@@ -538,15 +545,12 @@ function FAQ() {
     return (
         <section id="faq" className="py-24 px-4">
             <div className="max-w-3xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <span className="inline-block px-4 py-2 rounded-full glass text-sm text-gray-400 mb-4">
                         ❓ FAQ
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold">Frequently Asked Questions</h2>
                 </div>
-
-                {/* FAQ Items */}
                 <div className="space-y-4">
                     {FAQ_ITEMS.map((item, i) => (
                         <div key={i} className="glass rounded-xl overflow-hidden">
@@ -576,13 +580,13 @@ function CTASection() {
             <div className="max-w-4xl mx-auto text-center">
                 <div className="glass rounded-3xl p-12">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                        Ready to Build Your First AI-Powered App?
+                        Start Building for FREE Right Now
                     </h2>
                     <p className="text-gray-400 mb-8">
-                        Join 500+ builders who are already using PromptOS to create amazing applications.
+                        Tier 1 is completely free. No credit card. No catch. Just prompts that work.
                     </p>
                     <a href="#prompts" className="btn btn-primary text-lg px-8 py-4">
-                        🚀 Start Building Now
+                        🎁 Get Free Prompt Now
                     </a>
                 </div>
             </div>
@@ -595,7 +599,6 @@ function Footer() {
         <footer className="border-t border-white/5 py-12 px-4">
             <div className="max-w-7xl mx-auto">
                 <div className="grid md:grid-cols-4 gap-8 mb-8">
-                    {/* Brand */}
                     <div>
                         <a href="#" className="flex items-center gap-2 mb-4">
                             <span className="text-2xl">⚡</span>
@@ -605,8 +608,6 @@ function Footer() {
                             The 9-Prompt Framework for Building AI Apps
                         </p>
                     </div>
-
-                    {/* Links */}
                     <div>
                         <h4 className="font-semibold mb-4">Product</h4>
                         <ul className="space-y-2 text-gray-500 text-sm">
@@ -615,26 +616,21 @@ function Footer() {
                             <li><a href="#faq" className="hover:text-white transition">FAQ</a></li>
                         </ul>
                     </div>
-
                     <div>
                         <h4 className="font-semibold mb-4">Legal</h4>
                         <ul className="space-y-2 text-gray-500 text-sm">
                             <li><a href="#" className="hover:text-white transition">Terms of Service</a></li>
                             <li><a href="#" className="hover:text-white transition">Privacy Policy</a></li>
-                            <li><a href="#" className="hover:text-white transition">Refund Policy</a></li>
                         </ul>
                     </div>
-
                     <div>
                         <h4 className="font-semibold mb-4">Connect</h4>
                         <ul className="space-y-2 text-gray-500 text-sm">
                             <li><a href="#" className="hover:text-white transition">Twitter/X</a></li>
                             <li><a href="#" className="hover:text-white transition">Discord</a></li>
-                            <li><a href="#" className="hover:text-white transition">Email</a></li>
                         </ul>
                     </div>
                 </div>
-
                 <div className="border-t border-white/5 pt-8 text-center text-gray-500 text-sm">
                     © 2024 PromptOS. All rights reserved. Built with ❤️ and AI.
                 </div>
@@ -643,28 +639,189 @@ function Footer() {
     )
 }
 
-function PaymentModal({
-    isOpen,
-    onClose,
-    prompt
-}: {
-    isOpen: boolean;
-    onClose: () => void;
-    prompt: typeof PROMPTS[0] | null;
-}) {
+// ============================================
+// MODALS
+// ============================================
+
+function FreeUnlockModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
     if (!isOpen || !prompt) return null
 
-    // TODO: Replace with your Stripe/Gumroad links
-    const stripeLink = `https://buy.stripe.com/YOUR_STRIPE_LINK_${prompt.id}`
-    const gumroadLink = `https://YOUR_GUMROAD.gumroad.com/l/prompt${prompt.id}`
-
     return (
-        <div className={`modal-overlay ${isOpen ? 'active' : ''}`} onClick={onClose}>
+        <div className="modal-overlay active" onClick={onClose}>
             <div className="modal" onClick={e => e.stopPropagation()}>
                 <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
                     <X className="w-6 h-6" />
                 </button>
+                <div className="text-center">
+                    <div className="text-6xl mb-4">🎁</div>
+                    <h3 className="text-2xl font-bold mb-2">It&apos;s FREE!</h3>
+                    <p className="text-gray-400 mb-6">Click below to access your free prompt instantly</p>
+                    <Link
+                        href={`/unlock?prompt=${prompt.id}`}
+                        className="btn btn-primary w-full text-lg py-4"
+                    >
+                        ✨ Access Free Prompt
+                    </Link>
+                </div>
+            </div>
+        </div>
+    )
+}
 
+function FormUnlockModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [submitted, setSubmitted] = useState(false)
+
+    if (!isOpen || !prompt) return null
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (name && email) {
+            setSubmitted(true)
+        }
+    }
+
+    if (submitted) {
+        return (
+            <div className="modal-overlay active" onClick={onClose}>
+                <div className="modal" onClick={e => e.stopPropagation()}>
+                    <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+                        <X className="w-6 h-6" />
+                    </button>
+                    <div className="text-center">
+                        <div className="text-6xl mb-4">✅</div>
+                        <h3 className="text-2xl font-bold mb-2">Unlocked!</h3>
+                        <p className="text-gray-400 mb-6">Thank you, {name}! Your prompt is ready.</p>
+                        <Link
+                            href={`/unlock?prompt=${prompt.id}&email=${encodeURIComponent(email)}`}
+                            className="btn btn-primary w-full text-lg py-4"
+                        >
+                            ✨ Access Your Prompt
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    return (
+        <div className="modal-overlay active" onClick={onClose}>
+            <div className="modal" onClick={e => e.stopPropagation()}>
+                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                </button>
+                <div className="text-center">
+                    <div className="text-5xl mb-4">{prompt.icon}</div>
+                    <h3 className="text-2xl font-bold mb-2">Unlock {prompt.name}</h3>
+                    <p className="text-gray-400 mb-6">Fill the form below to unlock for FREE</p>
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="relative">
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                            <input
+                                type="text"
+                                placeholder="Your name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                                className="w-full bg-dark-800 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500"
+                            />
+                        </div>
+                        <div className="relative">
+                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                            <input
+                                type="email"
+                                placeholder="Your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                className="w-full bg-dark-800 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500"
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary w-full text-lg py-4">
+                            📝 Unlock Now
+                        </button>
+                    </form>
+                    <p className="text-xs text-gray-500 mt-4">We respect your privacy. No spam.</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function ReferralModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
+    if (!isOpen || !prompt) return null
+
+    const stripeLink = `https://buy.stripe.com/YOUR_STRIPE_LINK_3`
+    const gumroadLink = `https://YOUR_GUMROAD.gumroad.com/l/prompt3`
+    const referralLink = `https://4-promt.vercel.app/?ref=YOUR_ID`
+
+    return (
+        <div className="modal-overlay active" onClick={onClose}>
+            <div className="modal max-w-md" onClick={e => e.stopPropagation()}>
+                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                </button>
+                <div className="text-center">
+                    <div className="text-5xl mb-4">{prompt.icon}</div>
+                    <h3 className="text-2xl font-bold mb-2">Unlock {prompt.name}</h3>
+                    <p className="text-gray-400 mb-6">Choose how you want to unlock</p>
+
+                    {/* Option 1: Pay */}
+                    <div className="glass rounded-xl p-4 mb-4">
+                        <h4 className="font-semibold mb-3">💳 Option 1: Pay $3</h4>
+                        <div className="space-y-2">
+                            <a href={stripeLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full text-sm">
+                                Pay with Stripe
+                            </a>
+                            <a href={gumroadLink} target="_blank" rel="noopener noreferrer" className="btn btn-secondary w-full text-sm">
+                                Pay with Gumroad
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Option 2: Referral */}
+                    <div className="glass rounded-xl p-4">
+                        <h4 className="font-semibold mb-3">👥 Option 2: Referral (FREE)</h4>
+                        <p className="text-sm text-gray-400 mb-3">
+                            Share your link. When 3 people join AND each of them gets 3 people to join (9 total), you unlock Tier 3 FREE!
+                        </p>
+                        <div className="bg-dark-900 rounded-lg p-3 text-sm text-gray-300 break-all mb-3">
+                            {referralLink}
+                        </div>
+                        <button
+                            onClick={() => navigator.clipboard.writeText(referralLink)}
+                            className="btn btn-secondary w-full text-sm"
+                        >
+                            <Copy className="w-4 h-4" /> Copy Referral Link
+                        </button>
+                        <div className="mt-4 text-xs text-gray-500">
+                            <p>📊 Your Progress: 0/3 direct • 0/9 total</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// ============================================
+// MAIN PAGE
+// ============================================
+
+function PaymentModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
+    if (!isOpen || !prompt) return null
+
+    const stripeLink = `https://buy.stripe.com/YOUR_STRIPE_LINK_${prompt.id}`
+    const gumroadLink = `https://YOUR_GUMROAD.gumroad.com/l/prompt${prompt.id}`
+
+    return (
+        <div className="modal-overlay active" onClick={onClose}>
+            <div className="modal" onClick={e => e.stopPropagation()}>
+                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                </button>
                 <div className="text-center">
                     <div className="text-5xl mb-4">{prompt.icon}</div>
                     <h3 className="text-2xl font-bold mb-2">Unlock {prompt.name}</h3>
@@ -706,20 +863,21 @@ function PaymentModal({
     )
 }
 
-// ============================================
-// MAIN PAGE
-// ============================================
-
 export default function Home() {
     const [selectedPrompt, setSelectedPrompt] = useState<typeof PROMPTS[0] | null>(null)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [modalType, setModalType] = useState<'free' | 'form' | 'referral' | 'paid' | null>(null)
 
-    const handleUnlock = (id: number) => {
+    const handleUnlock = (id: number, type: string) => {
         const prompt = PROMPTS.find(p => p.id === id)
-        if (prompt) {
+        if (prompt && type !== 'coming-soon') {
             setSelectedPrompt(prompt)
-            setIsModalOpen(true)
+            setModalType(type as 'free' | 'form' | 'referral' | 'paid')
         }
+    }
+
+    const closeModal = () => {
+        setSelectedPrompt(null)
+        setModalType(null)
     }
 
     return (
@@ -734,11 +892,11 @@ export default function Home() {
             <CTASection />
             <Footer />
 
-            <PaymentModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                prompt={selectedPrompt}
-            />
+            <FreeUnlockModal isOpen={modalType === 'free'} onClose={closeModal} prompt={selectedPrompt} />
+            <FormUnlockModal isOpen={modalType === 'form'} onClose={closeModal} prompt={selectedPrompt} />
+            <ReferralModal isOpen={modalType === 'referral'} onClose={closeModal} prompt={selectedPrompt} />
+            <PaymentModal isOpen={modalType === 'paid'} onClose={closeModal} prompt={selectedPrompt} />
         </main>
     )
 }
+
