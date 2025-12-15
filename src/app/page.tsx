@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { UPIModal } from '@/components/UPIModal'
-
+import { PROMPTS, FAQ_ITEMS } from '@/config/constants'
 
 // ============================================
 // COMPONENTS
