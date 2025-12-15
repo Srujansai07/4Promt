@@ -45,6 +45,17 @@ export default function AdminPage() {
         }
     }, [authenticated])
 
+    const [error, setError] = useState('')
+
+    const handleLogin = () => {
+        if (password === ADMIN_PASSWORD) {
+            setAuthenticated(true)
+            setError('')
+        } else {
+            setError('Incorrect password')
+        }
+    }
+
     if (!authenticated) {
         return (
             <main className="min-h-screen flex items-center justify-center px-4">
@@ -54,12 +65,16 @@ export default function AdminPage() {
                         type="password"
                         placeholder="Enter admin password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && password === ADMIN_PASSWORD && setAuthenticated(true)}
-                        className="w-full bg-dark-800 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500 mb-4"
+                        onChange={(e) => {
+                            setPassword(e.target.value)
+                            setError('')
+                        }}
+                        onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                        className="w-full bg-dark-800 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500 mb-2"
                     />
+                    {error && <p className="text-red-400 text-sm mb-4 text-center">{error}</p>}
                     <button
-                        onClick={() => password === ADMIN_PASSWORD && setAuthenticated(true)}
+                        onClick={handleLogin}
                         className="btn btn-primary w-full"
                     >
                         Access Dashboard
