@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { kv } from '@vercel/kv'
 
 // Initialize Stripe (placeholder key if env missing)
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-    apiVersion: '2024-11-20.acacia', // Latest API version
+    apiVersion: '2024-11-20.acacia',
 })
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
@@ -16,7 +17,6 @@ export async function POST(request: NextRequest) {
         let event: Stripe.Event
 
         if (webhookSecret && signature) {
-            // Verify signature if secret is present
             try {
                 event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
             } catch (err: any) {
@@ -24,7 +24,6 @@ export async function POST(request: NextRequest) {
                 return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
             }
         } else {
-            // Fallback for testing without secret (NOT FOR PRODUCTION)
             console.warn('⚠️  Skipping signature verification (Missing secret or signature)')
             event = JSON.parse(body)
         }
@@ -32,16 +31,27 @@ export async function POST(request: NextRequest) {
         if (event.type === 'checkout.session.completed') {
             const session = event.data.object as Stripe.Checkout.Session
 
-            // Extract purchase info
             const email = session.customer_email
             const promptId = session.metadata?.promptId
 
-            console.log('Payment completed:', { email, promptId })
+            if (email && promptId) {
+                console.log('Payment completed:', { email, promptId })
 
-            // In production:
-            // 1. Store purchase in Vercel KV
-            // 2. Send confirmation email via Resend
-            // 3. Generate magic link for unlock
+                // 1. Store purchase in Vercel KV
+                try {
+                    await kv.hset(`user:${email}`, {
+                        [`prompt:${promptId}`]: 'purchased',
+                        lastPurchase: new Date().toISOString()
+                    })
+                    console.log('Purchase stored in KV')
+                } catch (kvError) {
+                    console.error('KV Storage Error:', kvError)
+                    // Don't fail the webhook, just log it
+                }
+
+                // 2. Send confirmation email (TODO)
+                // 3. Generate magic link (TODO)
+            }
 
             return NextResponse.json({
                 success: true,
@@ -59,7 +69,6 @@ export async function POST(request: NextRequest) {
     }
 }
 
-// Health check
 export async function GET() {
     return NextResponse.json({
         status: 'Stripe webhook endpoint ready',

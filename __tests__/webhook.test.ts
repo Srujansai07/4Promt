@@ -13,6 +13,13 @@ jest.mock('stripe', () => {
     }))
 })
 
+// Mock Vercel KV
+jest.mock('@vercel/kv', () => ({
+    kv: {
+        hset: jest.fn().mockResolvedValue(1)
+    }
+}))
+
 describe('Stripe Webhook', () => {
     const originalEnv = process.env
 
@@ -38,7 +45,7 @@ describe('Stripe Webhook', () => {
         expect(data.error).toBe('Invalid signature')
     })
 
-    it('processes valid checkout.session.completed', async () => {
+    it('processes valid checkout.session.completed and stores in KV', async () => {
         const req = new NextRequest('http://localhost/api/webhook/stripe', {
             method: 'POST',
             headers: { 'stripe-signature': 'valid' },
@@ -57,5 +64,11 @@ describe('Stripe Webhook', () => {
 
         expect(res.status).toBe(200)
         expect(data.success).toBe(true)
+
+        // Check if KV was called
+        const { kv } = require('@vercel/kv')
+        expect(kv.hset).toHaveBeenCalledWith('user:test@example.com', expect.objectContaining({
+            'prompt:1': 'purchased'
+        }))
     })
 })
