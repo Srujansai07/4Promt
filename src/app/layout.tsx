@@ -1,9 +1,25 @@
+/**
+ * @fileoverview Root Layout Component for PromptOS
+ * @description Wraps all pages with global styles, fonts, and error handling
+ * @author PromptOS Team
+ * @version 1.0.0
+ */
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
+/**
+ * Inter font configuration
+ * @description Google Font loaded with Latin subset for optimal performance
+ */
 const inter = Inter({ subsets: ['latin'] })
 
+/**
+ * Page Metadata for SEO
+ * @description Defines title, description, and social sharing info
+ * @see https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+ */
 export const metadata: Metadata = {
     title: 'PromptOS — The 9-Prompt Framework for Building AI Apps',
     description: 'Build complete AI applications with just 9 powerful prompts. The ultimate framework for prompt engineering. No coding required.',
@@ -22,19 +38,33 @@ export const metadata: Metadata = {
     },
 }
 
+/**
+ * Root Layout Component
+ * @description Wraps all pages with consistent styling, fonts, and background
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Child components to render
+ * @returns {JSX.Element} The root HTML structure
+ * 
+ * @example
+ * // This layout automatically wraps all pages in /app directory
+ * // No manual import needed - Next.js handles this
+ */
 export default function RootLayout({
     children,
 }: {
     children: React.ReactNode
-}) {
+}): JSX.Element {
     return (
         <html lang="en">
             <body className={inter.className}>
-                {/* Animated Background */}
-                <div className="bg-grid" />
-                <div className="bg-glow bg-glow-1" />
-                <div className="bg-glow bg-glow-2" />
+                {/* Animated Background Grid */}
+                <div className="bg-grid" aria-hidden="true" />
 
+                {/* Animated Glow Effects */}
+                <div className="bg-glow bg-glow-1" aria-hidden="true" />
+                <div className="bg-glow bg-glow-2" aria-hidden="true" />
+
+                {/* Main Content */}
                 {children}
             </body>
         </html>
