@@ -1,0 +1,43 @@
+FORMAT 5: ULTIMATE A-TO-Z EXTREME DEPTH FORMAT (For Full System Generation)
+This one forces the LLM to output EVERYTHING needed for a full app build.
+IDEA: IDEAK
+
+TASK:
+Expand this idea into a complete A→Z system blueprint ready for automated development.
+
+OUTPUT REQUIRED (MANDATORY):
+
+1. EXECUTIVE SUMMARY
+2. FULL PRD
+3. USER STORIES (detailed)
+4. FEATURE SPECIFICATIONS (each with acceptance criteria)
+5. DATA MODEL
+    - JSON schema
+    - Relations explained
+6. SYSTEM ARCHITECTURE
+    - frontend
+    - backend
+    - DB
+    - integration points
+7. API DESIGN
+    - endpoints
+    - request/response examples
+8. WORKFLOWS
+    - user flows
+    - system flows
+9. COMPLETE IMPLEMENTATION PLAN
+    - sprint-wise tasks
+    - Git branch naming
+    - commit messages
+10. DEPLOYMENT GUIDE
+    - environment setup
+    - hosting steps
+    - CI/CD pipeline
+11. TEST PLAN
+    - unit test list
+    - integration test list
+12. SECURITY + PERFORMANCE RULES
+13. FINAL HANDOFF PACKAGE
+    - list of files the automated builder must generate
+
+Output everything in clean structured text. No missing sections.

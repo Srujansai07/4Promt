@@ -1,0 +1,21 @@
+FORMAT 1: YOUR STYLE (Minimal → Expand Everything)
+RAW IDEA: IDEAK
+
+INSTRUCTIONS TO LLM:
+Expand this raw idea into a complete structured breakdown including:
+- Clear explanation
+- Feature list
+- User flow
+- Tech suggestions
+- Steps to build
+- Any missing improvements
+
+OUTPUT FORMAT:
+1. Summary
+2. Core Features
+3. User Interaction Flow
+4. Recommended Tech Stack
+5. Basic Implementation Steps
+6. Notes / Improvements
+
+Return all output in crisp, clean, simple structure.

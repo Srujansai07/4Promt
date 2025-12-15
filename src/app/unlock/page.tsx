@@ -503,9 +503,17 @@ interface PageProps {
     }
 }
 
+import { cookies } from 'next/headers'
+
 async function UnlockContent({ searchParams }: PageProps) {
     const promptId = parseInt(searchParams.prompt || '1')
-    const email = searchParams.email || ''
+
+    // Try to get email from URL, then from cookie
+    let email = searchParams.email || ''
+    if (!email) {
+        const cookieStore = cookies()
+        email = cookieStore.get('promptos-email')?.value || ''
+    }
 
     // 1. Verify Purchase
     let hasAccess = false

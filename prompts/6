@@ -1,0 +1,131 @@
+MASTER SUPER FORMAT 
+
+RAW IDEA: “IDEAK”
+
+INSTRUCTIONS TO LLM:
+Expand the RAW IDEA into a full, combined, multi-layer specification that merges:
+- Simple expansion clarity (Format 1)
+- Industry website-builder style (Format 2)
+- Engineering interpretation style (Format 3)
+- Universal LLM structure (Format 4)
+- Ultimate deep A→Z system design (Format 5)
+
+Your output MUST include ALL SECTIONS BELOW.
+Do NOT remove or merge sections.  
+Do NOT shorten.  
+Do NOT skip any part.  
+Produce the FULL expanded version.
+
+------------------------------------------------------------------
+1. HIGH-LEVEL SUMMARY (Format 1)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+2. CORE FEATURES (Simple + Industry + Deep Acceptance Criteria)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+3. PRODUCT DESCRIPTION (Industry Standard)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+4. USER PERSONAS
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+5. USER STORIES (Basic + Detailed)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+6. SCREEN / PAGE MAP (Website Builder Format)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+7. USER FLOW (Simple) + SYSTEM FLOW (Advanced)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+8. OBJECTIVES (Primary, Secondary, Tertiary)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+9. FULL FEATURE SPECIFICATIONS (With Acceptance Criteria)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+10. DATA MODEL (JSON + Relationships)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+11. API BLUEPRINT 
+- Endpoints
+- Request/Response
+- Auth flows
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+12. SYSTEM ARCHITECTURE (Frontend + Backend + DB + Integrations)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+13. LOGIC FLOW (Engineering Format)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+14. PRD (Product Requirements Document)
+- Problem
+- Solution
+- Constraints
+- KPIs
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+15. TECH STACK RECOMMENDATIONS
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+16. IMPLEMENTATION PLAN (Phases + Sprints + Tasks)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+18. DEVELOPMENT ROADMAP (Timeline)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+19. DEPLOYMENT & HOSTING PLAN (with CI/CD)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+20. TEST PLAN (Unit + Integration + End-to-end)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+22. NON-FUNCTIONAL REQUIREMENTS (Speed, UX, Privacy)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+23. RISKS & MITIGATION STRATEGIES
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+24. FINAL HANDOFF PACKAGE
+- All files/components the builder must generate
+- Folder structure
+- Key deliverables
+------------------------------------------------------------------
+
+OUTPUT RULES:
+- Follow the exact order above.
+- Use clear headings.
+- Use numbered lists where they are logical.
+- Provide detailed content under every section.
+- Never shorten or summarise unless asked.
+- The output should be complete enough for an automated website-building LLM to generate the entire application end-to-end.

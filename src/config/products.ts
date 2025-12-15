@@ -19,7 +19,12 @@ export const PRODUCT_CONFIG = {
             1: 'link_1',
             2: 'link_2',
             3: 'link_3',
-            // ... add actual IDs
+            4: 'link_4',
+            5: 'link_5',
+            6: 'link_6',
+            7: 'link_7',
+            8: 'link_8',
+            9: 'link_9',
         }
     }
 }

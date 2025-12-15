@@ -1,0 +1,75 @@
+MARKDOWN MASTER SUPER-PROMPT
+                                                                        (Perfect for human readability + most dev tools)
+# MASTER SUPER FORMAT (Markdown Output)
+Raw Idea: “IDEAK”
+
+## INSTRUCTIONS TO LLM
+Expand the raw idea into a complete multi-layer specification containing ALL sections below.  
+Output MUST be in **Markdown format only**.  
+Do NOT skip any section.
+
+---
+
+# 1. High-Level Summary
+
+# 2. Core Features
+- With basic description
+- With acceptance criteria
+
+# 3. Product Description
+
+# 4. User Personas
+
+# 5. User Stories
+- Simple
+- Detailed
+
+# 6. Screen / Page Map
+
+# 7. User Flow & System Flow
+
+# 8. Objectives
+- Primary
+- Secondary
+- Tertiary
+
+# 9. Full Feature Specifications
+- With acceptance criteria
+
+# 10. Data Model
+```json
+{ }
+
+(Relationships explained in text)
+11. API Blueprint
+Endpoints
+Request/Response examples
+Auth
+12. System Architecture
+Frontend
+Backend
+Database
+Integrations
+13. Logic Flow
+14. PRD (Product Requirements Document)
+15. Tech Stack Recommendations
+16. Implementation Plan
+Phases
+Sprints
+Tasks
+17. Git Branch Plan & Commit Messages
+18. Development Roadmap
+19. Deployment & Hosting Plan (CI/CD included)
+20. Test Plan
+Unit tests
+Integration tests
+End-to-end
+21. Security & Performance Guidelines
+22. Non-Functional Requirements
+23. Risks & Mitigation
+24. Final Handoff Package
+Required files
+Folder structure
+Deliverables
+
+

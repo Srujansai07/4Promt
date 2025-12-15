@@ -354,8 +354,8 @@ function PricingSection({ onUnlock }: { onUnlock: (id: number, type: string) => 
                 <div className="mt-12 text-center">
                     <div className="glass rounded-2xl p-8">
                         <Clock className="w-12 h-12 mx-auto mb-4 text-gray-500" />
-                        <h3 className="text-2xl font-bold mb-2">Tiers 4-9 Coming Soon</h3>
-                        <p className="text-gray-400 mb-4">Master Pack, UI/UX Designer, Launch & Scale, and more!</p>
+                        <h3 className="text-2xl font-bold mb-2">Tiers 7-9 Coming Soon</h3>
+                        <p className="text-gray-400 mb-4">Debug, Design, and Launch prompts are on the way!</p>
                         <p className="text-sm text-gray-500">Get Tier 1 FREE now and be the first to know when new tiers launch</p>
                     </div>
                 </div>

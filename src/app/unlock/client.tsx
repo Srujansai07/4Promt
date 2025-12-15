@@ -23,6 +23,11 @@ export default function UnlockClient({ prompt, email, promptId }: UnlockClientPr
         setTimeout(() => setCopied(false), 2000)
     }
 
+    // Persist email to cookie for session retention
+    if (typeof window !== 'undefined' && email) {
+        document.cookie = `promptos-email=${email}; path=/; max-age=31536000` // 1 year
+    }
+
     const handleDownload = () => {
         const blob = new Blob([prompt.content], { type: 'text/plain' })
         const url = URL.createObjectURL(blob)

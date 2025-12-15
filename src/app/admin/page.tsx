@@ -65,11 +65,11 @@ export default function AdminPage() {
                         type="password"
                         placeholder="Enter admin password"
                         value={password}
-                        onChange={(e) => {
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             setPassword(e.target.value)
                             setError('')
                         }}
-                        onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleLogin()}
                         className="w-full bg-dark-800 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500 mb-2"
                     />
                     {error && <p className="text-red-400 text-sm mb-4 text-center">{error}</p>}
