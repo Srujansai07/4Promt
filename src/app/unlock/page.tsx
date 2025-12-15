@@ -9,19 +9,27 @@ const PROMPT_CONTENT: Record<number, { name: string; icon: string; content: stri
     1: {
         name: 'Starter Format',
         icon: '🌱',
-        content: `# STARTER FORMAT PROMPT
-PROJECT IDEA: [Your Idea Here]
+        content: `# FORMAT 1: YOUR STYLE (Minimal → Expand Everything)
+RAW IDEA: IDEAK
 
-TASK:
-Create a high-quality PRD (Product Requirements Document) for this idea.
+INSTRUCTIONS TO LLM:
+Expand this raw idea into a complete structured breakdown including:
+- Clear explanation
+- Feature list
+- User flow
+- Tech suggestions
+- Steps to build
+- Any missing improvements
 
-OUTPUT SECTIONS:
-1. Core Features
-2. User Flow
-3. Tech Stack
-4. Database Schema
+OUTPUT FORMAT:
+1. Summary
+2. Core Features
+3. User Interaction Flow
+4. Recommended Tech Stack
+5. Basic Implementation Steps
+6. Notes / Improvements
 
-Ensure the output is clear and actionable.`
+Return all output in crisp, clean, simple structure.`
     },
     2: {
         name: 'Pro Builder Format',
