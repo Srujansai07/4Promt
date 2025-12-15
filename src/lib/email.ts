@@ -30,11 +30,6 @@ export async function sendPurchaseEmail(email: string, promptId: string) {
         console.error('Email Send Failed:', error)
         return { success: false, error }
     }
-    return { success: true, id: data?.id }
-} catch (error) {
-    console.error('Email Send Failed:', error)
-    return { success: false, error }
-}
 }
 
 export async function sendMagicLinkEmail(email: string, token: string) {
@@ -65,8 +60,6 @@ export async function sendMagicLinkEmail(email: string, token: string) {
         console.error('Magic Link Failed:', error)
         return { success: false, error }
     }
-    return { success: false, error }
-}
 }
 
 import { kv } from '@vercel/kv'

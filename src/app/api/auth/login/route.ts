@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendMagicLinkEmail, checkEmailRateLimit } from '@/lib/email'
 import { storeMagicLinkToken } from '@/lib/kv-auth'
-import { crypto } from '@/lib/utils' // Wait, I don't have utils.crypto. I'll use native crypto.
+import { randomUUID } from 'crypto'
 
 export async function POST(request: NextRequest) {
     try {
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         }
 
         // 2. Generate Token (UUID)
-        const token = crypto.randomUUID()
+        const token = randomUUID()
 
         // 3. Store in KV
         await storeMagicLinkToken(token, email)
