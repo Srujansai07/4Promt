@@ -10,96 +10,442 @@ const PROMPT_CONTENT: Record<number, { name: string; icon: string; content: stri
         name: 'Starter Format',
         icon: '🌱',
         content: `# STARTER FORMAT PROMPT
+PROJECT IDEA: [Your Idea Here]
 
-[Your Prompt 1 content will go here]
+TASK:
+Create a high-quality PRD (Product Requirements Document) for this idea.
 
-## Instructions
-1. Copy this prompt
-2. Paste into ChatGPT or Claude
-3. Fill in your app idea
-4. Watch the magic happen!
+OUTPUT SECTIONS:
+1. Core Features
+2. User Flow
+3. Tech Stack
+4. Database Schema
 
----
-© PromptOS - Purchased Prompt`
+Ensure the output is clear and actionable.`
     },
     2: {
         name: 'Pro Builder Format',
         icon: '⚡',
-        content: `# PRO BUILDER FORMAT PROMPT
+        content: `# FORMAT 2: TOP WEBSITE-BUILDER STYLE (Industry Standard)
+PROJECT IDEA: IDEAK
 
-[Your Prompt 2 content will go here]
+TASK:
+Convert this idea into a full website-builder-ready specification.
 
-## LLM Shortcuts
-- LLM = ...
-- JSON = ...
-- RAG = ...
+OUTPUT SECTIONS REQUIRED:
+1. PRODUCT DESCRIPTION (1–2 paragraphs)
+2. USER PERSONAS
+3. FEATURE LIST (MVP + Future)
+4. SCREEN / PAGE MAP
+5. FUNCTIONAL REQUIREMENTS
+6. NON-FUNCTIONAL REQUIREMENTS (speed, UX, security)
+7. DATA STRUCTURE (JSON only)
+8. API ENDPOINT PLAN
+9. DEVELOPMENT ROADMAP (phases)
+10. DEPLOYMENT FRAMEWORK (hosting, build system)
 
----
-© PromptOS - Purchased Prompt`
+Ensure the final output can be directly used by an automated no-code/AI website builder.`
     },
     3: {
         name: 'Industry Engineer Format',
         icon: '🏭',
-        content: `# INDUSTRY ENGINEER FORMAT PROMPT
+        content: `# FORMAT 3: OFFICIAL LLM UNDERSTANDING TEMPLATE (Maximum Clarity for Any AI)
+IDEA INPUT:
+IDEAK
 
-[Your Prompt 3 content will go here]
+YOUR TASK:
+Interpret the idea and produce a complete structured document for downstream AI tools.
 
-## Enterprise Features
-- Production-grade architecture
-- Scalable design patterns
-- Security best practices
+MANDATORY OUTPUT STRUCTURE:
+---CONCEPT---
+Explain the idea.
+---OBJECTIVES---
+List primary, secondary, tertiary goals.
+---FEATURES---
+Numbered features with purpose.
+---DATA MODEL (JSON)---
+Provide clean schema.
+---LOGIC FLOW---
+Describe how the system works step-by-step.
+---IMPLEMENTATION PLAN---
+List tasks with substeps.
+---RISKS & OPTIMIZATIONS---
 
----
-© PromptOS - Purchased Prompt`
+Rules:
+- No fluff
+- No assumptions beyond the idea
+- Use precise engineering language`
     },
     4: {
         name: 'Universal Architecture',
         icon: '🌐',
-        content: `# UNIVERSAL ARCHITECTURE PROMPT
+        content: `# FORMAT 4: UNIVERSAL LLM FORMAT (Works on ANY Model, ANY Platform)
+INPUT IDEA: IDEAK
 
-[Your Prompt 4 content will go here]
+OUTPUT REQUIREMENT:
+Generate a universal specification that includes:
 
-## Multi-Platform Support
-- Web applications
-- Mobile apps
-- Desktop software
+1. High-Level Summary
+2. PRD (Product Requirements Document)
+3. System Architecture Overview
+4. Data Flow Diagram (written description)
+5. API Blueprint
+6. UI/UX Layout (textual, not visual)
+7. Tasks & Milestones
+8. Final Deliverable Specification (for handoff to builder models)
+9. Additional Insights & Recommendations
 
----
-© PromptOS - Purchased Prompt`
+
+ADDITIONAL RULES:
+- Always maintain numbered lists
+- Always include JSON where needed
+- Keep consistent section names for easy parsing
+- Output must be comprehensive, expertly structured, and immediately actionable.
+- Maintain a confident, structured tone throughout`
     },
     5: {
         name: 'Ultimate A→Z Blueprint',
         icon: '🗺️',
-        content: `# ULTIMATE A→Z BLUEPRINT PROMPT
+        content: `# FORMAT 5: ULTIMATE A-TO-Z EXTREME DEPTH FORMAT (For Full System Generation)
+This one forces the LLM to output EVERYTHING needed for a full app build.
+IDEA: IDEAK
 
-[Your Prompt 5 content will go here]
+TASK:
+Expand this idea into a complete A→Z system blueprint ready for automated development.
 
-## Complete Roadmap
-- Idea validation
-- Architecture design
-- Development
-- Testing
-- Deployment
+OUTPUT REQUIRED (MANDATORY):
 
----
-© PromptOS - Purchased Prompt`
+1. EXECUTIVE SUMMARY
+2. FULL PRD
+3. USER STORIES (detailed)
+4. FEATURE SPECIFICATIONS (each with acceptance criteria)
+5. DATA MODEL
+    - JSON schema
+    - Relations explained
+6. SYSTEM ARCHITECTURE
+    - frontend
+    - backend
+    - DB
+    - integration points
+7. API DESIGN
+    - endpoints
+    - request/response examples
+8. WORKFLOWS
+    - user flows
+    - system flows
+9. COMPLETE IMPLEMENTATION PLAN
+    - sprint-wise tasks
+    - Git branch naming
+    - commit messages
+10. DEPLOYMENT GUIDE
+    - environment setup
+    - hosting steps
+    - CI/CD pipeline
+11. TEST PLAN
+    - unit test list
+    - integration test list
+12. SECURITY + PERFORMANCE RULES
+13. FINAL HANDOFF PACKAGE
+    - list of files the automated builder must generate
+
+Output everything in clean structured text. No missing sections.`
     },
     6: {
         name: 'Master Super Pack',
         icon: '💎',
-        content: `# MASTER SUPER PACK
+        content: `# MASTER SUPER FORMAT 
 
-Congratulations! You have access to ALL 9 prompts.
+RAW IDEA: “IDEAK”
 
-## Included Formats:
-- Markdown (.md)
-- JSON (.json)
-- TOML (.toml)
+INSTRUCTIONS TO LLM:
+Expand the RAW IDEA into a full, combined, multi-layer specification that merges:
+- Simple expansion clarity (Format 1)
+- Industry website-builder style (Format 2)
+- Engineering interpretation style (Format 3)
+- Universal LLM structure (Format 4)
+- Ultimate deep A→Z system design (Format 5)
 
-[All prompts content here]
+Your output MUST include ALL SECTIONS BELOW.
+Do NOT remove or merge sections.  
+Do NOT shorten.  
+Do NOT skip any part.  
+Produce the FULL expanded version.
+
+------------------------------------------------------------------
+1. HIGH-LEVEL SUMMARY (Format 1)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+2. CORE FEATURES (Simple + Industry + Deep Acceptance Criteria)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+3. PRODUCT DESCRIPTION (Industry Standard)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+4. USER PERSONAS
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+5. USER STORIES (Basic + Detailed)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+6. SCREEN / PAGE MAP (Website Builder Format)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+7. USER FLOW (Simple) + SYSTEM FLOW (Advanced)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+8. OBJECTIVES (Primary, Secondary, Tertiary)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+9. FULL FEATURE SPECIFICATIONS (With Acceptance Criteria)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+10. DATA MODEL (JSON + Relationships)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+11. API BLUEPRINT 
+- Endpoints
+- Request/Response
+- Auth flows
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+12. SYSTEM ARCHITECTURE (Frontend + Backend + DB + Integrations)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+13. LOGIC FLOW (Engineering Format)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+14. PRD (Product Requirements Document)
+- Problem
+- Solution
+- Constraints
+- KPIs
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+15. TECH STACK RECOMMENDATIONS
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+16. IMPLEMENTATION PLAN (Phases + Sprints + Tasks)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+18. DEVELOPMENT ROADMAP (Timeline)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+19. DEPLOYMENT & HOSTING PLAN (with CI/CD)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+20. TEST PLAN (Unit + Integration + End-to-end)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+22. NON-FUNCTIONAL REQUIREMENTS (Speed, UX, Privacy)
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+23. RISKS & MITIGATION STRATEGIES
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+24. FINAL HANDOFF PACKAGE
+- All files/components the builder must generate
+- Folder structure
+- Key deliverables
+------------------------------------------------------------------
+
+OUTPUT RULES:
+- Follow the exact order above.
+- Use clear headings.
+- Use numbered lists where they are logical.
+- Provide detailed content under every section.
+- Never shorten or summarise unless asked.
+- The output should be complete enough for an automated website-building LLM to generate the entire application end-to-end.
+
 
 ---
-© PromptOS - Master Pack Owner`
+
+# BONUS: MARKDOWN MASTER SUPER-PROMPT (Format 6.1)
+(Perfect for human readability + most dev tools)
+
+# MASTER SUPER FORMAT (Markdown Output)
+Raw Idea: “IDEAK”
+
+## INSTRUCTIONS TO LLM
+Expand the raw idea into a complete multi-layer specification containing ALL sections below.  
+Output MUST be in **Markdown format only**.  
+Do NOT skip any section.
+
+---
+
+# 1. High-Level Summary
+
+# 2. Core Features
+- With basic description
+- With acceptance criteria
+
+# 3. Product Description
+
+# 4. User Personas
+
+# 5. User Stories
+- Simple
+- Detailed
+
+# 6. Screen / Page Map
+
+# 7. User Flow & System Flow
+
+# 8. Objectives
+- Primary
+- Secondary
+- Tertiary
+
+# 9. Full Feature Specifications
+- With acceptance criteria
+
+# 10. Data Model
+\`\`\`json
+{ }
+\`\`\`
+
+(Relationships explained in text)
+11. API Blueprint
+Endpoints
+Request/Response examples
+Auth
+12. System Architecture
+Frontend
+Backend
+Database
+Integrations
+13. Logic Flow
+14. PRD (Product Requirements Document)
+15. Tech Stack Recommendations
+16. Implementation Plan
+Phases
+Sprints
+Tasks
+17. Git Branch Plan & Commit Messages
+18. Development Roadmap
+19. Deployment & Hosting Plan (CI/CD included)
+20. Test Plan
+Unit tests
+Integration tests
+End-to-end
+21. Security & Performance Guidelines
+22. Non-Functional Requirements
+23. Risks & Mitigation
+24. Final Handoff Package
+Required files
+Folder structure
+Deliverables
+
+
+---
+
+# BONUS: JSON MASTER SUPER-PROMPT (Format 6.2)
+(Fits perfectly into LLMs that parse JSON or structured builders)
+
+\`\`\`json
+{
+"raw_idea": "IDEAK",
+"instructions": "Expand into the full combined blueprint. Output MUST be valid JSON.",
+"high_level_summary": "",
+"core_features": [],
+"product_description": "",
+"user_personas": [],
+"user_stories": {
+"simple": [],
+"detailed": []
+},
+"screen_map": [],
+"flows": {
+"user_flow": "",
+"system_flow": ""
+},
+"objectives": {
+"primary": [],
+"secondary": [],
+"tertiary": []
+},
+"feature_specifications": [],
+"data_model": {
+"schema_json": {},
+"relations_explained": ""
+},
+"api_blueprint": {
+"endpoints": [],
+"examples": {}
+},
+"system_architecture": {
+"frontend": "",
+"backend": "",
+"database": "",
+"integrations": ""
+},
+"logic_flow": "",
+"prd": {
+"problem": "",
+"solution": "",
+"constraints": "",
+"kpis": ""
+},
+"tech_stack_recommendations": [],
+"implementation_plan": {
+"phases": [],
+"sprints": [],
+"tasks": []
+},
+"git_plan": {
+"branches": [],
+"commit_messages": []
+},
+"development_roadmap": [],
+"deployment_plan": {
+"environment": "",
+"hosting": "",
+"ci_cd": ""
+},
+"test_plan": {
+"unit_tests": [],
+"integration_tests": [],
+"e2e_tests": []
+},
+"security_guidelines": "",
+"performance_guidelines": "",
+"non_functional_requirements": [],
+"risks_and_mitigations": [],
+"final_handoff_package": {
+"files": [],
+"folder_structure": "",
+"deliverables": []
+}
+}
+\`\`\``
     },
     7: {
         name: 'Debug & Optimize',
@@ -222,4 +568,3 @@ export default function UnlockPage(props: PageProps) {
         </Suspense>
     )
 }
-
