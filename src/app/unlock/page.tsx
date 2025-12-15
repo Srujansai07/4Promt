@@ -194,7 +194,7 @@ Produce the FULL expanded version.
 
 ------------------------------------------------------------------
     6. SCREEN / PAGE MAP(Website Builder Format)
-------------------------------------------------------------------`
+------------------------------------------------------------------
 
 ------------------------------------------------------------------
     7. USER FLOW(Simple) + SYSTEM FLOW(Advanced)
@@ -448,10 +448,10 @@ Deliverables
 }
 \`\`\``
     },
-7: {
-    name: 'Debug & Optimize',
+    7: {
+        name: 'Debug & Optimize',
         icon: '🔧',
-            content: `# DEBUG & OPTIMIZE PROMPT
+        content: `# DEBUG & OPTIMIZE PROMPT
         
 🚧 COMING SOON 🚧
 
@@ -460,11 +460,11 @@ Stay tuned for updates!
 
 ---
 © PromptOS`
-},
-8: {
-    name: 'UI/UX Designer',
+    },
+    8: {
+        name: 'UI/UX Designer',
         icon: '🎨',
-            content: `# UI/UX DESIGNER PROMPT
+        content: `# UI/UX DESIGNER PROMPT
 
 🚧 COMING SOON 🚧
 
@@ -473,11 +473,11 @@ Stay tuned for updates!
 
 ---
 © PromptOS`
-},
-9: {
-    name: 'Launch & Scale',
+    },
+    9: {
+        name: 'Launch & Scale',
         icon: '🚀',
-            content: `# LAUNCH & SCALE PROMPT
+        content: `# LAUNCH & SCALE PROMPT
 
 🚧 COMING SOON 🚧
 
@@ -486,7 +486,7 @@ Stay tuned for updates!
 
 ---
 © PromptOS`
-},
+    },
 }
 
 interface PageProps {
