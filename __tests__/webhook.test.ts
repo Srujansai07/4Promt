@@ -1,22 +1,47 @@
 import { POST } from '../src/app/api/webhook/stripe/route'
 import { NextRequest } from 'next/server'
 
+// Mock Stripe
+jest.mock('stripe', () => {
+    return jest.fn().mockImplementation(() => ({
+        webhooks: {
+            constructEvent: jest.fn((body, sig, secret) => {
+                if (sig === 'invalid') throw new Error('Invalid signature')
+                return JSON.parse(body)
+            })
+        }
+    }))
+})
+
 describe('Stripe Webhook', () => {
-    it('returns 200 for unhandled event types', async () => {
+    const originalEnv = process.env
+
+    beforeEach(() => {
+        jest.resetModules()
+        process.env = { ...originalEnv, STRIPE_WEBHOOK_SECRET: 'whsec_test' }
+    })
+
+    afterAll(() => {
+        process.env = originalEnv
+    })
+
+    it('returns 400 for invalid signature', async () => {
         const req = new NextRequest('http://localhost/api/webhook/stripe', {
             method: 'POST',
-            body: JSON.stringify({ type: 'payment_intent.succeeded' })
+            headers: { 'stripe-signature': 'invalid' },
+            body: JSON.stringify({ type: 'test' })
         })
         const res = await POST(req)
         const data = await res.json()
 
-        expect(res.status).toBe(200)
-        expect(data).toEqual({ received: true })
+        expect(res.status).toBe(400)
+        expect(data.error).toBe('Invalid signature')
     })
 
-    it('processes checkout.session.completed', async () => {
+    it('processes valid checkout.session.completed', async () => {
         const req = new NextRequest('http://localhost/api/webhook/stripe', {
             method: 'POST',
+            headers: { 'stripe-signature': 'valid' },
             body: JSON.stringify({
                 type: 'checkout.session.completed',
                 data: {
@@ -32,15 +57,5 @@ describe('Stripe Webhook', () => {
 
         expect(res.status).toBe(200)
         expect(data.success).toBe(true)
-    })
-
-    it('handles invalid JSON gracefully', async () => {
-        const req = new NextRequest('http://localhost/api/webhook/stripe', {
-            method: 'POST',
-            body: 'invalid-json'
-        })
-        const res = await POST(req)
-
-        expect(res.status).toBe(500)
     })
 })

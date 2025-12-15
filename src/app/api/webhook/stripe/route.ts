@@ -1,20 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Stripe from 'stripe'
 
-// Stripe webhook handler placeholder
-// In production, use actual Stripe SDK
+// Initialize Stripe (placeholder key if env missing)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
+    apiVersion: '2024-11-20.acacia', // Latest API version
+})
+
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 
 export async function POST(request: NextRequest) {
     try {
         const body = await request.text()
         const signature = request.headers.get('stripe-signature')
 
-        // TODO: Verify Stripe signature
-        // const event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
+        let event: Stripe.Event
 
-        const event = JSON.parse(body)
+        if (webhookSecret && signature) {
+            // Verify signature if secret is present
+            try {
+                event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
+            } catch (err: any) {
+                console.error(`⚠️  Webhook signature verification failed.`, err.message)
+                return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
+            }
+        } else {
+            // Fallback for testing without secret (NOT FOR PRODUCTION)
+            console.warn('⚠️  Skipping signature verification (Missing secret or signature)')
+            event = JSON.parse(body)
+        }
 
         if (event.type === 'checkout.session.completed') {
-            const session = event.data.object
+            const session = event.data.object as Stripe.Checkout.Session
 
             // Extract purchase info
             const email = session.customer_email
