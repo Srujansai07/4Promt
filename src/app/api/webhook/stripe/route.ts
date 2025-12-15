@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { kv } from '@vercel/kv'
+import { sendPurchaseEmail } from '@/lib/email'
 
 // Initialize Stripe (placeholder key if env missing)
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
@@ -46,11 +47,11 @@ export async function POST(request: NextRequest) {
                     console.log('Purchase stored in KV')
                 } catch (kvError) {
                     console.error('KV Storage Error:', kvError)
-                    // Don't fail the webhook, just log it
                 }
 
-                // 2. Send confirmation email (TODO)
-                // 3. Generate magic link (TODO)
+                // 2. Send confirmation email
+                await sendPurchaseEmail(email, promptId)
+                console.log('Confirmation email sent')
             }
 
             return NextResponse.json({
