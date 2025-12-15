@@ -93,7 +93,7 @@ Generate a universal specification that includes:
 2. PRD (Product Requirements Document)
 3. System Architecture Overview
 4. Data Flow Diagram (written description)
-5. API Blueprint`
+5. API Blueprint
 6. UI / UX Layout(textual, not visual)
 7. Tasks & Milestones
 8. Final Deliverable Specification(for handoff to builder models)

@@ -511,76 +511,33 @@ function Footer() {
 
 // FormUnlockModal removed as per new requirements
 
-value = { email }
-onChange = {(e) => setEmail(e.target.value)}
-required
-className = "w-full bg-dark-800 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500"
-    />
-                        </div >
-    <button type="submit" className="btn btn-primary w-full text-lg py-4">
-        📝 Unlock Now
+
+
+// ReferralModal removed
+
+
+{/* Option 2: Referral */ }
+<div className="glass rounded-xl p-4">
+    <h4 className="font-semibold mb-3">👥 Option 2: Referral (FREE)</h4>
+    <p className="text-sm text-gray-400 mb-3">
+        Share your link. When 3 people join AND each of them gets 3 people to join (9 total), you unlock Tier 3 FREE!
+    </p>
+    <div className="bg-dark-900 rounded-lg p-3 text-sm text-gray-300 break-all mb-3">
+        {referralLink}
+    </div>
+    <button
+        onClick={() => navigator.clipboard.writeText(referralLink)}
+        className="btn btn-secondary w-full text-sm"
+    >
+        <Copy className="w-4 h-4" /> Copy Referral Link
     </button>
-                    </form >
-    <p className="text-xs text-gray-500 mt-4">We respect your privacy. No spam.</p>
+    <div className="mt-4 text-xs text-gray-500">
+        <p>📊 Your Progress: 0/3 direct • 0/9 total</p>
+    </div>
+</div>
                 </div >
             </div >
         </div >
-    )
-}
-
-function ReferralModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
-    if (!isOpen || !prompt) return null
-
-    const stripeLink = getStripeLink(3)
-    const gumroadLink = getGumroadLink(3)
-    const referralLink = `https://4-promt.vercel.app/?ref=YOUR_ID`
-
-    return (
-        <div className="modal-overlay active" onClick={onClose}>
-            <div className="modal max-w-md" onClick={e => e.stopPropagation()}>
-                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <X className="w-6 h-6" />
-                </button>
-                <div className="text-center">
-                    <div className="text-5xl mb-4">{prompt.icon}</div>
-                    <h3 className="text-2xl font-bold mb-2">Unlock {prompt.name}</h3>
-                    <p className="text-gray-400 mb-6">Choose how you want to unlock</p>
-
-                    {/* Option 1: Pay */}
-                    <div className="glass rounded-xl p-4 mb-4">
-                        <h4 className="font-semibold mb-3">💳 Option 1: Pay $3</h4>
-                        <div className="space-y-2">
-                            <a href={stripeLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full text-sm">
-                                Pay with Stripe
-                            </a>
-                            <a href={gumroadLink} target="_blank" rel="noopener noreferrer" className="btn btn-secondary w-full text-sm">
-                                Pay with Gumroad
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Option 2: Referral */}
-                    <div className="glass rounded-xl p-4">
-                        <h4 className="font-semibold mb-3">👥 Option 2: Referral (FREE)</h4>
-                        <p className="text-sm text-gray-400 mb-3">
-                            Share your link. When 3 people join AND each of them gets 3 people to join (9 total), you unlock Tier 3 FREE!
-                        </p>
-                        <div className="bg-dark-900 rounded-lg p-3 text-sm text-gray-300 break-all mb-3">
-                            {referralLink}
-                        </div>
-                        <button
-                            onClick={() => navigator.clipboard.writeText(referralLink)}
-                            className="btn btn-secondary w-full text-sm"
-                        >
-                            <Copy className="w-4 h-4" /> Copy Referral Link
-                        </button>
-                        <div className="mt-4 text-xs text-gray-500">
-                            <p>📊 Your Progress: 0/3 direct • 0/9 total</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     )
 }
 
