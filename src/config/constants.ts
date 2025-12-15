@@ -19,7 +19,7 @@ export const PROMPTS = [
         priceLabel: 'FREE',
         icon: '⚡',
         description: 'Advanced structure with shortcuts for LLM, JSON, and RAG configurations.',
-        features: ['LLM shortcuts', 'JSON templates', 'Fill form to unlock'],
+        features: ['LLM shortcuts', 'JSON templates', 'Instant Access'],
         popular: false,
         unlockType: 'form' as const,
     },
