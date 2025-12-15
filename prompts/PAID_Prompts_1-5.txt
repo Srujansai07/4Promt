@@ -1,0 +1,167 @@
+================================================================================
+                          PROMPTOS - PAID PROMPTS (1-5)
+================================================================================
+                    All 5 Paid Tier Prompts in One File
+================================================================================
+
+
+================================================================================
+                        PROMPT 1: STARTER FORMAT (Tier 1)
+================================================================================
+FORMAT 1: YOUR STYLE (Minimal → Expand Everything)
+RAW IDEA: IDEAK
+
+INSTRUCTIONS TO LLM:
+Expand this raw idea into a complete structured breakdown including:
+- Clear explanation
+- Feature list
+- User flow
+- Tech suggestions
+- Steps to build
+- Any missing improvements
+
+OUTPUT FORMAT:
+1. Summary
+2. Core Features
+3. User Interaction Flow
+4. Recommended Tech Stack
+5. Basic Implementation Steps
+6. Notes / Improvements
+
+Return all output in crisp, clean, simple structure.
+
+
+================================================================================
+                     PROMPT 2: PRO BUILDER FORMAT (Tier 2)
+================================================================================
+FORMAT 2: TOP WEBSITE-BUILDER STYLE (Industry Standard)
+PROJECT IDEA: IDEAK
+
+TASK:
+Convert this idea into a full website-builder-ready specification.
+
+OUTPUT SECTIONS REQUIRED:
+1. PRODUCT DESCRIPTION (1–2 paragraphs)
+2. USER PERSONAS
+3. FEATURE LIST (MVP + Future)
+4. SCREEN / PAGE MAP
+5. FUNCTIONAL REQUIREMENTS
+6. NON-FUNCTIONAL REQUIREMENTS (speed, UX, security)
+7. DATA STRUCTURE (JSON only)
+8. API ENDPOINT PLAN
+9. DEVELOPMENT ROADMAP (phases)
+10. DEPLOYMENT FRAMEWORK (hosting, build system)
+
+Ensure the final output can be directly used by an automated no-code/AI website builder.
+
+
+================================================================================
+                   PROMPT 3: INDUSTRY ENGINEER FORMAT (Tier 3)
+================================================================================
+FORMAT 3: OFFICIAL LLM UNDERSTANDING TEMPLATE (Maximum Clarity for Any AI)
+IDEA INPUT:
+IDEAK
+
+YOUR TASK:
+Interpret the idea and produce a complete structured document for downstream AI tools.
+
+MANDATORY OUTPUT STRUCTURE:
+---CONCEPT---
+Explain the idea.
+---OBJECTIVES---
+List primary, secondary, tertiary goals.
+---FEATURES---
+Numbered features with purpose.
+---DATA MODEL (JSON)---
+Provide clean schema.
+---LOGIC FLOW---
+Describe how the system works step-by-step.
+---IMPLEMENTATION PLAN---
+List tasks with substeps.
+---RISKS & OPTIMIZATIONS---
+
+Rules:
+- No fluff
+- No assumptions beyond the idea
+- Use precise engineering language
+
+
+================================================================================
+                   PROMPT 4: UNIVERSAL ARCHITECTURE (Tier 4)
+================================================================================
+FORMAT 4: UNIVERSAL LLM FORMAT (Works on ANY Model, ANY Platform)
+INPUT IDEA: IDEAK
+
+OUTPUT REQUIREMENT:
+Generate a universal specification that includes:
+
+1. High-Level Summary
+2. PRD (Product Requirements Document)
+3. System Architecture Overview
+4. Data Flow Diagram (written description)
+5. API Blueprint
+6. UI/UX Layout (textual, not visual)
+7. Tasks & Milestones
+8. Final Deliverable Specification (for handoff to builder models)
+9. Additional Insights & Recommendations
+
+
+ADDITIONAL RULES:
+- Always maintain numbered lists
+- Always include JSON where needed
+- Keep consistent section names for easy parsing
+- Output must be comprehensive, expertly structured, and immediately actionable.
+- Maintain a confident, structured tone throughout
+
+
+================================================================================
+                  PROMPT 5: ULTIMATE A→Z BLUEPRINT (Tier 5)
+================================================================================
+FORMAT 5: ULTIMATE A-TO-Z EXTREME DEPTH FORMAT (For Full System Generation)
+This one forces the LLM to output EVERYTHING needed for a full app build.
+IDEA: IDEAK
+
+TASK:
+Expand this idea into a complete A→Z system blueprint ready for automated development.
+
+OUTPUT REQUIRED (MANDATORY):
+
+1. EXECUTIVE SUMMARY
+2. FULL PRD
+3. USER STORIES (detailed)
+4. FEATURE SPECIFICATIONS (each with acceptance criteria)
+5. DATA MODEL
+    - JSON schema
+    - Relations explained
+6. SYSTEM ARCHITECTURE
+    - frontend
+    - backend
+    - DB
+    - integration points
+7. API DESIGN
+    - endpoints
+    - request/response examples
+8. WORKFLOWS
+    - user flows
+    - system flows
+9. COMPLETE IMPLEMENTATION PLAN
+    - sprint-wise tasks
+    - Git branch naming
+    - commit messages
+10. DEPLOYMENT GUIDE
+    - environment setup
+    - hosting steps
+    - CI/CD pipeline
+11. TEST PLAN
+    - unit test list
+    - integration test list
+12. SECURITY + PERFORMANCE RULES
+13. FINAL HANDOFF PACKAGE
+    - list of files the automated builder must generate
+
+Output everything in clean structured text. No missing sections.
+
+
+================================================================================
+                              END OF PAID PROMPTS
+================================================================================

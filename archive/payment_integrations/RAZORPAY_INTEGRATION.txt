@@ -1,0 +1,239 @@
+================================================================================
+                    RAZORPAY INTEGRATION - COMPLETE ARCHIVE
+================================================================================
+                  For Indian Users: UPI + Cards + Net Banking
+================================================================================
+
+This file contains ALL the code needed for Razorpay payments.
+Best for production-grade Indian payments with automatic verification.
+
+================================================================================
+SECTION 1: ENVIRONMENT VARIABLES
+================================================================================
+Add these to your .env.local file:
+
+```env
+# Razorpay Configuration
+RAZORPAY_KEY_ID=rzp_test_YOUR_KEY_ID
+RAZORPAY_KEY_SECRET=YOUR_KEY_SECRET
+RAZORPAY_WEBHOOK_SECRET=YOUR_WEBHOOK_SECRET
+NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_YOUR_KEY_ID
+```
+
+================================================================================
+SECTION 2: RAZORPAY WEBHOOK HANDLER
+================================================================================
+FILE: src/app/api/webhook/razorpay/route.ts
+
+```typescript
+// src/app/api/webhook/razorpay/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import crypto from 'crypto'
+import { kv } from '@vercel/kv'
+
+export async function POST(request: NextRequest) {
+    try {
+        const body = await request.text()
+        const signature = request.headers.get('x-razorpay-signature')
+
+        if (!signature) {
+            return NextResponse.json({ error: 'No signature' }, { status: 400 })
+        }
+
+        // Verify webhook signature
+        const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET
+        if (webhookSecret) {
+            const expectedSignature = crypto
+                .createHmac('sha256', webhookSecret)
+                .update(body)
+                .digest('hex')
+
+            if (expectedSignature !== signature) {
+                console.error('❌ Invalid Razorpay signature')
+                return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
+            }
+        }
+
+        const event = JSON.parse(body)
+        console.log('✅ Razorpay Event:', event.event)
+
+        // Handle payment success
+        if (event.event === 'payment.captured' || event.event === 'payment_link.paid') {
+            const payment = event.payload.payment.entity
+            const email = payment.email
+            const notes = payment.notes || {}
+            const promptId = notes.promptId || '1'
+
+            console.log('💰 Payment captured:', { email, promptId, amount: payment.amount / 100 })
+
+            if (email && promptId) {
+                try {
+                    // Store purchase in KV
+                    await kv.hset(`user:${email}`, {
+                        [`prompt:${promptId}`]: 'purchased',
+                        [`purchase_date:${promptId}`]: new Date().toISOString(),
+                        [`razorpay_payment_id:${promptId}`]: payment.id,
+                        lastPurchase: new Date().toISOString(),
+                        source: 'razorpay'
+                    })
+                    console.log('✅ Stored in KV')
+
+                    // Track analytics
+                    try {
+                        await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/analytics`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                event: 'purchase',
+                                properties: { promptId, source: 'razorpay', amount: payment.amount / 100 },
+                                userId: email
+                            })
+                        })
+                    } catch (e) {
+                        console.error('Analytics failed:', e)
+                    }
+
+                } catch (error) {
+                    console.error('❌ Post-payment processing failed:', error)
+                }
+            }
+        }
+
+        return NextResponse.json({ status: 'ok' })
+
+    } catch (error) {
+        console.error('❌ Razorpay webhook error:', error)
+        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500 })
+    }
+}
+
+export async function GET() {
+    return NextResponse.json({
+        status: 'Razorpay webhook endpoint active',
+        timestamp: new Date().toISOString(),
+        env: {
+            hasWebhookSecret: !!process.env.RAZORPAY_WEBHOOK_SECRET
+        }
+    })
+}
+```
+
+================================================================================
+SECTION 3: PRODUCT CONFIG WITH RAZORPAY
+================================================================================
+FILE: src/config/products.ts
+
+```typescript
+// src/config/products.ts - Razorpay (Indian Payments)
+export const PRODUCT_CONFIG = {
+    razorpay: {
+        // Get these from: https://dashboard.razorpay.com/app/payment-pages
+        paymentPages: {
+            3: 'https://rzp.io/l/YOUR_LINK_TIER_3',
+            4: 'https://rzp.io/l/YOUR_LINK_TIER_4',
+            5: 'https://rzp.io/l/YOUR_LINK_TIER_5',
+            6: 'https://rzp.io/l/YOUR_LINK_TIER_6',
+        }
+    },
+    prices: {
+        1: 0,      // Free
+        2: 0,      // Free
+        3: 249,    // ~$3 USD
+        4: 349,    // ~$4.30 USD
+        5: 549,    // ~$6.90 USD
+        6: 999,    // ~$12 USD
+    }
+}
+
+export function getRazorpayLink(promptId: number, email?: string): string {
+    const link = PRODUCT_CONFIG.razorpay.paymentPages[promptId as keyof typeof PRODUCT_CONFIG.razorpay.paymentPages]
+    
+    if (!link) {
+        console.error(`No Razorpay link configured for prompt ${promptId}`)
+        return '#'
+    }
+    
+    // Add email as query param if provided
+    if (email) {
+        return `${link}?prefill[email]=${encodeURIComponent(email)}`
+    }
+    
+    return link
+}
+
+export function getPromptPrice(promptId: number): number {
+    return PRODUCT_CONFIG.prices[promptId as keyof typeof PRODUCT_CONFIG.prices] || 0
+}
+```
+
+================================================================================
+SECTION 4: RAZORPAY BUTTON IN MODAL
+================================================================================
+Add this inside your PaymentModal component:
+
+```tsx
+import { getRazorpayLink } from '@/config/products'
+
+// Inside your payment modal
+const razorpayLink = getRazorpayLink(prompt.id, email)
+
+<a 
+    href={razorpayLink} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="btn btn-primary w-full text-lg"
+>
+    💳 Pay ₹{prompt.price} with UPI / Card
+</a>
+
+<p className="text-xs text-gray-500 mt-4">
+    Supports: UPI, Paytm, PhonePe, GPay, Cards, Net Banking
+</p>
+```
+
+================================================================================
+SECTION 5: RAZORPAY SETUP STEPS
+================================================================================
+1. Go to https://razorpay.com and create account
+2. Complete KYC verification (1-2 days)
+3. For testing: Use Test Mode immediately (no KYC needed)
+4. Get API Keys: Dashboard → Settings → API Keys
+5. Create Payment Pages: Dashboard → Payment Pages → Create New
+   - Tier 3: ₹249 (add custom field: promptId = 3)
+   - Tier 4: ₹349 (add custom field: promptId = 4)
+   - Tier 5: ₹549 (add custom field: promptId = 5)
+   - Tier 6: ₹999 (add custom field: promptId = 6)
+6. Copy Short URLs (e.g., https://rzp.io/l/abc123)
+7. Setup Webhook: Settings → Webhooks → Add
+   - URL: https://your-domain.vercel.app/api/webhook/razorpay
+   - Events: payment.captured, payment_link.paid
+8. Test with: Card 4111 1111 1111 1111 or UPI success@razorpay
+
+================================================================================
+SECTION 6: RAZORPAY VS OTHER OPTIONS
+================================================================================
+RAZORPAY:
+✅ Best for India (UPI + Cards)
+✅ Easy setup
+✅ Payment pages (no coding needed)
+✅ Automatic webhooks
+✅ 2% fees (reasonable)
+❌ India only
+❌ KYC required for live mode
+
+STRIPE:
+✅ International
+✅ More features
+❌ No UPI support
+❌ Higher fees in India
+
+DIRECT UPI:
+✅ Zero fees
+❌ Manual verification
+❌ No automation
+
+RECOMMENDATION: Razorpay for Indian market, Stripe for international.
+
+================================================================================
+                              END OF RAZORPAY ARCHIVE
+================================================================================

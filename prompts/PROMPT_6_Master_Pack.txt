@@ -1,6 +1,12 @@
+================================================================================
+                      PROMPTOS - PROMPT 6: MASTER SUPER PACK
+================================================================================
+                    The Ultimate Combined Prompt (All-in-One)
+================================================================================
+
 MASTER SUPER FORMAT 
 
-RAW IDEA: “IDEAK”
+RAW IDEA: "IDEAK"
 
 INSTRUCTIONS TO LLM:
 Expand the RAW IDEA into a full, combined, multi-layer specification that merges:
@@ -129,3 +135,8 @@ OUTPUT RULES:
 - Provide detailed content under every section.
 - Never shorten or summarise unless asked.
 - The output should be complete enough for an automated website-building LLM to generate the entire application end-to-end.
+
+
+================================================================================
+                         END OF PROMPT 6: MASTER PACK
+================================================================================

@@ -513,33 +513,7 @@ function Footer() {
 
 
 
-// ReferralModal removed
-
-
-{/* Option 2: Referral */ }
-<div className="glass rounded-xl p-4">
-    <h4 className="font-semibold mb-3">👥 Option 2: Referral (FREE)</h4>
-    <p className="text-sm text-gray-400 mb-3">
-        Share your link. When 3 people join AND each of them gets 3 people to join (9 total), you unlock Tier 3 FREE!
-    </p>
-    <div className="bg-dark-900 rounded-lg p-3 text-sm text-gray-300 break-all mb-3">
-        {referralLink}
-    </div>
-    <button
-        onClick={() => navigator.clipboard.writeText(referralLink)}
-        className="btn btn-secondary w-full text-sm"
-    >
-        <Copy className="w-4 h-4" /> Copy Referral Link
-    </button>
-    <div className="mt-4 text-xs text-gray-500">
-        <p>📊 Your Progress: 0/3 direct • 0/9 total</p>
-    </div>
-</div>
-                </div >
-            </div >
-        </div >
-    )
-}
+// ReferralModal removed - archived in archive/payment_integrations/
 
 // ============================================
 // MAIN PAGE

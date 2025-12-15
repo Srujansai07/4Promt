@@ -1,0 +1,217 @@
+================================================================================
+                    GUMROAD INTEGRATION - COMPLETE ARCHIVE
+================================================================================
+                  HOW TO RE-INTEGRATE: Follow the sections below
+================================================================================
+
+This file contains ALL the code needed to re-integrate Gumroad payments.
+Just copy each section to the corresponding file location.
+
+================================================================================
+SECTION 1: ENVIRONMENT VARIABLES
+================================================================================
+Add these to your .env.local file:
+
+```env
+# Gumroad Configuration
+NEXT_PUBLIC_GUMROAD_URL=https://gumroad.com/l
+```
+
+================================================================================
+SECTION 2: GUMROAD WEBHOOK HANDLER
+================================================================================
+FILE: src/app/api/webhook/gumroad/route.ts
+
+```typescript
+// src/app/api/webhook/gumroad/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import { kv } from '@vercel/kv'
+import { sendPurchaseEmail } from '@/lib/email'
+
+export async function POST(request: NextRequest) {
+    try {
+        const formData = await request.formData()
+        
+        const email = formData.get('email') as string
+        const permalink = formData.get('permalink') as string
+        const saleId = formData.get('sale_id') as string
+        const productName = formData.get('product_name') as string
+
+        console.log('🛒 Gumroad purchase:', { email, permalink, saleId, productName })
+
+        if (!email || !permalink) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+        }
+
+        // Extract prompt ID from permalink
+        // Expected formats: "promptos-industry" → 3, "promptos-master-pack" → 6
+        const promptMap: Record<string, string> = {
+            'promptos-starter': '1',
+            'promptos-pro-builder': '2',
+            'promptos-industry': '3',
+            'promptos-universal': '4',
+            'promptos-ultimate': '5',
+            'promptos-master-pack': '6',
+        }
+
+        const promptId = promptMap[permalink] || '1'
+
+        try {
+            // 1. Store purchase
+            await kv.hset(`user:${email}`, {
+                [`prompt:${promptId}`]: 'purchased',
+                [`purchase_date:${promptId}`]: new Date().toISOString(),
+                [`gumroad_sale_id:${promptId}`]: saleId,
+                lastPurchase: new Date().toISOString(),
+                source: 'gumroad'
+            })
+            console.log('✅ Stored in KV')
+
+            // 2. Send email
+            await sendPurchaseEmail(email, promptId)
+            console.log('✅ Email sent')
+
+            // 3. Track analytics
+            try {
+                await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/analytics`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        event: 'purchase',
+                        properties: { promptId, source: 'gumroad' },
+                        userId: email
+                    })
+                })
+            } catch (e) {
+                console.error('Analytics failed:', e)
+            }
+
+            return NextResponse.json({ success: true })
+
+        } catch (error) {
+            console.error('❌ Post-purchase processing failed:', error)
+            // Still return success to Gumroad
+            return NextResponse.json({ success: true })
+        }
+
+    } catch (error) {
+        console.error('❌ Gumroad webhook error:', error)
+        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500 })
+    }
+}
+
+export async function GET() {
+    return NextResponse.json({
+        status: 'Gumroad webhook endpoint active',
+        timestamp: new Date().toISOString()
+    })
+}
+```
+
+================================================================================
+SECTION 3: PRODUCT CONFIG WITH GUMROAD
+================================================================================
+FILE: src/config/products.ts
+
+```typescript
+// src/config/products.ts
+export const PRODUCT_CONFIG = {
+    gumroad: {
+        baseUrl: 'https://gumroad.com/l',
+        products: {
+            1: 'promptos-starter',      // Free - Create on Gumroad anyway for tracking
+            2: 'promptos-pro-builder',  // Free with form
+            3: 'promptos-industry',     // $3
+            4: 'promptos-universal',    // $4.30
+            5: 'promptos-ultimate',     // $6.90
+            6: 'promptos-master-pack',  // $12
+        }
+    },
+    prices: {
+        1: 0,
+        2: 0,
+        3: 3.00,
+        4: 4.30,
+        5: 6.90,
+        6: 12.00,
+    }
+}
+
+export function getGumroadLink(promptId: number, email?: string): string {
+    const slug = PRODUCT_CONFIG.gumroad.products[promptId as keyof typeof PRODUCT_CONFIG.gumroad.products]
+    if (!slug) {
+        console.error(`No Gumroad product configured for prompt ${promptId}`)
+        return '#'
+    }
+    const baseLink = `${PRODUCT_CONFIG.gumroad.baseUrl}/${slug}`
+    // Add email prefill if provided
+    if (email) {
+        return `${baseLink}?email=${encodeURIComponent(email)}`
+    }
+    return baseLink
+}
+
+export function getPromptPrice(promptId: number): number {
+    return PRODUCT_CONFIG.prices[promptId as keyof typeof PRODUCT_CONFIG.prices] || 0
+}
+```
+
+================================================================================
+SECTION 4: GUMROAD BUTTON IN MODAL
+================================================================================
+Add this inside your PaymentModal component:
+
+```tsx
+// Inside your payment modal
+const gumroadLink = getGumroadLink(prompt.id, email)
+
+<a 
+    href={gumroadLink} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="btn btn-secondary w-full"
+>
+    🛒 Pay with Gumroad
+</a>
+```
+
+================================================================================
+SECTION 5: GUMROAD SETUP STEPS
+================================================================================
+1. Go to https://gumroad.com and create account
+2. Create Products: Dashboard → New Product
+   - Tier 3: $3 - Permalink: promptos-industry
+   - Tier 4: $4.30 - Permalink: promptos-universal
+   - Tier 5: $6.90 - Permalink: promptos-ultimate
+   - Tier 6: $12 - Permalink: promptos-master-pack
+3. Get Product Links: Click product → Copy short URL
+4. Setup Webhook: Settings → Advanced → Ping
+   - URL: https://your-domain.vercel.app/api/webhook/gumroad
+5. Update product links in src/config/products.ts
+6. Test with Gumroad test mode
+
+================================================================================
+SECTION 6: GUMROAD VS STRIPE COMPARISON
+================================================================================
+GUMROAD:
+✅ Easier setup (no API keys needed)
+✅ Built-in product pages
+✅ Handles all payment processing
+✅ Good for digital products
+❌ Higher fees (10-15% + payment processing)
+❌ Less customization
+❌ Limited webhooks
+
+STRIPE:
+✅ Lower fees (2.9% + $0.30)
+✅ Full customization
+✅ Better for subscriptions
+✅ Powerful webhooks
+❌ More complex setup
+❌ Need to create checkout pages
+
+RECOMMENDATION: Use BOTH for redundancy. Some users prefer Gumroad.
+
+================================================================================
+                              END OF GUMROAD ARCHIVE
+================================================================================

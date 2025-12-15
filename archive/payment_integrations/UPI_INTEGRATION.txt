@@ -1,0 +1,285 @@
+================================================================================
+                    UPI INTEGRATION - COMPLETE ARCHIVE
+================================================================================
+                  HOW TO RE-INTEGRATE: Follow the sections below
+================================================================================
+
+This file contains ALL the code needed for UPI (Indian) payments.
+Works with direct UPI links - no payment gateway needed!
+
+================================================================================
+SECTION 1: UPI MODAL COMPONENT
+================================================================================
+FILE: src/components/UPIModal.tsx
+
+```typescript
+'use client'
+
+import { useState } from 'react'
+import { X, Copy, Check, Smartphone } from 'lucide-react'
+import Link from 'next/link'
+
+interface UPIModalProps {
+    isOpen: boolean
+    onClose: () => void
+    prompt: {
+        id: number
+        name: string
+        icon: string
+        price: number
+    } | null
+}
+
+export default function UPIModal({ isOpen, onClose, prompt }: UPIModalProps) {
+    const [copied, setCopied] = useState(false)
+    const [isVerifying, setIsVerifying] = useState(false)
+
+    if (!isOpen || !prompt) return null
+
+    // ⚠️ REPLACE WITH YOUR ACTUAL UPI ID
+    const UPI_ID = "your-upi-id@upi"
+    const UPI_NAME = "PromptOS"
+
+    // UPI Intent Link (opens payment apps directly)
+    const amount = prompt.price
+    const transactionNote = `PromptOS Tier ${prompt.id}`
+    const upiLink = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(UPI_NAME)}&am=${amount}&tn=${encodeURIComponent(transactionNote)}&cu=INR`
+
+    const handleCopyUPI = () => {
+        navigator.clipboard.writeText(UPI_ID)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+    }
+
+    const handleVerifyPayment = async () => {
+        setIsVerifying(true)
+        // In production, you would verify payment here
+        // For now, just redirect to unlock page
+        setTimeout(() => {
+            window.location.href = `/unlock?prompt=${prompt.id}`
+        }, 2000)
+    }
+
+    return (
+        <div className="modal-overlay active" onClick={onClose}>
+            <div className="modal max-w-md" onClick={e => e.stopPropagation()}>
+                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                </button>
+                
+                <div className="text-center">
+                    <div className="text-5xl mb-4">{prompt.icon}</div>
+                    <h3 className="text-2xl font-bold mb-2">Pay ₹{prompt.price}</h3>
+                    <p className="text-gray-400 mb-6">for {prompt.name}</p>
+
+                    {/* UPI ID Display */}
+                    <div className="glass rounded-xl p-4 mb-4">
+                        <p className="text-sm text-gray-400 mb-2">UPI ID:</p>
+                        <div className="flex items-center justify-between bg-dark-800 rounded-lg p-3">
+                            <span className="font-mono text-lg">{UPI_ID}</span>
+                            <button 
+                                onClick={handleCopyUPI}
+                                className="p-2 hover:bg-dark-700 rounded-lg transition"
+                            >
+                                {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Pay Now Button - Opens UPI App */}
+                    <a 
+                        href={upiLink}
+                        className="btn btn-primary w-full text-lg py-4 mb-4"
+                    >
+                        <Smartphone className="w-5 h-5" />
+                        Pay ₹{prompt.price} with UPI App
+                    </a>
+
+                    {/* Manual Payment Instructions */}
+                    <div className="text-left glass rounded-xl p-4 mb-4">
+                        <p className="font-semibold mb-2">📱 How to Pay:</p>
+                        <ol className="text-sm text-gray-400 space-y-1">
+                            <li>1. Open PhonePe, GPay, Paytm, or any UPI app</li>
+                            <li>2. Send ₹{prompt.price} to: <span className="text-white">{UPI_ID}</span></li>
+                            <li>3. Add note: "{transactionNote}"</li>
+                            <li>4. Click "I've Paid" below</li>
+                        </ol>
+                    </div>
+
+                    {/* Verification Button */}
+                    <button
+                        onClick={handleVerifyPayment}
+                        disabled={isVerifying}
+                        className="btn btn-secondary w-full"
+                    >
+                        {isVerifying ? '⏳ Verifying...' : '✅ I\'ve Paid - Verify'}
+                    </button>
+
+                    <p className="text-xs text-gray-500 mt-4">
+                        Supports: PhonePe, GPay, Paytm, BHIM, any UPI app
+                    </p>
+                </div>
+            </div>
+        </div>
+    )
+}
+```
+
+================================================================================
+SECTION 2: HOW TO USE UPI MODAL IN PAGE
+================================================================================
+FILE: src/app/page.tsx (add import and usage)
+
+```typescript
+// At the top of page.tsx
+import UPIModal from '@/components/UPIModal'
+
+// Inside your Home component, add state
+const [showUPI, setShowUPI] = useState(false)
+
+// In your handleUnlock function
+const handleUnlock = (id: number, type: string) => {
+    const prompt = PROMPTS.find(p => p.id === id)
+    if (!prompt) return
+
+    if (type === 'free' || type === 'form') {
+        // Redirect to unlock page for free tiers
+        window.location.href = `/unlock?prompt=${id}`
+    } else if (type === 'paid') {
+        // Show UPI modal for paid tiers
+        setSelectedPrompt(prompt)
+        setShowUPI(true)
+    }
+}
+
+// In your JSX, add the modal
+<UPIModal 
+    isOpen={showUPI} 
+    onClose={() => setShowUPI(false)} 
+    prompt={selectedPrompt} 
+/>
+```
+
+================================================================================
+SECTION 3: UPI PAYMENT VERIFICATION (OPTIONAL)
+================================================================================
+For manual verification, create an admin page to check payments.
+For automatic verification, integrate with Razorpay or Paytm APIs.
+
+```typescript
+// src/app/api/verify-upi/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import { kv } from '@vercel/kv'
+
+export async function POST(request: NextRequest) {
+    try {
+        const { email, promptId, transactionId } = await request.json()
+
+        // In production, verify with bank API or manual check
+        // For now, just record the pending verification
+        await kv.hset(`pending_upi:${email}`, {
+            promptId,
+            transactionId,
+            timestamp: new Date().toISOString(),
+            status: 'pending'
+        })
+
+        return NextResponse.json({
+            success: true,
+            message: 'Payment verification submitted. You will receive access within 24 hours.'
+        })
+
+    } catch (error) {
+        return NextResponse.json({ error: 'Verification failed' }, { status: 500 })
+    }
+}
+```
+
+================================================================================
+SECTION 4: UPI PRICING IN INR
+================================================================================
+Update your constants file:
+
+```typescript
+// src/config/constants.ts
+export const PROMPTS = [
+    {
+        id: 1,
+        name: 'Starter Format',
+        price: 0,
+        priceLabel: 'FREE',
+        // ...
+    },
+    {
+        id: 2,
+        name: 'Pro Builder Format',
+        price: 0,
+        priceLabel: 'FREE',
+        // ...
+    },
+    {
+        id: 3,
+        name: 'Industry Engineer Format',
+        price: 249,  // ₹249 ≈ $3
+        priceLabel: '₹249',
+        // ...
+    },
+    {
+        id: 4,
+        name: 'Universal Architecture',
+        price: 349,  // ₹349 ≈ $4.30
+        priceLabel: '₹349',
+        // ...
+    },
+    {
+        id: 5,
+        name: 'Ultimate A→Z Blueprint',
+        price: 549,  // ₹549 ≈ $6.90
+        priceLabel: '₹549',
+        // ...
+    },
+    {
+        id: 6,
+        name: 'Master Super Pack',
+        price: 999,  // ₹999 ≈ $12
+        priceLabel: '₹999',
+        // ...
+    },
+]
+```
+
+================================================================================
+SECTION 5: UPI VS STRIPE/GUMROAD COMPARISON
+================================================================================
+UPI (Direct):
+✅ Zero fees (no payment gateway)
+✅ Instant settlement
+✅ Works with all Indian bank apps
+✅ No account needed
+❌ Manual verification required
+❌ Only works in India
+❌ No automatic webhooks
+
+RAZORPAY (Recommended for automation):
+✅ Automatic verification
+✅ Webhooks
+✅ UPI + Cards + Net Banking
+❌ 2% fees
+❌ Requires account setup
+
+RECOMMENDATION: 
+- For MVP/Testing: Use direct UPI
+- For Production: Use Razorpay for automation
+
+================================================================================
+SECTION 6: YOUR UPI ID SETUP
+================================================================================
+1. Open any UPI app (PhonePe, GPay, Paytm)
+2. Go to your profile
+3. Find your UPI ID (usually: phone@ybl, phone@paytm, etc.)
+4. Replace "your-upi-id@upi" in the code with your actual UPI ID
+5. Test by sending ₹1 to yourself from another account
+
+================================================================================
+                              END OF UPI ARCHIVE
+================================================================================

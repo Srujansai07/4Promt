@@ -1,0 +1,276 @@
+🔧 CRITICAL FIX #1: Build Errors
+src / app / page.tsx - SYNTAX FIXED
+
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
+import {
+    ArrowRight, Menu, X, Zap, Sparkles, Check,
+    ChevronDown, Star, Clock, Copy, Download, Share2,
+    Mail, User
+} from 'lucide-react'
+import Link from 'next/link'
+import { PROMPTS, FAQ_ITEMS } from '@/config/constants'
+import { getRazorpayLink } from '@/config/products'
+
+// ... Full code continues in the original file
+
+🔧 CRITICAL FIX #2: Unlock Page with Code Viewer
+src / app / unlock / page.tsx - FIXED with Format Viewer
+
+🔧 CRITICAL FIX #3: Unlock Client with Format Viewer
+src / app / unlock / client.tsx - Code Viewer Style
+
+🔧 CRITICAL FIX #4: Razorpay Integration(Indian Payments)
+src / config / products.ts - Razorpay(UPI / Cards)
+
+// src/config/products.ts - Indian Payment Gateway (Razorpay)
+
+export const PRODUCT_CONFIG = {
+    razorpay: {
+        // Get these from: https://dashboard.razorpay.com/app/payment-pages
+        paymentPages: {
+            3: 'https://rzp.io/l/YOUR_LINK_TIER_3',
+            4: 'https://rzp.io/l/YOUR_LINK_TIER_4',
+            5: 'https://rzp.io/l/YOUR_LINK_TIER_5',
+            6: 'https://rzp.io/l/YOUR_LINK_TIER_6',
+        }
+    },
+    prices: {
+        1: 0,      // Free
+        2: 0,      // Free
+        3: 249,    // ~$3 USD
+        4: 349,    // ~$4.30 USD
+        5: 549,    // ~$6.90 USD
+        6: 999,    // ~$12 USD
+    }
+}
+
+export function getRazorpayLink(promptId: number, email?: string): string {
+    const link = PRODUCT_CONFIG.razorpay.paymentPages[promptId as keyof typeof PRODUCT_CONFIG.razorpay.paymentPages]
+
+    if (!link) {
+        console.error(`No Razorpay link configured for prompt ${promptId}`)
+        return '#'
+    }
+
+    // Add email as query param if provided
+    if (email) {
+        return `${link}?prefill[email]=${encodeURIComponent(email)}`
+    }
+
+    return link
+}
+
+export function getPromptPrice(promptId: number): number {
+    return PRODUCT_CONFIG.prices[promptId as keyof typeof PRODUCT_CONFIG.prices] || 0
+}
+
+
+🔧 CRITICAL FIX #5: Update Constants(Remove 7 - 9, Fix Pricing)
+src / config / constants.ts - FIXED(Only 1 - 6, INR Pricing)
+
+
+export const PROMPTS = [
+    {
+        id: 1,
+        name: 'Starter Format',
+        tier: 'Tier 1',
+        price: 0,
+        priceLabel: 'FREE',
+        icon: '🌱',
+        description: 'The foundation prompt for simple apps and quick prototypes. Perfect for beginners.',
+        features: ['Instant access', 'No email required'],
+        popular: false,
+        unlockType: 'free' as const,
+    },
+    {
+        id: 2,
+        name: 'Pro Builder Format',
+        tier: 'Tier 2',
+        price: 0,
+        priceLabel: 'FREE',
+        icon: '⚡',
+        description: 'Advanced structure with shortcuts for LLM, JSON, and RAG configurations.',
+        features: ['Instant access', 'No email required'],
+        popular: false,
+        unlockType: 'form' as const,
+    },
+    {
+        id: 3,
+        name: 'Industry Engineer Format',
+        tier: 'Tier 3',
+        price: 249,
+        priceLabel: '₹249',
+        icon: '🏭',
+        description: 'Production-grade prompt for enterprise-level applications.',
+        features: ['Enterprise-ready', 'UPI/Card payment'],
+        popular: true,
+        unlockType: 'paid' as const,
+    },
+    {
+        id: 4,
+        name: 'Universal Architecture',
+        tier: 'Tier 4',
+        price: 349,
+        priceLabel: '₹349',
+        icon: '🌐',
+        description: 'Multi-platform prompt that works across web, mobile, and desktop.',
+        features: ['Cross-platform', 'Architecture docs'],
+        popular: false,
+        unlockType: 'paid' as const,
+    },
+    {
+        id: 5,
+        name: 'Ultimate A→Z Blueprint',
+        tier: 'Tier 5',
+        price: 549,
+        priceLabel: '₹549',
+        icon: '🗺️',
+        description: 'Complete end-to-end application blueprint from idea to deployment.',
+        features: ['Full roadmap', 'Deployment guide'],
+        popular: false,
+        unlockType: 'paid' as const,
+    },
+    {
+        id: 6,
+        name: 'Master Super Pack',
+        tier: 'Master Tier',
+        price: 999,
+        priceLabel: '₹999',
+        icon: '💎',
+        description: 'All prompts in one bundle. Includes Markdown, JSON & TOML formats.',
+        features: ['All formats', '4 variations', 'Best value'],
+        popular: false,
+        isMaster: true,
+        unlockType: 'paid' as const,
+    }
+]
+
+export const FAQ_ITEMS = [
+    {
+        q: 'What exactly do I get after unlocking?',
+        a: 'Instant access to the prompt text. You can copy it to your clipboard or download it. Use it unlimited times with ChatGPT, Claude, or any AI.',
+    },
+    {
+        q: 'Which AI does this work with?',
+        a: 'All major AI models: ChatGPT (GPT-4), Claude, Gemini, and any other LLM. The prompts are engineered to work universally.',
+    },
+    {
+        q: 'What payment methods do you accept?',
+        a: 'We support UPI (PhonePe, Paytm, GPay), Debit/Credit Cards (Visa, Mastercard, RuPay), and Net Banking - all through secure Razorpay payment gateway.',
+    },
+    {
+        q: 'Do I need coding experience?',
+        a: 'No! The prompts are designed so that the AI does the coding. You just describe what you want.',
+    },
+    {
+        q: 'Can I use these prompts commercially?',
+        a: 'Yes! Once you purchase, you can use the prompts to build and sell your own apps.',
+    },
+]
+
+🔧 CRITICAL FIX #6: Razorpay Webhook
+src / app / api / webhook / razorpay / route.ts - UPI Payment Handler
+
+// src/app/api/webhook/razorpay/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import crypto from 'crypto'
+import { kv } from '@vercel/kv'
+
+export async function POST(request: NextRequest) {
+    try {
+        const body = await request.text()
+        const signature = request.headers.get('x-razorpay-signature')
+
+        if (!signature) {
+            return NextResponse.json({ error: 'No signature' }, { status: 400 })
+        }
+
+        // Verify webhook signature
+        const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET
+        if (webhookSecret) {
+            const expectedSignature = crypto
+                .createHmac('sha256', webhookSecret)
+                .update(body)
+                .digest('hex')
+
+            if (expectedSignature !== signature) {
+                console.error('❌ Invalid Razorpay signature')
+                return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
+            }
+        }
+
+        const event = JSON.parse(body)
+        console.log('✅ Razorpay Event:', event.event)
+
+        // Handle payment success
+        if (event.event === 'payment.captured' || event.event === 'payment_link.paid') {
+            const payment = event.payload.payment.entity
+            const email = payment.email
+            const notes = payment.notes || {}
+            const promptId = notes.promptId || '1'
+
+            console.log('💰 Payment captured:', { email, promptId, amount: payment.amount / 100 })
+
+            if (email && promptId) {
+                try {
+                    // Store purchase in KV
+                    await kv.hset(`user:${email}`, {
+                        [`prompt:${promptId}`]: 'purchased',
+                        [`purchase_date:${promptId}`]: new Date().toISOString(),
+                        [`razorpay_payment_id:${promptId}`]: payment.id,
+                        lastPurchase: new Date().toISOString(),
+                        source: 'razorpay'
+                    })
+                    console.log('✅ Stored in KV')
+
+                } catch (error) {
+                    console.error('❌ Post-payment processing failed:', error)
+                }
+            }
+        }
+
+        return NextResponse.json({ status: 'ok' })
+
+    } catch (error) {
+        console.error('❌ Razorpay webhook error:', error)
+        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500 })
+    }
+}
+
+export async function GET() {
+    return NextResponse.json({
+        status: 'Razorpay webhook endpoint active',
+        timestamp: new Date().toISOString(),
+        env: {
+            hasWebhookSecret: !!process.env.RAZORPAY_WEBHOOK_SECRET
+        }
+    })
+}
+
+🔧 CRITICAL FIX #7: Environment Variables
+    .env.local.example - Updated for Razorpay
+
+# PromptOS Environment Variables
+
+# Razorpay(Indian Payment Gateway)
+# Get from: https://dashboard.razorpay.com/app/keys
+RAZORPAY_KEY_ID = rzp_test_YOUR_KEY_ID
+RAZORPAY_KEY_SECRET = YOUR_KEY_SECRET
+RAZORPAY_WEBHOOK_SECRET = YOUR_WEBHOOK_SECRET
+
+# JWT Secret(generate with: openssl rand - base64 32)
+JWT_SECRET_KEY = your_super_secret_random_string_min_32_chars
+
+# App URLs
+NEXT_PUBLIC_APP_URL = http://localhost:3000
+NEXT_PUBLIC_RAZORPAY_KEY_ID = rzp_test_YOUR_KEY_ID
+
+# Vercel KV(Auto - injected by Vercel, but for local testing)
+# Get by running: vercel env pull.env.local
+KV_REST_API_URL =
+    KV_REST_API_TOKEN =
+    KV_REST_API_READ_ONLY_TOKEN =
+    KV_URL =

@@ -1,0 +1,238 @@
+================================================================================
+                    STRIPE INTEGRATION - COMPLETE ARCHIVE
+================================================================================
+                  HOW TO RE-INTEGRATE: Follow the sections below
+================================================================================
+
+This file contains ALL the code needed to re-integrate Stripe payments.
+Just copy each section to the corresponding file location.
+
+================================================================================
+SECTION 1: ENVIRONMENT VARIABLES
+================================================================================
+Add these to your .env.local file:
+
+```env
+# Stripe Configuration
+STRIPE_SECRET_KEY=sk_test_YOUR_KEY_HERE
+STRIPE_WEBHOOK_SECRET=whsec_YOUR_SECRET_HERE
+NEXT_PUBLIC_STRIPE_PAYMENT_URL=https://buy.stripe.com
+```
+
+================================================================================
+SECTION 2: STRIPE WEBHOOK HANDLER
+================================================================================
+FILE: src/app/api/webhook/stripe/route.ts
+
+```typescript
+// src/app/api/webhook/stripe/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import Stripe from 'stripe'
+import { kv } from '@vercel/kv'
+import { sendPurchaseEmail } from '@/lib/email'
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2024-12-18.acacia',
+})
+
+export async function POST(req: NextRequest) {
+    const body = await req.text()
+    const signature = req.headers.get('stripe-signature')
+
+    if (!signature) {
+        return NextResponse.json({ error: 'No signature' }, { status: 400 })
+    }
+
+    let event: Stripe.Event
+
+    try {
+        event = stripe.webhooks.constructEvent(
+            body,
+            signature,
+            process.env.STRIPE_WEBHOOK_SECRET!
+        )
+    } catch (err: any) {
+        console.error('❌ Webhook signature verification failed:', err.message)
+        return NextResponse.json(
+            { error: `Webhook Error: ${err.message}` },
+            { status: 400 }
+        )
+    }
+
+    console.log('✅ Stripe Event:', event.type)
+
+    // Handle the event
+    switch (event.type) {
+        case 'checkout.session.completed': {
+            const session = event.data.object as Stripe.Checkout.Session
+            
+            const email = session.customer_details?.email || session.customer_email
+            const promptId = session.metadata?.promptId
+
+            if (!email || !promptId) {
+                console.error('Missing email or promptId in session')
+                return NextResponse.json({ received: true })
+            }
+
+            console.log('💳 Payment completed:', { email, promptId })
+
+            try {
+                // 1. Store purchase in KV
+                await kv.hset(`user:${email}`, {
+                    [`prompt:${promptId}`]: 'purchased',
+                    [`purchase_date:${promptId}`]: new Date().toISOString(),
+                    lastPurchase: new Date().toISOString(),
+                    source: 'stripe'
+                })
+                console.log('✅ Stored in KV')
+
+                // 2. Send email
+                await sendPurchaseEmail(email, promptId)
+                console.log('✅ Email sent')
+
+                // 3. Track analytics
+                try {
+                    await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/analytics`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            event: 'purchase',
+                            properties: { promptId, source: 'stripe' },
+                            userId: email
+                        })
+                    })
+                } catch (e) {
+                    console.error('Analytics failed:', e)
+                }
+
+            } catch (error) {
+                console.error('❌ Post-payment processing failed:', error)
+            }
+
+            break
+        }
+
+        case 'payment_intent.succeeded': {
+            const paymentIntent = event.data.object as Stripe.PaymentIntent
+            console.log('💰 Payment intent succeeded:', paymentIntent.id)
+            break
+        }
+
+        case 'payment_intent.payment_failed': {
+            const paymentIntent = event.data.object as Stripe.PaymentIntent
+            console.error('❌ Payment failed:', paymentIntent.id)
+            break
+        }
+
+        default:
+            console.log(`Unhandled event type: ${event.type}`)
+    }
+
+    return NextResponse.json({ received: true })
+}
+
+export async function GET() {
+    return NextResponse.json({
+        status: 'Stripe webhook endpoint active',
+        timestamp: new Date().toISOString(),
+        env: {
+            hasSecretKey: !!process.env.STRIPE_SECRET_KEY,
+            hasWebhookSecret: !!process.env.STRIPE_WEBHOOK_SECRET
+        }
+    })
+}
+```
+
+================================================================================
+SECTION 3: PRODUCT CONFIG WITH STRIPE
+================================================================================
+FILE: src/config/products.ts
+
+```typescript
+// src/config/products.ts
+export const PRODUCT_CONFIG = {
+    stripe: {
+        // Replace these with your actual Stripe Payment Links
+        paymentLinks: {
+            3: 'https://buy.stripe.com/test_REPLACE_WITH_YOUR_LINK_3',
+            4: 'https://buy.stripe.com/test_REPLACE_WITH_YOUR_LINK_4',
+            5: 'https://buy.stripe.com/test_REPLACE_WITH_YOUR_LINK_5',
+            6: 'https://buy.stripe.com/test_REPLACE_WITH_YOUR_LINK_6',
+        }
+    },
+    prices: {
+        1: 0,
+        2: 0,
+        3: 3.00,
+        4: 4.30,
+        5: 6.90,
+        6: 12.00,
+    }
+}
+
+export function getStripeLink(promptId: number, email?: string): string {
+    const link = PRODUCT_CONFIG.stripe.paymentLinks[promptId as keyof typeof PRODUCT_CONFIG.stripe.paymentLinks]
+    if (!link) {
+        console.error(`No Stripe link configured for prompt ${promptId}`)
+        return '#'
+    }
+    // Add email prefill if provided
+    if (email) {
+        return `${link}?prefilled_email=${encodeURIComponent(email)}`
+    }
+    return link
+}
+
+export function getPromptPrice(promptId: number): number {
+    return PRODUCT_CONFIG.prices[promptId as keyof typeof PRODUCT_CONFIG.prices] || 0
+}
+```
+
+================================================================================
+SECTION 4: STRIPE BUTTON IN MODAL
+================================================================================
+Add this inside your PaymentModal component:
+
+```tsx
+// Inside your payment modal
+const stripeLink = getStripeLink(prompt.id, email)
+
+<a 
+    href={stripeLink} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="btn btn-primary w-full"
+>
+    💳 Pay with Stripe
+</a>
+```
+
+================================================================================
+SECTION 5: INSTALL STRIPE PACKAGE
+================================================================================
+Run this command:
+
+```bash
+npm install stripe
+```
+
+================================================================================
+SECTION 6: STRIPE SETUP STEPS
+================================================================================
+1. Go to https://stripe.com and create account
+2. Get API Keys: Dashboard → Developers → API Keys
+3. Create Products: Dashboard → Products → Add Product
+   - Tier 3: $3.00 (add metadata: promptId: 3)
+   - Tier 4: $4.30 (add metadata: promptId: 4)
+   - Tier 5: $6.90 (add metadata: promptId: 5)
+   - Tier 6: $12.00 (add metadata: promptId: 6)
+4. Create Payment Links for each product
+5. Setup Webhook: Dashboard → Developers → Webhooks
+   - URL: https://your-domain.vercel.app/api/webhook/stripe
+   - Events: checkout.session.completed, payment_intent.succeeded
+6. Copy Webhook Secret and add to .env.local
+7. Test with card: 4242 4242 4242 4242
+
+================================================================================
+                              END OF STRIPE ARCHIVE
+================================================================================

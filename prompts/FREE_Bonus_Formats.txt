@@ -1,0 +1,290 @@
+================================================================================
+                       PROMPTOS - FREE PROMPTS (3 Bonus)
+================================================================================
+             These 3 formats are FREE with Prompt 6 (Master Pack)
+================================================================================
+
+
+================================================================================
+               FREE FORMAT 1: MARKDOWN MASTER SUPER-PROMPT
+================================================================================
+(Perfect for human readability + most dev tools)
+
+# MASTER SUPER FORMAT (Markdown Output)
+Raw Idea: "IDEAK"
+
+## INSTRUCTIONS TO LLM
+Expand the raw idea into a complete multi-layer specification containing ALL sections below.  
+Output MUST be in **Markdown format only**.  
+Do NOT skip any section.
+
+---
+
+# 1. High-Level Summary
+
+# 2. Core Features
+- With basic description
+- With acceptance criteria
+
+# 3. Product Description
+
+# 4. User Personas
+
+# 5. User Stories
+- Simple
+- Detailed
+
+# 6. Screen / Page Map
+
+# 7. User Flow & System Flow
+
+# 8. Objectives
+- Primary
+- Secondary
+- Tertiary
+
+# 9. Full Feature Specifications
+- With acceptance criteria
+
+# 10. Data Model
+```json
+{ }
+```
+(Relationships explained in text)
+
+# 11. API Blueprint
+- Endpoints
+- Request/Response examples
+- Auth
+
+# 12. System Architecture
+- Frontend
+- Backend
+- Database
+- Integrations
+
+# 13. Logic Flow
+
+# 14. PRD (Product Requirements Document)
+
+# 15. Tech Stack Recommendations
+
+# 16. Implementation Plan
+- Phases
+- Sprints
+- Tasks
+
+# 17. Git Branch Plan & Commit Messages
+
+# 18. Development Roadmap
+
+# 19. Deployment & Hosting Plan (CI/CD included)
+
+# 20. Test Plan
+- Unit tests
+- Integration tests
+- End-to-end
+
+# 21. Security & Performance Guidelines
+
+# 22. Non-Functional Requirements
+
+# 23. Risks & Mitigation
+
+# 24. Final Handoff Package
+- Required files
+- Folder structure
+- Deliverables
+
+
+================================================================================
+                 FREE FORMAT 2: JSON MASTER SUPER-PROMPT
+================================================================================
+(Fits perfectly into LLMs that parse JSON or structured builders)
+
+{
+    "raw_idea": "IDEAK",
+    "instructions": "Expand into the full combined blueprint. Output MUST be valid JSON.",
+    "high_level_summary": "",
+    "core_features": [],
+    "product_description": "",
+    "user_personas": [],
+    "user_stories": {
+        "simple": [],
+        "detailed": []
+    },
+    "screen_map": [],
+    "flows": {
+        "user_flow": "",
+        "system_flow": ""
+    },
+    "objectives": {
+        "primary": [],
+        "secondary": [],
+        "tertiary": []
+    },
+    "feature_specifications": [],
+    "data_model": {
+        "schema_json": {},
+        "relations_explained": ""
+    },
+    "api_blueprint": {
+        "endpoints": [],
+        "examples": {}
+    },
+    "system_architecture": {
+        "frontend": "",
+        "backend": "",
+        "database": "",
+        "integrations": ""
+    },
+    "logic_flow": "",
+    "prd": {
+        "problem": "",
+        "solution": "",
+        "constraints": "",
+        "kpis": ""
+    },
+    "tech_stack_recommendations": [],
+    "implementation_plan": {
+        "phases": [],
+        "sprints": [],
+        "tasks": []
+    },
+    "git_plan": {
+        "branches": [],
+        "commit_messages": []
+    },
+    "development_roadmap": [],
+    "deployment_plan": {
+        "environment": "",
+        "hosting": "",
+        "ci_cd": ""
+    },
+    "test_plan": {
+        "unit_tests": [],
+        "integration_tests": [],
+        "e2e_tests": []
+    },
+    "security_guidelines": "",
+    "performance_guidelines": "",
+    "non_functional_requirements": [],
+    "risks_and_mitigations": [],
+    "final_handoff_package": {
+        "files": [],
+        "folder_structure": "",
+        "deliverables": []
+    }
+}
+
+
+================================================================================
+                 FREE FORMAT 3: TOML MASTER SUPER-PROMPT
+================================================================================
+(Perfect for AI tools, configuration engines, structured automation)
+
+raw_idea = "IDEAK"
+instructions = "Output MUST be valid TOML. Include all sections."
+
+[high_level_summary]
+content = ""
+
+[core_features]
+list = []
+
+[product_description]
+content = ""
+
+[user_personas]
+list = []
+
+[user_stories.simple]
+list = []
+
+[user_stories.detailed]
+list = []
+
+[screen_map]
+pages = []
+
+[flows]
+user_flow = ""
+system_flow = ""
+
+[objectives]
+primary = []
+secondary = []
+tertiary = []
+
+[feature_specifications]
+list = []
+
+[data_model]
+schema_json = "{}"
+relations = ""
+
+[api_blueprint]
+endpoints = []
+examples = ""
+
+[system_architecture]
+frontend = ""
+backend = ""
+database = ""
+integrations = ""
+
+[logic_flow]
+content = ""
+
+[prd]
+problem = ""
+solution = ""
+constraints = ""
+kpis = ""
+
+[tech_stack_recommendations]
+list = []
+
+[implementation_plan]
+phases = []
+sprints = []
+tasks = []
+
+[git_plan]
+branches = []
+commit_messages = []
+
+[development_roadmap]
+milestones = []
+
+[deployment_plan]
+environment = ""
+hosting = ""
+ci_cd = ""
+
+[test_plan]
+unit = []
+integration = []
+e2e = []
+
+[security]
+guidelines = ""
+
+[performance]
+guidelines = ""
+
+[non_functional_requirements]
+list = []
+
+[risks_and_mitigations]
+list = []
+
+[final_handoff_package]
+files = []
+folder_structure = ""
+deliverables = []
+
+
+================================================================================
+                              END OF FREE PROMPTS
+================================================================================
