@@ -558,7 +558,8 @@ async function UnlockContent({ searchParams }: PageProps) {
         )
     }
 
-    const prompt = PROMPT_CONTENT[promptId] || PROMPT_CONTENT[1]
+    const promptData = PROMPT_CONTENT[promptId] || PROMPT_CONTENT[1]
+    const prompt = { ...promptData, id: promptId }
 
     return <UnlockClient prompt={prompt} email={email} promptId={promptId} />
 }
