@@ -516,62 +516,11 @@ function Footer() {
 
 // ReferralModal removed - archived in archive/payment_integrations/
 
+// PaymentModal removed - using UPIModal for Indian payments now
+
 // ============================================
 // MAIN PAGE
 // ============================================
-
-function PaymentModal({ isOpen, onClose, prompt }: { isOpen: boolean; onClose: () => void; prompt: typeof PROMPTS[0] | null }) {
-    if (!isOpen || !prompt) return null
-
-    const stripeLink = getStripeLink(prompt.id)
-    const gumroadLink = getGumroadLink(prompt.id)
-
-    return (
-        <div className="modal-overlay active" onClick={onClose}>
-            <div className="modal" onClick={e => e.stopPropagation()}>
-                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <X className="w-6 h-6" />
-                </button>
-                <div className="text-center">
-                    <div className="text-5xl mb-4">{prompt.icon}</div>
-                    <h3 className="text-2xl font-bold mb-2">Unlock {prompt.name}</h3>
-                    <p className="text-gray-400 mb-4">Choose your preferred payment method</p>
-                    <div className="text-4xl font-bold mb-6">${prompt.price}</div>
-
-                    <div className="space-y-3">
-                        <a
-                            href={stripeLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-primary w-full justify-between"
-                        >
-                            <span className="flex items-center gap-2">
-                                💳 Pay with Stripe
-                            </span>
-                            <span className="text-sm opacity-70">Credit/Debit Card</span>
-                        </a>
-
-                        <a
-                            href={gumroadLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-secondary w-full justify-between"
-                        >
-                            <span className="flex items-center gap-2">
-                                🛒 Pay with Gumroad
-                            </span>
-                            <span className="text-sm opacity-70">Multiple options</span>
-                        </a>
-                    </div>
-
-                    <p className="text-sm text-gray-500 mt-6">
-                        🔒 Secure payment • Instant delivery
-                    </p>
-                </div>
-            </div>
-        </div>
-    )
-}
 
 export default function Home() {
     const [selectedPrompt, setSelectedPrompt] = useState<typeof PROMPTS[0] | null>(null)
