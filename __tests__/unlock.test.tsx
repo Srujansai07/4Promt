@@ -1,44 +1,26 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import UnlockPage from '../src/app/unlock/page'
+import UnlockClient from '../src/app/unlock/client'
 import '@testing-library/jest-dom'
 
-// Mock useSearchParams
-const mockGet = jest.fn()
-jest.mock('next/navigation', () => ({
-    useSearchParams: () => ({
-        get: mockGet
-    })
-}))
+const MOCK_PROMPT = {
+    name: 'Test Prompt',
+    icon: '🧪',
+    content: '# Test Content'
+}
 
-describe('Unlock Page', () => {
-    beforeEach(() => {
-        mockGet.mockReset()
-    })
-
-    it('renders the correct prompt content', () => {
-        mockGet.mockImplementation((key) => {
-            if (key === 'prompt') return '3'
-            if (key === 'email') return 'test@example.com'
-            return null
-        })
-        render(<UnlockPage />)
-        expect(screen.getByText('Industry Engineer Format')).toBeInTheDocument()
+describe('Unlock Client', () => {
+    it('renders the prompt content', () => {
+        render(<UnlockClient prompt={MOCK_PROMPT} email="test@example.com" promptId={1} />)
+        expect(screen.getByText('Test Prompt')).toBeInTheDocument()
+        expect(screen.getByText('# Test Content')).toBeInTheDocument()
     })
 
-    it('defaults to Prompt 1 if ID is invalid', () => {
-        mockGet.mockImplementation((key) => {
-            if (key === 'prompt') return '999' // Invalid ID
-            return null
-        })
-        render(<UnlockPage />)
-        expect(screen.getByText('Starter Format')).toBeInTheDocument()
+    it('shows purchase email', () => {
+        render(<UnlockClient prompt={MOCK_PROMPT} email="test@example.com" promptId={1} />)
+        expect(screen.getByText('Purchased by: test@example.com')).toBeInTheDocument()
     })
 
     it('allows copying content', () => {
-        mockGet.mockImplementation((key) => {
-            if (key === 'prompt') return '1'
-            return null
-        })
         // Mock clipboard
         Object.assign(navigator, {
             clipboard: {
@@ -46,9 +28,12 @@ describe('Unlock Page', () => {
             }
         })
 
-        render(<UnlockPage />)
+        render(<UnlockClient prompt={MOCK_PROMPT} email="test@example.com" promptId={1} />)
+
         const copyButton = screen.getByText('Copy to Clipboard')
         fireEvent.click(copyButton)
-        expect(navigator.clipboard.writeText).toHaveBeenCalled()
+
+        expect(navigator.clipboard.writeText).toHaveBeenCalledWith('# Test Content')
+        expect(screen.getByText('Copied!')).toBeInTheDocument()
     })
 })

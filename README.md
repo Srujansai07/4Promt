@@ -22,6 +22,8 @@
 ### Pages
 - `/` - Landing page
 - `/unlock?prompt=X` - Unlock page
+- `/login` - Magic Link Login
+- `/dashboard` - User Dashboard
 - `/admin` - Admin dashboard (password: `promptos2024`)
 
 ### API Routes

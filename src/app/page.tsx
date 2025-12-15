@@ -1,5 +1,15 @@
+'use client'
 
-// Data moved to @/config/constants
+import { useState } from 'react'
+import {
+    ArrowRight, Menu, X, Zap, Sparkles, Check,
+    ChevronDown, Star, Clock, Copy, Download, Share2,
+    Mail, User, Lock, Shield
+} from 'lucide-react'
+import Link from 'next/link'
+import { PROMPTS, FAQ_ITEMS } from '@/config/constants'
+import { getGumroadLink, getStripeLink } from '@/config/products'
+
 
 // ============================================
 // COMPONENTS
