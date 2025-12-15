@@ -1,8 +1,38 @@
-# PromptOS
+# ⚡ PromptOS
 
 > The 9-Prompt Framework for Building AI Apps
 
-A Gen-Z aesthetic web platform for selling AI prompt packs with Stripe and Gumroad integration.
+**Live**: [https://4-promt.vercel.app](https://4-promt.vercel.app)
+
+---
+
+## 🎯 Features
+
+### Pricing Tiers
+| Tier | Name | Price | Unlock Method |
+|------|------|-------|---------------|
+| 1 | Starter Format | FREE | Instant |
+| 2 | Pro Builder | FREE | Fill form |
+| 3 | Industry Engineer | $3 | Pay or Referral |
+| 4 | Universal Architecture | $4.30 | Stripe/Gumroad |
+| 5 | A→Z Blueprint | $6.90 | Stripe/Gumroad |
+| 6 | Master Pack | $12 | Stripe/Gumroad |
+| 7-9 | Advanced | - | Coming Soon |
+
+### Pages
+- `/` - Landing page
+- `/unlock?prompt=X` - Unlock page
+- `/admin` - Admin dashboard (password: `promptos2024`)
+
+### API Routes
+- `GET /api/health` - System status
+- `POST /api/submit-form` - Form submissions
+- `POST /api/referral` - Referral tracking
+- `POST /api/email` - Send emails
+- `GET /api/analytics` - View analytics
+- `POST /api/webhook/stripe` - Stripe webhooks
+
+---
 
 ## 🚀 Quick Start
 
@@ -17,92 +47,84 @@ npm run dev
 npm run build
 ```
 
-## 🔧 Setup
-
-### 1. Payment Links
-
-Update the payment links in `src/app/page.tsx`:
-
-```typescript
-// Line ~590 - Update with your actual links
-const stripeLink = `https://buy.stripe.com/YOUR_STRIPE_LINK_${prompt.id}`
-const gumroadLink = `https://YOUR_GUMROAD.gumroad.com/l/prompt${prompt.id}`
-```
-
-### 2. Environment Variables (for future features)
-
-Create `.env.local`:
-
-```env
-# Stripe
-STRIPE_SECRET_KEY=sk_live_xxx
-STRIPE_WEBHOOK_SECRET=whsec_xxx
-
-# Resend (Email)
-RESEND_API_KEY=re_xxx
-
-# JWT Secret
-JWT_SECRET=your-secret-key
-
-# Vercel KV
-KV_URL=xxx
-KV_REST_API_TOKEN=xxx
-```
-
-### 3. Add Your Prompts
-
-Update the prompt content in `src/app/unlock/page.tsx`:
-
-```typescript
-const PROMPT_CONTENT = {
-  1: {
-    name: 'Starter Format',
-    icon: '🌱',
-    content: `YOUR ACTUAL PROMPT 1 HERE`
-  },
-  // ... rest of prompts
-}
-```
+---
 
 ## 📁 Project Structure
 
 ```
-src/
-├── app/
-│   ├── globals.css     # Global styles + Tailwind
-│   ├── layout.tsx      # Root layout + metadata
-│   ├── page.tsx        # Landing page
-│   └── unlock/
-│       └── page.tsx    # Prompt unlock page
+src/app/
+├── page.tsx              # Landing page
+├── unlock/page.tsx       # Unlock page
+├── admin/page.tsx        # Admin dashboard
+├── layout.tsx            # Root layout
+├── globals.css           # Global styles
+└── api/
+    ├── health/route.ts       # Health check
+    ├── submit-form/route.ts  # Form handler
+    ├── referral/route.ts     # Referral system
+    ├── email/route.ts        # Email sending
+    ├── analytics/route.ts    # Analytics
+    └── webhook/stripe/route.ts # Stripe webhooks
 ```
-
-## 🎨 Tech Stack
-
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Hosting**: Vercel
-- **Payments**: Stripe + Gumroad
-
-## 📊 Pricing Tiers
-
-| Tier | Name | Price |
-|------|------|-------|
-| 1 | Starter Format | $1 |
-| 2 | Pro Builder Format | $2 |
-| 3 | Industry Engineer | $3 |
-| 4 | Universal Architecture | $4.30 |
-| 5 | Ultimate A→Z Blueprint | $6.90 |
-| 6 | Master Super Pack | $12 |
-| 7 | Debug & Optimize | $4 |
-| 8 | UI/UX Designer | $5 |
-| 9 | Launch & Scale | $5 |
-
-## 🔗 Links
-
-- Live Site: https://4-promt.vercel.app
-- GitHub: https://github.com/Srujansai07/4Promt
 
 ---
 
-Built with ❤️ and AI
+## ⚙️ Environment Variables
+
+Create `.env.local`:
+
+```env
+# Stripe (for payments)
+STRIPE_SECRET_KEY=sk_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+# Resend (for emails)
+RESEND_API_KEY=re_...
+
+# Optional: Vercel KV (for persistence)
+KV_REST_API_URL=...
+KV_REST_API_TOKEN=...
+```
+
+---
+
+## 🔗 Setup Payment Links
+
+1. Create Stripe products/prices
+2. Create Gumroad products
+3. Update links in `src/app/page.tsx`:
+   - Search for `YOUR_STRIPE_LINK`
+   - Search for `YOUR_GUMROAD`
+
+---
+
+## 📧 Email Templates
+
+- `welcome` - New user welcome
+- `unlock` - Prompt unlock confirmation
+- `purchase` - Payment receipt
+
+---
+
+## 🎨 Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Lucide Icons
+- Vercel Hosting
+
+---
+
+## 📊 Admin Dashboard
+
+Access at `/admin` with password: `promptos2024`
+
+View:
+- System status
+- Analytics events
+- Referral stats
+
+---
+
+Built with ❤️ by PromptOS
