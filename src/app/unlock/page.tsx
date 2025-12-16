@@ -505,7 +505,7 @@ Stay tuned for updates!
     },
     8: {
         name: 'UI/UX Designer',
-        icon: '🎨',
+        icon: '◼️',
         content: `# UI/UX DESIGNER PROMPT
 
 🚧 COMING SOON 🚧
@@ -518,7 +518,7 @@ Stay tuned for updates!
     },
     9: {
         name: 'Launch & Scale',
-        icon: '🚀',
+        icon: '�',
         content: `# LAUNCH & SCALE PROMPT
 
 🚧 COMING SOON 🚧
