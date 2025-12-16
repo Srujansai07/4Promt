@@ -1,30 +1,43 @@
-PROMPTOS - 9-PROMPT AI FRAMEWORK SELLING PLATFORM
-COMPLETE SPECIFICATION DOCUMENT
+# PROMPTOS - 9-PROMPT AI FRAMEWORK SELLING PLATFORM
+## COMPLETE SPECIFICATION DOCUMENT
 
-1. HIGH-LEVEL SUMMARY
-Project Name: PromptOS
- Purpose: A lightweight, conversion-optimized web platform to sell a 9-prompt framework system for building AI applications
- Core Value: Instant purchase → Instant unlock → Zero friction
- Target Launch: 2-3 weeks
- Revenue Model: Direct payment via Stripe + Gumroad with tiered pricing ($1-$12)
-What It Does:
-Displays 9 premium prompts as "unlockable modules"
-Accepts payments through Stripe and Gumroad
-Unlocks prompts instantly after purchase
-Minimal auth (email-only verification for purchased content)
-Gen-Z aesthetic: clean, minimal, Apple-inspired
-Mobile-first responsive design
-What It Doesn't Do:
-No complex user accounts
-No subscription management
-No backend database (or minimal KV store)
-No social features
-No admin dashboard (initially)
+---
 
-2. CORE FEATURES
-Essential Features (MVP)
-F1: Landing Page
-Hero section with bold headline
+## 1. HIGH-LEVEL SUMMARY
+
+**Project Name:** PromptOS
+
+**Purpose:** A lightweight, conversion-optimized web platform to sell a 9-prompt framework system for building AI applications
+
+**Core Value:** Instant purchase → Instant unlock → Zero friction
+
+**Target Launch:** 2-3 weeks
+
+**Revenue Model:** Direct payment via Stripe + Gumroad with tiered pricing ($1-$12)
+
+### What It Does:
+- Displays 9 premium prompts as "unlockable modules"
+- Accepts payments through Stripe and Gumroad
+- Unlocks prompts instantly after purchase
+- Minimal auth (email-only verification for purchased content)
+- Gen-Z aesthetic: clean, minimal, Apple-inspired
+- Mobile-first responsive design
+
+### What It Doesn't Do:
+- No complex user accounts
+- No subscription management
+- No backend database (or minimal KV store)
+- No social features
+- No admin dashboard (initially)
+
+---
+
+## 2. CORE FEATURES
+
+### Essential Features (MVP)
+
+#### F1: Landing Page
+- Hero section with bold headline
 9 prompt modules displayed as cards
 Pricing clearly visible
 Trust indicators (fake testimonials until real ones)
