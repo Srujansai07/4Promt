@@ -7,7 +7,7 @@ import {
     Mail, User, Lock, Shield
 } from 'lucide-react'
 import Link from 'next/link'
-import { UPIModal } from '@/components/UPIModal'
+import { PaymentModal } from '@/components/PaymentModal'
 import { PROMPTS, FAQ_ITEMS } from '@/config/constants'
 
 // ============================================
@@ -524,7 +524,7 @@ function Footer() {
 
 export default function Home() {
     const [selectedPrompt, setSelectedPrompt] = useState<typeof PROMPTS[0] | null>(null)
-    const [showUPI, setShowUPI] = useState(false)
+    const [showPayment, setShowPayment] = useState(false)
 
     const handleUnlock = (id: number, type: string) => {
         const prompt = PROMPTS.find(p => p.id === id)
@@ -535,13 +535,7 @@ export default function Home() {
             window.location.href = `/unlock?prompt=${id}`
         } else if (type === 'referral' || type === 'paid') {
             setSelectedPrompt(prompt)
-            setShowUPI(true)
-        }
-    }
-
-    const handleUPISuccess = () => {
-        if (selectedPrompt) {
-            window.location.href = `/unlock?prompt=${selectedPrompt.id}&paid=true`
+            setShowPayment(true)
         }
     }
 
@@ -557,11 +551,10 @@ export default function Home() {
             <CTASection />
             <Footer />
 
-            <UPIModal
-                isOpen={showUPI}
-                onClose={() => setShowUPI(false)}
-                onSuccess={handleUPISuccess}
-                amount={selectedPrompt?.price || 3}
+            <PaymentModal
+                isOpen={showPayment}
+                onClose={() => setShowPayment(false)}
+                promptId={selectedPrompt?.id || 3}
                 tierName={selectedPrompt?.name || 'Tier'}
             />
         </main>
