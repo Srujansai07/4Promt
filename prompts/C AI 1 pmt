@@ -101,95 +101,120 @@ F8: Bundle Discounts
 Buy 3 prompts → 10% off
 Buy all 9 → 30% off
 
-3. PRODUCT DESCRIPTION
+## 3. PRODUCT DESCRIPTION
+
 PromptOS is a Gen-Z-optimized digital storefront for selling a premium 9-prompt AI framework system. It's designed for maximum conversion with zero friction:
-Instant gratification: Pay → Unlock → Use (under 2 minutes)
-No barriers: No account creation, no complex forms
-Premium feel: Clean, minimal, Apple-like aesthetic
-Mobile-first: Works perfectly on phones
-Multi-payment: Stripe and Gumroad for maximum reach
-Tagline Options:
-"Build AI Apps With 9 Prompts"
-"The Complete Prompt Framework for AI Builders"
-"Unlock Pro Prompts. Build Faster."
-Target Audience:
-Indie developers
-No-code builders
-AI enthusiasts
-Side hustlers
-Students learning AI
 
-4. USER PERSONAS
-Persona 1: "Alex the Indie Hacker"
-Age: 22-28
-Background: Self-taught developer, works on side projects
-Pain: Spends hours writing prompts, wants templates
-Goal: Build an app fast, validate idea quickly
-Behavior: Browses Product Hunt, follows AI Twitter, impulse buyer
-Budget: $10-50 for tools
-Persona 2: "Jordan the Student"
-Age: 18-24
-Background: CS student, learning AI/ML
-Pain: Needs structured prompts for projects
-Goal: Get good grades, build portfolio projects
-Behavior: Active on Reddit, Discord, watches YouTube tutorials
-Budget: $5-20 (low budget)
-Persona 3: "Sam the Entrepreneur"
-Age: 25-35
-Background: Runs small business, exploring AI automation
-Pain: Doesn't know how to prompt effectively
-Goal: Automate workflows, save time
-Behavior: Reads blogs, follows trends, willing to pay for shortcuts
-Budget: $50-200
+- **Instant gratification:** Pay → Unlock → Use (under 2 minutes)
+- **No barriers:** No account creation, no complex forms
+- **Premium feel:** Clean, minimal, Apple-like aesthetic
+- **Mobile-first:** Works perfectly on phones
+- **Multi-payment:** Stripe and Gumroad for maximum reach
 
-5. USER STORIES
-Basic User Stories
-US1: As a visitor, I want to see all 9 prompts clearly so I can decide which ones to buy
- US2: As a buyer, I want to pay quickly (under 1 minute) so I don't lose interest
- US3: As a buyer, I want to unlock my prompt immediately after payment
- US4: As a user, I want to copy the prompt with one click so I can use it right away
- US5: As a returning user, I want to access my purchased prompts without logging in again
-Detailed User Stories
-US6 (Payment Flow):
- "As Alex, I see Prompt 4 costs $4.30. I click 'Unlock Now,' enter my email and card details in Stripe, complete payment in 30 seconds, and immediately see the full prompt with a 'Copy' button. I copy it and paste it into ChatGPT to start building my app."
-US7 (Share-to-Unlock):
- "As Jordan, I'm a broke student. I see Prompt 3 can unlock if I share to 3 platforms. I click 'Share to Unlock,' post to Twitter, LinkedIn, and Reddit. After my third share, the prompt unlocks for free. I download it as a PDF."
-US8 (Re-access):
- "As Sam, I bought Prompt 5 last week. I lost the link. I go back to the site, enter my email, receive a magic link, and see all my purchased prompts in a simple dashboard."
+### Tagline Options:
+- "Build AI Apps With 9 Prompts"
+- "The Complete Prompt Framework for AI Builders"
+- "Unlock Pro Prompts. Build Faster."
 
-6. SCREEN / PAGE MAP
-Page 1: Landing Page (/)
-Sections:
-Hero: Bold headline + CTA
-Prompt Modules: 9 cards showing tiers
-Pricing: Clear pricing table
-Social Proof: Testimonials
-FAQ: 5-7 common questions
-Footer: Links, legal, contact
-Page 2: Checkout (/checkout?prompt=X)
-Sections:
-Prompt preview (what they're buying)
-Email input field
-Stripe/Gumroad payment buttons
-Trust badges (SSL, secure payment)
-Page 3: Unlock Page (/unlock?email=XXX&prompt=X)
-Sections:
-"You've unlocked Prompt X!"
-Full prompt displayed in monospace font
-Copy button
-Download PDF button
-Share button (optional)
-Page 4: Dashboard (/dashboard?email=XXX)
-Sections:
-"Your Purchased Prompts"
-List of unlocked prompts
-Re-download links
-Upgrade to bundle CTA
-Page 5: Magic Link (/auth?token=XXX)
-Sections:
-Email verification
-Redirect to dashboard
-Error handling (expired link)
+### Target Audience:
+- Indie developers
+- No-code builders
+- AI enthusiasts
+- Side hustlers
+- Students learning AI
+
+---
+
+## 4. USER PERSONAS
+
+### Persona 1: "Alex the Indie Hacker"
+- **Age:** 22-28
+- **Background:** Self-taught developer, works on side projects
+- **Pain:** Spends hours writing prompts, wants templates
+- **Goal:** Build an app fast, validate idea quickly
+- **Behavior:** Browses Product Hunt, follows AI Twitter, impulse buyer
+- **Budget:** $10-50 for tools
+
+### Persona 2: "Jordan the Student"
+- **Age:** 18-24
+- **Background:** CS student, learning AI/ML
+- **Pain:** Needs structured prompts for projects
+- **Goal:** Get good grades, build portfolio projects
+- **Behavior:** Active on Reddit, Discord, watches YouTube tutorials
+- **Budget:** $5-20 (low budget)
+
+### Persona 3: "Sam the Entrepreneur"
+- **Age:** 25-35
+- **Background:** Runs small business, exploring AI automation
+- **Pain:** Doesn't know how to prompt effectively
+- **Goal:** Automate workflows, save time
+- **Behavior:** Reads blogs, follows trends, willing to pay for shortcuts
+- **Budget:** $50-200
+
+---
+
+## 5. USER STORIES
+
+### Basic User Stories
+- **US1:** As a visitor, I want to see all 9 prompts clearly so I can decide which ones to buy
+- **US2:** As a buyer, I want to pay quickly (under 1 minute) so I don't lose interest
+- **US3:** As a buyer, I want to unlock my prompt immediately after payment
+- **US4:** As a user, I want to copy the prompt with one click so I can use it right away
+- **US5:** As a returning user, I want to access my purchased prompts without logging in again
+
+### Detailed User Stories
+
+**US6 (Payment Flow):**
+> "As Alex, I see Prompt 4 costs $4.30. I click 'Unlock Now,' enter my email and card details in Stripe, complete payment in 30 seconds, and immediately see the full prompt with a 'Copy' button. I copy it and paste it into ChatGPT to start building my app."
+
+**US7 (Share-to-Unlock):**
+> "As Jordan, I'm a broke student. I see Prompt 3 can unlock if I share to 3 platforms. I click 'Share to Unlock,' post to Twitter, LinkedIn, and Reddit. After my third share, the prompt unlocks for free. I download it as a PDF."
+
+**US8 (Re-access):**
+> "As Sam, I bought Prompt 5 last week. I lost the link. I go back to the site, enter my email, receive a magic link, and see all my purchased prompts in a simple dashboard."
+
+---
+
+## 6. SCREEN / PAGE MAP
+
+### Page 1: Landing Page (/)
+**Sections:**
+- Hero: Bold headline + CTA
+- Prompt Modules: 9 cards showing tiers
+- Pricing: Clear pricing table
+- Social Proof: Testimonials
+- FAQ: 5-7 common questions
+- Footer: Links, legal, contact
+
+### Page 2: Checkout (/checkout?prompt=X)
+**Sections:**
+- Prompt preview (what they're buying)
+- Email input field
+- Stripe/Gumroad payment buttons
+- Trust badges (SSL, secure payment)
+
+### Page 3: Unlock Page (/unlock?email=XXX&prompt=X)
+**Sections:**
+- "You've unlocked Prompt X!"
+- Full prompt displayed in monospace font
+- Copy button
+- Download PDF button
+- Share button (optional)
+
+### Page 4: Dashboard (/dashboard?email=XXX)
+**Sections:**
+- "Your Purchased Prompts"
+- List of unlocked prompts
+- Re-download links
+- Upgrade to bundle CTA
+
+### Page 5: Magic Link (/auth?token=XXX)
+**Sections:**
+- Email verification
+- Redirect to dashboard
+- Error handling (expired link)
+
+---
 
 7. USER FLOW + SYSTEM FLOW
 Simple User Flow
