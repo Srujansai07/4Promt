@@ -1,1092 +1,299 @@
-PROMPTOS - 9-PROMPT AI FRAMEWORK SELLING PLATFORM
-COMPLETE SPECIFICATION DOCUMENT
+# PROMPTOS - Complete Technical Specification
+# 9-Prompt AI Framework Selling Platform
 
-1. HIGH-LEVEL SUMMARY
+================================================================================
+                              SPECIFICATION DOCUMENT
+================================================================================
+
+## 1. HIGH-LEVEL SUMMARY
+
 Project Name: PromptOS
- Purpose: A lightweight, conversion-optimized web platform to sell a 9-prompt framework system for building AI applications
- Core Value: Instant purchase → Instant unlock → Zero friction
- Target Launch: 2-3 weeks
- Revenue Model: Direct payment via Stripe + Gumroad with tiered pricing ($1-$12)
-What It Does:
-Displays 9 premium prompts as "unlockable modules"
-Accepts payments through Stripe and Gumroad
-Unlocks prompts instantly after purchase
-Minimal auth (email-only verification for purchased content)
-Gen-Z aesthetic: clean, minimal, Apple-inspired
-Mobile-first responsive design
-What It Doesn't Do:
-No complex user accounts
-No subscription management
-No backend database (or minimal KV store)
-No social features
-No admin dashboard (initially)
+Purpose: A lightweight, conversion-optimized web platform to sell a 9-prompt 
+         framework system for building AI applications
 
-2. CORE FEATURES
-Essential Features (MVP)
-F1: Landing Page
-Hero section with bold headline
-9 prompt modules displayed as cards
-Pricing clearly visible
-Trust indicators (fake testimonials until real ones)
-FAQ section
-Payment buttons embedded
+Core Value: Instant purchase → Instant unlock → Zero friction
+Target Launch: 2-3 weeks
+Revenue Model: UPI payments with tiered pricing (₹1-₹999)
+
+### What It Does:
+- Displays 9 premium prompts as "unlockable modules"
+- Accepts payments through UPI (PhonePe, GPay, Paytm)
+- Unlocks prompts instantly after purchase
+- Minimal auth (email-only verification)
+- Gen-Z aesthetic: clean, minimal, Apple-inspired
+- Mobile-first responsive design
+
+### What It Doesn't Do:
+- No complex user accounts
+- No subscription management
+- No social features
+- No admin dashboard (initially)
+
+---
+
+## 2. CORE FEATURES
+
+### F1: Landing Page
+- Hero section with bold headline
+- 9 prompt modules displayed as cards
+- Pricing clearly visible
+- Trust indicators
+- FAQ section
+- Payment buttons embedded
+
 Acceptance Criteria:
 ✅ Loads in under 2 seconds
 ✅ Mobile responsive (works on iPhone/Android)
-✅ All 9 prompts visible without scrolling excessively
+✅ All 9 prompts visible
 ✅ Payment buttons are prominent and clickable
-F2: Payment Processing
-Stripe Checkout integration
-Gumroad alternative buttons
-Support for $1, $2, $3, $4.3, $6.9, $12 tiers
-Automatic redirect after payment
-Acceptance Criteria:
-✅ Payment completes in under 60 seconds
-✅ User receives confirmation email
-✅ User is redirected to unlock page immediately
-✅ No payment errors or broken checkout flows
-F3: Email Verification (Lightweight Auth)
-User enters email before/after purchase
-Receives magic link to access purchased prompts
-No password required
-Session lasts 30 days
-Acceptance Criteria:
-✅ Email sent within 30 seconds
-✅ Magic link works on any device
-✅ User can re-access purchased content anytime
-✅ Email is stored securely (encrypted)
-F4: Prompt Unlock System
-After payment, user sees the full prompt
-Options: Copy to clipboard, Download as PDF, View in browser
-Prompt displayed in clean, readable format
-Markdown rendering for formatted prompts
-Acceptance Criteria:
-✅ Copy button copies entire prompt instantly
-✅ PDF download includes branding
-✅ Prompt is fully visible (no truncation)
-✅ Works on mobile devices
-F5: Share-to-Unlock (for Prompt 3)
-Prompt 3 unlocks if user shares to 3 platforms
-Share buttons for Twitter, LinkedIn, Reddit
-Tracks shares via URL parameters
-Unlocks automatically after 3 shares
-Acceptance Criteria:
-✅ Share buttons open native share dialogs
-✅ System detects successful shares
-✅ Unlocks Prompt 3 without payment
-✅ Cannot be gamed/cheated easily
-Nice-to-Have Features (Post-MVP)
-F6: User Dashboard
-Simple page showing all purchased prompts
-Re-download options
-Purchase history
-F7: Affiliate System
-Generate referral links
-20% commission on sales
-Track via URL parameters
-F8: Bundle Discounts
-Buy 3 prompts → 10% off
-Buy all 9 → 30% off
 
-3. PRODUCT DESCRIPTION
-PromptOS is a Gen-Z-optimized digital storefront for selling a premium 9-prompt AI framework system. It's designed for maximum conversion with zero friction:
-Instant gratification: Pay → Unlock → Use (under 2 minutes)
-No barriers: No account creation, no complex forms
-Premium feel: Clean, minimal, Apple-like aesthetic
-Mobile-first: Works perfectly on phones
-Multi-payment: Stripe and Gumroad for maximum reach
-Tagline Options:
-"Build AI Apps With 9 Prompts"
-"The Complete Prompt Framework for AI Builders"
-"Unlock Pro Prompts. Build Faster."
-Target Audience:
-Indie developers
-No-code builders
-AI enthusiasts
-Side hustlers
-Students learning AI
+### F2: Payment Processing (UPI)
+- PhonePe, GPay, Paytm integration
+- UPI ID payment option
+- Support for ₹0, ₹249, ₹349, ₹549, ₹999 tiers
+- Automatic redirect after payment
 
-4. USER PERSONAS
-Persona 1: "Alex the Indie Hacker"
-Age: 22-28
-Background: Self-taught developer, works on side projects
-Pain: Spends hours writing prompts, wants templates
-Goal: Build an app fast, validate idea quickly
-Behavior: Browses Product Hunt, follows AI Twitter, impulse buyer
-Budget: $10-50 for tools
-Persona 2: "Jordan the Student"
-Age: 18-24
-Background: CS student, learning AI/ML
-Pain: Needs structured prompts for projects
-Goal: Get good grades, build portfolio projects
-Behavior: Active on Reddit, Discord, watches YouTube tutorials
-Budget: $5-20 (low budget)
-Persona 3: "Sam the Entrepreneur"
-Age: 25-35
-Background: Runs small business, exploring AI automation
-Pain: Doesn't know how to prompt effectively
-Goal: Automate workflows, save time
-Behavior: Reads blogs, follows trends, willing to pay for shortcuts
-Budget: $50-200
+### F3: Email Verification (Magic Links)
+- User enters email before/after purchase
+- Receives magic link to access purchased prompts
+- No password required
+- Session lasts 30 days
 
-5. USER STORIES
-Basic User Stories
-US1: As a visitor, I want to see all 9 prompts clearly so I can decide which ones to buy
- US2: As a buyer, I want to pay quickly (under 1 minute) so I don't lose interest
- US3: As a buyer, I want to unlock my prompt immediately after payment
- US4: As a user, I want to copy the prompt with one click so I can use it right away
- US5: As a returning user, I want to access my purchased prompts without logging in again
-Detailed User Stories
-US6 (Payment Flow):
- "As Alex, I see Prompt 4 costs $4.30. I click 'Unlock Now,' enter my email and card details in Stripe, complete payment in 30 seconds, and immediately see the full prompt with a 'Copy' button. I copy it and paste it into ChatGPT to start building my app."
-US7 (Share-to-Unlock):
- "As Jordan, I'm a broke student. I see Prompt 3 can unlock if I share to 3 platforms. I click 'Share to Unlock,' post to Twitter, LinkedIn, and Reddit. After my third share, the prompt unlocks for free. I download it as a PDF."
-US8 (Re-access):
- "As Sam, I bought Prompt 5 last week. I lost the link. I go back to the site, enter my email, receive a magic link, and see all my purchased prompts in a simple dashboard."
+### F4: Prompt Unlock System
+- After payment, user sees the full prompt
+- Options: Copy to clipboard, Download
+- Prompt displayed in clean, readable format
+- Markdown rendering for formatted prompts
 
-6. SCREEN / PAGE MAP
-Page 1: Landing Page (/)
-Sections:
-Hero: Bold headline + CTA
-Prompt Modules: 9 cards showing tiers
-Pricing: Clear pricing table
-Social Proof: Testimonials
-FAQ: 5-7 common questions
-Footer: Links, legal, contact
-Page 2: Checkout (/checkout?prompt=X)
-Sections:
-Prompt preview (what they're buying)
-Email input field
-Stripe/Gumroad payment buttons
-Trust badges (SSL, secure payment)
-Page 3: Unlock Page (/unlock?email=XXX&prompt=X)
-Sections:
-"You've unlocked Prompt X!"
-Full prompt displayed in monospace font
-Copy button
-Download PDF button
-Share button (optional)
-Page 4: Dashboard (/dashboard?email=XXX)
-Sections:
-"Your Purchased Prompts"
-List of unlocked prompts
-Re-download links
-Upgrade to bundle CTA
-Page 5: Magic Link (/auth?token=XXX)
-Sections:
-Email verification
-Redirect to dashboard
-Error handling (expired link)
+---
 
-7. USER FLOW + SYSTEM FLOW
-Simple User Flow
+## 3. PRODUCT DESCRIPTION
+
+PromptOS is a Gen-Z-optimized digital storefront for selling a premium 
+9-prompt AI framework system. Designed for maximum conversion with zero friction:
+
+- Instant gratification: Pay → Unlock → Use (under 2 minutes)
+- No barriers: No account creation, no complex forms
+- Premium feel: Clean, minimal, Apple-like aesthetic
+- Mobile-first: Works perfectly on phones
+- Multi-payment: UPI for Indian market
+
+### Target Audience:
+- Indie developers
+- No-code builders
+- AI enthusiasts
+- Side hustlers
+- Students learning AI
+
+---
+
+## 4. USER PERSONAS
+
+### Persona 1: "Alex the Indie Hacker"
+- Age: 22-28
+- Self-taught developer, works on side projects
+- Pain: Spends hours writing prompts, wants templates
+- Goal: Build an app fast, validate idea quickly
+- Budget: ₹500-₹2000 for tools
+
+### Persona 2: "Jordan the Student"
+- Age: 18-24
+- CS student, learning AI/ML
+- Pain: Needs structured prompts for projects
+- Goal: Get good grades, build portfolio projects
+- Budget: ₹200-₹800 (low budget)
+
+### Persona 3: "Sam the Entrepreneur"
+- Age: 25-35
+- Runs small business, exploring AI automation
+- Pain: Doesn't know how to prompt effectively
+- Goal: Automate workflows, save time
+- Budget: ₹2000-₹8000
+
+---
+
+## 5. USER STORIES
+
+### Basic User Stories
+US1: As a visitor, I want to see all 9 prompts clearly so I can decide which to buy
+US2: As a buyer, I want to pay quickly (under 1 minute) so I don't lose interest
+US3: As a buyer, I want to unlock my prompt immediately after payment
+US4: As a user, I want to copy the prompt with one click
+US5: As a returning user, I want to access my purchased prompts easily
+
+---
+
+## 6. SCREEN / PAGE MAP
+
+### Page 1: Landing Page (/)
+- Hero: Bold headline + CTA
+- Prompt Modules: 9 cards showing tiers
+- Pricing: Clear pricing table
+- Social Proof: Testimonials
+- FAQ: 5-7 common questions
+- Footer: Links, legal, contact
+
+### Page 2: Unlock Page (/unlock?prompt=X)
+- "You've unlocked Prompt X!"
+- Full prompt displayed in monospace font
+- Copy button
+- Download button
+- Share button (optional)
+
+---
+
+## 7. USER FLOW
+
+```
 Visitor lands on homepage
- ↓
+        ↓
 Scrolls through 9 prompt modules
- ↓
-Clicks "Unlock Prompt 4 - $4.30"
- ↓
-Enters email + completes Stripe payment
- ↓
+        ↓
+Clicks "Unlock Prompt 4 - ₹349"
+        ↓
+UPI payment modal opens (PhonePe/GPay/Paytm/UPI ID)
+        ↓
+Completes payment
+        ↓
 Redirected to /unlock page
- ↓
+        ↓
 Sees full prompt + clicks "Copy"
- ↓
-Receives email with magic link
- ↓
-Can re-access anytime via magic link
-Advanced System Flow
-User clicks "Buy Prompt 4"
-    ↓
-Frontend: Check if prompt already purchased (localStorage check)
-    ↓ NO
-Frontend: Redirect to /checkout?prompt=4
-    ↓
-User enters email + card
-    ↓
-Stripe Checkout Session created
-    ↓
-Payment succeeded webhook → Backend
-    ↓
-Backend: Store purchase record (email + promptId + timestamp)
-    ↓
-Backend: Send confirmation email with magic link
-    ↓
-Frontend: Redirect to /unlock?email=XX&prompt=4
-    ↓
-Frontend: Fetch prompt from backend (verify purchase)
-    ↓
-Display prompt + Copy/Download buttons
-    ↓
-User clicks "Copy" → Prompt copied to clipboard
+        ↓
+Can re-access anytime via email
+```
 
+---
 
-8. OBJECTIVES
-Primary Objectives
-Generate first $100 in 7 days
-Get 50 visitors in first week
-Achieve 5% conversion rate (5 sales per 100 visitors)
-Zero payment errors
-Mobile-friendly (works on all devices)
-Secondary Objectives
-Get featured on Product Hunt (200+ upvotes)
-Build email list of 100 subscribers
-Get 3 organic testimonials
-Achieve 2-second page load time
-SEO-optimized for "AI prompts" keywords
-Tertiary Objectives
-Build affiliate program (10 affiliates)
-Launch bundle pricing
-Add 3 more prompts (expand to 12)
-Create YouTube demo video
-Get mentioned in AI newsletters
+## 8. OBJECTIVES
 
-9. FULL FEATURE SPECIFICATIONS
-Feature 1: Payment Processing (Stripe)
-Description: Integrate Stripe Checkout for seamless payments
-Technical Details:
-Use Stripe Checkout (hosted page)
-Create payment link for each prompt tier
-Pass metadata: {email, promptId, price}
-Webhook endpoint to capture checkout.session.completed
-Store purchase in KV store: email:promptId → true
-Acceptance Criteria:
-✅ Payment completes in <60s
-✅ Supports all major cards (Visa, Mastercard, Amex)
-✅ Mobile-friendly checkout
-✅ Webhook fires 100% of the time
-✅ No duplicate charges
-Edge Cases:
-User refreshes during checkout → Resume session
-Payment fails → Show error + retry button
-Webhook delayed → Poll status after 30s
+### Primary Objectives
+- Generate first ₹5000 in 7 days
+- Get 50 visitors in first week
+- Achieve 5% conversion rate
+- Zero payment errors
+- Mobile-friendly (works on all devices)
 
-Feature 2: Email-Based Auth (Magic Links)
-Description: Passwordless authentication via email magic links
-Technical Details:
-User enters email
-Generate JWT token (expires in 24h)
-Send email with link: /auth?token=XXX
-Verify token on click → Set session cookie (30 days)
-Session stored in localStorage
-Acceptance Criteria:
-✅ Email sent within 30s
-✅ Link works on any device
-✅ Expired links show clear error
-✅ No password required
-Security:
-JWT signed with secret key
-Rate limit: 3 emails per hour per IP
-Token single-use (burns after first click)
+### Secondary Objectives
+- Get featured on Product Hunt (200+ upvotes)
+- Build email list of 100 subscribers
+- Get 3 organic testimonials
+- Achieve 2-second page load time
 
-Feature 3: Prompt Unlock System
-Description: Display purchased prompt with copy/download options
-Technical Details:
-Fetch prompt from JSON file or backend
-Render Markdown (code blocks, bold, lists)
-Copy button uses navigator.clipboard.writeText()
-Download PDF uses jsPDF library
-Mobile responsive (readable on small screens)
-Acceptance Criteria:
-✅ Prompt loads instantly (<1s)
-✅ Copy button works 100% of the time
-✅ PDF includes branding (logo, footer)
-✅ Markdown renders correctly
+---
 
-Feature 4: Share-to-Unlock (Prompt 3)
-Description: Unlock Prompt 3 by sharing to 3 platforms
-Technical Details:
-Share buttons for Twitter, LinkedIn, Reddit
-Each share opens native share dialog with pre-filled text
-Track shares via URL param: ?ref=user123
-Backend endpoint: /api/track-share?user=XX&platform=XX
-After 3 unique shares → Unlock prompt
-Prevent cheating: Check Referer header, rate limit
-Acceptance Criteria:
-✅ Share buttons work on mobile
-✅ Tracks shares accurately
-✅ Unlocks after 3 shares
-✅ Cannot game system (refresh = no count)
+## 9. DATA MODEL
 
-10. DATA MODEL
-User Purchase Record (KV Store)
+### User Purchase Record
+```json
 {
-  "email": "alex@example.com",
+  "email": "user@example.com",
   "purchases": [
     {
       "promptId": 4,
-      "price": 4.30,
+      "price": 349,
       "purchaseDate": "2025-12-12T10:30:00Z",
-      "stripeSessionId": "cs_test_abc123"
+      "paymentMethod": "upi"
     }
   ],
-  "createdAt": "2025-12-12T10:30:00Z",
-  "lastAccessed": "2025-12-12T12:00:00Z"
+  "createdAt": "2025-12-12T10:30:00Z"
 }
+```
 
-Prompt Data (JSON)
+### Prompt Data
+```json
 {
   "id": 4,
   "name": "Universal Architecture Format",
-  "price": 4.30,
+  "price": 349,
   "tier": "pro",
-  "description": "Build complete system architectures with one prompt",
-  "content": "# UNIVERSAL ARCHITECTURE FORMAT\n\n[Full prompt text here...]",
-  "unlockMethod": "payment",
-  "featured": true
+  "description": "Build complete system architectures",
+  "content": "[Full prompt text here...]",
+  "unlockMethod": "payment"
 }
+```
 
-Session Token (JWT)
-{
-  "email": "alex@example.com",
-  "iat": 1702382400,
-  "exp": 1702468800,
-  "jti": "unique-token-id"
-}
+---
 
+## 10. TECH STACK
 
-11. API BLUEPRINT
-Endpoints
-1. Create Checkout Session
-POST /api/create-checkout
-Request:
-{
-  "email": "alex@example.com",
-  "promptId": 4
-}
+### Frontend
+- Next.js 14 (App Router) - Fast, SEO-friendly
+- Tailwind CSS - Rapid styling, mobile-first
+- lucide-react - Icon library
 
-Response:
-{
-  "checkoutUrl": "https://checkout.stripe.com/c/pay/cs_test_xxx"
-}
+### Backend
+- Vercel Serverless Functions - Zero config, auto-scaling
+- TypeScript - Type safety
 
-Auth: None (public)
-
-2. Stripe Webhook
-POST /api/webhook/stripe
-Request (from Stripe):
-{
-  "type": "checkout.session.completed",
-  "data": {
-    "object": {
-      "customer_email": "alex@example.com",
-      "metadata": {
-        "promptId": "4"
-      }
-    }
-  }
-}
-
-Response:
-{
-  "received": true
-}
-
-Auth: Stripe signature verification
-Actions:
-Store purchase in KV
-Send confirmation email with magic link
-
-3. Send Magic Link
-POST /api/send-magic-link
-Request:
-{
-  "email": "alex@example.com"
-}
-
-Response:
-{
-  "success": true,
-  "message": "Check your email"
-}
-
-Auth: None (rate limited)
-
-4. Verify Magic Link
-GET /api/verify-token?token=XXX
-Response:
-{
-  "valid": true,
-  "email": "alex@example.com",
-  "purchases": [4, 5, 6]
-}
-
-Auth: None (token is secret)
-
-5. Get Prompt Content
-GET /api/prompt/:id?email=XXX
-Response:
-{
-  "id": 4,
-  "content": "[Full prompt here]",
-  "unlocked": true
-}
-
-Auth: Email must have purchased this prompt
-Error Cases:
-403: Prompt not purchased
-404: Invalid prompt ID
-
-6. Track Share
-POST /api/track-share
-Request:
-{
-  "email": "alex@example.com",
-  "platform": "twitter"
-}
-
-Response:
-{
-  "sharesCount": 2,
-  "unlocked": false
-}
-
-Auth: None (rate limited)
-
-12. SYSTEM ARCHITECTURE
-Frontend (Next.js)
-Framework: Next.js 14 (App Router)
-Styling: Tailwind CSS
-Hosting: Vercel
-State: Zustand (global state) + localStorage
-UI Library: shadcn/ui + lucide-react icons
-Backend (Serverless)
-Runtime: Vercel Serverless Functions
-Language: TypeScript
-Database: Vercel KV (Redis)
-Email: Resend.com
-Payments: Stripe + Gumroad
-Infrastructure
-CDN: Vercel Edge Network
-Domain: Namecheap or Vercel Domains
-SSL: Auto (Vercel handles)
-Analytics: Vercel Analytics + Plausible
-Data Flow
-User Browser
-    ↓
-Next.js Frontend (Static + Client-Side)
-    ↓
-Vercel Serverless Functions (API)
-    ↓
-Vercel KV (Purchase Records)
-    ↓
-Stripe API (Payment Processing)
-    ↓
-Resend API (Email Sending)
-
-
-13. LOGIC FLOW
-Purchase Flow (Engineering Format)
-START
-    ↓
-1. User clicks "Buy Prompt 4"
-    ↓
-2. Frontend: POST /api/create-checkout {email, promptId: 4}
-    ↓
-3. Backend: Create Stripe Checkout Session
-    ↓
-4. Backend: Return {checkoutUrl}
-    ↓
-5. Frontend: Redirect to Stripe Checkout
-    ↓
-6. User enters card + completes payment
-    ↓
-7. Stripe: Fire webhook → POST /api/webhook/stripe
-    ↓
-8. Backend: Verify webhook signature
-    ↓
-9. Backend: Store purchase in KV
-    KEY: `purchase:alex@example.com:4`
-    VALUE: {purchaseDate, price, sessionId}
-    ↓
-10. Backend: Send email via Resend
-    Subject: "You've unlocked Prompt 4!"
-    Body: "Click here: /auth?token=XXX"
-    ↓
-11. Stripe: Redirect user to /unlock?email=XXX&prompt=4
-    ↓
-12. Frontend: GET /api/prompt/4?email=XXX
-    ↓
-13. Backend: Check KV for purchase:alex@example.com:4
-    ↓
-14. IF EXISTS → Return prompt content
-    ELSE → Return 403 Forbidden
-    ↓
-15. Frontend: Display prompt + Copy button
-    ↓
-END
-
-Auth Flow (Magic Link)
-START
-    ↓
-1. User enters email on /dashboard
-    ↓
-2. Frontend: POST /api/send-magic-link {email}
-    ↓
-3. Backend: Generate JWT token (expires 24h)
-    payload: {email, exp, jti}
-    ↓
-4. Backend: Send email with link /auth?token=XXX
-    ↓
-5. User clicks link
-    ↓
-6. Frontend: GET /api/verify-token?token=XXX
-    ↓
-7. Backend: Verify JWT signature + expiration
-    ↓
-8. IF VALID → Burn token (mark as used in KV)
-              → Return {email, purchases}
-              → Set session cookie (30 days)
-    ELSE → Return 401 Unauthorized
-    ↓
-9. Frontend: Store session in localStorage
-    ↓
-10. Redirect to /dashboard
-    ↓
-END
-
-
-14. PRD (Product Requirements Document)
-Problem Statement
-Current Pain:
-AI builders waste hours crafting effective prompts
-No structured framework for building complete apps
-Existing prompt marketplaces are cluttered and low-quality
-Gen-Z users want instant gratification, not complex onboarding
-User Frustration: "I tried 20 different prompts and none gave me what I needed. I need a proven system, not random examples."
-Solution
-PromptOS provides:
-A curated 9-prompt framework (tested and proven)
-Instant purchase → instant unlock (under 2 minutes)
-Tiered pricing ($1-$12) for different budgets
-Zero friction: No signup, no passwords, just email + pay
-Premium Gen-Z aesthetic that builds trust
-Constraints
-Technical:
-Must work on mobile (60% of traffic)
-Must load in <2 seconds
-Must work without JavaScript (graceful degradation)
-Payment must complete in <60 seconds
-Business:
-Must launch in 2-3 weeks
-Must cost <$50/month to run
-Must handle 1000 users without breaking
-Must work with $0 marketing budget initially
-Legal:
-Must comply with GDPR (EU users)
-Must show clear refund policy
-Must have Terms of Service
-Must securely handle payment data (PCI DSS via Stripe)
-KPIs (Success Metrics)
-Week 1:
-50 visitors
-5 sales ($25 revenue)
-10% conversion rate
-Month 1:
-500 visitors
-50 sales ($250 revenue)
-15 email subscribers
-Month 3:
-2000 visitors
-200 sales ($1000 revenue)
-Product Hunt featured
-3 testimonials
-
-15. TECH STACK RECOMMENDATIONS
-Frontend
-Next.js 14 (App Router) - Fast, SEO-friendly, serverless-ready
-Tailwind CSS - Rapid styling, mobile-first
-shadcn/ui - Pre-built components (buttons, cards, dialogs)
-lucide-react - Icon library
-Framer Motion - Smooth animations
-react-markdown - Render prompts beautifully
-Backend
-Vercel Serverless Functions - Zero config, auto-scaling
-TypeScript - Type safety, fewer bugs
-Vercel KV - Redis-compatible, instant setup
-Stripe SDK - Payment processing
-Resend - Email sending (10k free/month)
-DevOps
-Vercel - Hosting, CI/CD, analytics (all-in-one)
-GitHub - Code repository
-Plausible - Privacy-friendly analytics
-Sentry - Error tracking
-Why This Stack?
+### Why This Stack?
 ✅ Fast to build: Launch in 2 weeks
 ✅ Low cost: <$50/month
-✅ Scalable: Handles 10k users without changes
+✅ Scalable: Handles 10k users
 ✅ Mobile-optimized: Works on all devices
 ✅ SEO-friendly: Next.js SSR/SSG
 
-16. IMPLEMENTATION PLAN
-Phase 1: Foundation (Week 1)
-Sprint 1.1: Setup (Days 1-2)
-[ ] Create Next.js project
-[ ] Install dependencies (Tailwind, shadcn, etc.)
-[ ] Setup Vercel project
-[ ] Connect GitHub repo
-[ ] Create Stripe account + get API keys
-[ ] Setup Vercel KV database
-Sprint 1.2: Landing Page (Days 3-4)
-[ ] Design hero section (bold headline + CTA)
-[ ] Create 9 prompt cards (pricing, description)
-[ ] Build FAQ section (5 questions)
-[ ] Add testimonials (placeholder)
-[ ] Mobile responsive check
-Sprint 1.3: Payment Integration (Days 5-7)
-[ ] Create Stripe Checkout sessions
-[ ] Add "Buy" buttons for each prompt
-[ ] Setup webhook endpoint
-[ ] Test payments (Stripe test mode)
-[ ] Handle success/failure redirects
-Phase 2: Core Features (Week 2)
-Sprint 2.1: Auth System (Days 8-10)
-[ ] Build magic link email sender
-[ ] Create JWT token generator
-[ ] Setup email templates (Resend)
-[ ] Build /auth?token=XXX page
-[ ] Test magic link flow
-Sprint 2.2: Unlock System (Days 11-13)
-[ ] Create /unlock page
-[ ] Build prompt display component
-[ ] Add copy-to-clipboard button
-[ ] Add PDF download (jsPDF)
-[ ] Store purchases in KV
-Sprint 2.3: Dashboard (Day 14)
-[ ] Build /dashboard page
-[ ] Show purchased prompts
-[ ] Add re-download links
-[ ] Display purchase history
-Phase 3: Polish & Launch (Week 3)
-Sprint 3.1: Testing (Days 15-16)
-[ ] Test all payment flows
-[ ] Test on mobile devices
-[ ] Fix bugs
-[ ] Load testing (100 concurrent users)
-Sprint 3.2: Content (Days 17-18)
-[ ] Write final copy (headlines, descriptions)
-[ ] Create demo video (30 seconds)
-[ ] Design social media graphics
-[ ] Prepare Product Hunt launch
-Sprint 3.3: Launch (Days 19-21)
-[ ] Deploy to production
-[ ] Setup custom domain
-[ ] Enable analytics
-[ ] Launch on Product Hunt
-[ ] Post on Reddit, Twitter, Discord
+---
 
-17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
-Branch Strategy
-Main Branches:
-main - Production (always deployable)
-develop - Staging (merge features here first)
-Feature Branches:
-feature/landing-page
-feature/stripe-integration
-feature/magic-links
-feature/unlock-system
-feature/dashboard
-Commit Message Format
-Structure:
-<type>(<scope>): <subject>
+## 11. IMPLEMENTATION PLAN
 
-<body>
+### Phase 1: Foundation (Week 1)
+- [ ] Create Next.js project
+- [ ] Setup Vercel project
+- [ ] Design hero section
+- [ ] Create 9 prompt cards
+- [ ] Build FAQ section
+- [ ] Mobile responsive check
 
-Types:
-feat - New feature
-fix - Bug fix
-style - UI/styling changes
-refactor - Code refactor
-test - Add tests
-docs - Documentation
-chore - Build, dependencies
-Examples:
-feat(payment): add stripe checkout integration
+### Phase 2: Core Features (Week 2)
+- [ ] UPI payment integration
+- [ ] Build /unlock page
+- [ ] Build prompt display component
+- [ ] Add copy-to-clipboard button
+- [ ] Test all payment flows
 
-- Create checkout session API endpoint
-- Add webhook handler for payment success
-- Store purchases in Vercel KV
+### Phase 3: Launch (Week 3)
+- [ ] Testing + bug fixes
+- [ ] Write final copy
+- [ ] Deploy to production
+- [ ] Setup custom domain
+- [ ] Launch on Product Hunt
 
-fix(mobile): responsive layout on iPhone SE
+---
 
-- Fix card overflow on small screens
-- Adjust font sizes for readability
-- Test on devices <375px width
+## 12. PRICING TIERS
 
-style(landing): improve hero section animations
+| Tier | Name                    | Price  | Unlock Method    |
+|------|-------------------------|--------|------------------|
+| 1    | Starter Format          | FREE   | Instant          |
+| 2    | Pro Builder Format      | FREE   | Instant          |
+| 3    | Industry Engineer       | ₹249   | Referral/Payment |
+| 4    | Universal Architecture  | ₹349   | Payment          |
+| 5    | Ultimate A→Z Blueprint  | ₹549   | Payment          |
+| 6    | Master Super Pack       | ₹999   | Payment          |
+| 7    | Debug & Optimize        | TBD    | Coming Soon      |
+| 8    | UI/UX Designer          | TBD    | Coming Soon      |
+| 9    | Launch & Scale          | TBD    | Coming Soon      |
 
-- Add fade-in effect to headline
-- Smooth scroll to pricing section
-- Optimize button hover states
+---
 
+## 13. SUCCESS METRICS (KPIs)
 
-18. DEVELOPMENT ROADMAP (Timeline)
-Week 1: Foundation
-Day 1-2: Project setup, Vercel, Stripe accounts
-Day 3-4: Landing page (hero + 9 cards)
-Day 5-7: Stripe integration + webhooks
-Week 2: Core Features
-Day 8-10: Magic link auth system
-Day 11-13: Unlock page + copy/download
-Day 14: Dashboard (purchased prompts)
-Week 3: Launch
-Day 15-16: Testing + bug fixes
-Day 17-18: Content + marketing prep
-Day 19-21: Launch (Product Hunt, Reddit, Twitter)
-Post-Launch (Month 1)
-Week 4: Monitor analytics, fix issues
-Week 5-6: Add share-to-unlock feature
-Week 7-8: Build affiliate system
-Long-Term (Month 2-3)
-Add bundle pricing
-Create more prompts (expand to 12)
-Build user testimonials section
-SEO optimization
+### Week 1:
+- 50 visitors
+- 5 sales (₹1500 revenue)
+- 10% conversion rate
 
-19. DEPLOYMENT & HOSTING PLAN
-Hosting: Vercel
-Why Vercel?
-Zero-config Next.js deployment
-Auto-scaling serverless functions
-Built-in CDN (global edge network)
-Free SSL certificates
-100GB bandwidth/month (free tier)
-CI/CD Pipeline
-Automatic Deployments:
-Push to main → Deploy to production
-Push to develop → Deploy to staging
-Pull requests → Deploy preview URLs
-Build Process:
-# Install dependencies
-npm install
+### Month 1:
+- 500 visitors
+- 50 sales (₹15000 revenue)
+- 15 email subscribers
 
-# Build Next.js app
-npm run build
+### Month 3:
+- 2000 visitors
+- 200 sales (₹60000 revenue)
+- Product Hunt featured
+- 3 testimonials
 
-# Run tests
-npm run test
+---
 
-# Deploy
-vercel --prod
-
-Environment Variables
-Production:
-STRIPE_SECRET_KEY=sk_live_xxx
-STRIPE_WEBHOOK_SECRET=whsec_xxx
-JWT_SECRET=xxx
-RESEND_API_KEY=re_xxx
-KV_URL=xxx
-KV_REST_API_TOKEN=xxx
-
-Staging:
-STRIPE_SECRET_KEY=sk_test_xxx
-(same structure as prod)
-
-Domain Setup
-Buy domain (e.g., promptos.com)
-Add to Vercel project
-Configure DNS (A records)
-SSL auto-configured
-Monitoring
-Vercel Analytics: Page views, performance
-Plausible: User behavior (privacy-friendly)
-Sentry: Error tracking
-Stripe Dashboard: Payment monitoring
-
-20. TEST PLAN
-Unit Tests
-Frontend Components:
-[ ] Test prompt card renders correctly
-[ ] Test copy button copies text
-[ ] Test payment button redirects
-[ ] Test error states (payment fails)
-Backend APIs:
-[ ] Test /api/create-checkout returns URL
-[ ] Test webhook stores purchase correctly
-[ ] Test magic link sends email
-[ ] Test JWT token validation
-Integration Tests
-Payment Flow:
-Click "Buy Prompt 4"
-Enter email + card
-Complete payment
-Verify purchase stored in KV
-Verify email sent
-Verify redirect to /unlock
-Auth Flow:
-Enter email on dashboard
-Click magic link in email
-Verify token validated
-Verify session created
-Verify dashboard shows purchases
-End-to-End Tests (Playwright)
-E2E Test 1: Complete Purchase
-test('user can buy and unlock prompt', async ({ page }) => {
-  await page.goto('/');
-  await page.click('[data-prompt="4"]');
-  await page.fill('input[type="email"]', 'test@example.com');
-  // ... complete Stripe checkout
-  await expect(page).toHaveURL('/unlock');
-  await expect(page.locator('.prompt-content')).toBeVisible();
-});
-
-E2E Test 2: Magic Link Login
-test('user can login with magic link', async ({ page }) => {
-  await page.goto('/dashboard');
-  await page.fill('input[type="email"]', 'test@example.com');
-  // ... intercept email, click link
-  await expect(page).toHaveURL('/dashboard');
-});
-
-Manual Testing Checklist
-Pre-Launch:
-[ ] Test on iPhone Safari
-[ ] Test on Android Chrome
-[ ] Test on desktop Chrome/Firefox
-[ ] Test with slow 3G connection
-[ ] Test payment in Stripe test mode
-[ ] Test payment with real card ($1)
-[ ] Test magic link on different device
-[ ] Test copy button on mobile
-[ ] Test PDF download works
-[ ] Test share buttons open dialogs
-
-21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
-Security
-Payment Security:
-✅ Never store card numbers (Stripe handles)
-✅ Use HTTPS only (enforced by Vercel)
-✅ Verify webhook signatures (prevent spoofing)
-✅ Rate limit payment endpoints (prevent abuse)
-Auth Security:
-✅ JWT tokens expire in 24h
-✅ Tokens are single-use (burned after first click)
-✅ Email rate limiting (3 per hour per IP)
-✅ Session cookies are HttpOnly + Secure
-Data Security:
-✅ Encrypt emails in KV store
-✅ No PII in logs
-✅ GDPR-compliant (user data export/delete)
-✅ Regular backups (Vercel KV auto-backups)
-API Security:
-✅ CORS configured (only allow your domain)
-✅ Input validation (email format, prompt IDs)
-✅ SQL injection prevention (use ORMs)
-✅ XSS prevention (sanitize user input)
-Performance Optimization
-Frontend:
-✅ Image optimization (Next.js Image component)
-✅ Code splitting (dynamic imports)
-✅ Lazy load below-the-fold content
-✅ Minify CSS/JS (automatic in Next.js)
-✅ Use CDN for static assets
-Backend:
-✅ Cache prompt content (Redis)
-✅ Batch KV operations
-✅ Optimize database queries
-✅ Use serverless edge functions (faster)
-Target Metrics:
-⚡ First Contentful Paint: <1.5s
-⚡ Time to Interactive: <3s
-⚡ Lighthouse Score: 90+
-⚡ Core Web Vitals: All green
-
-22. NON-FUNCTIONAL REQUIREMENTS
-Speed
-Page load: <2 seconds (on 4G)
-Payment flow: <60 seconds total
-API response time: <500ms
-Email delivery: <30 seconds
-UX
-Mobile-first design (60% of traffic)
-One-click copy (no manual selection)
-Clear error messages (no technical jargon)
-Zero-friction auth (no passwords)
-Accessibility
-WCAG 2.1 AA compliance
-Keyboard navigation support
-Screen reader friendly
-High contrast mode
-Privacy
-GDPR compliant (EU users)
-CCPA compliant (CA users)
-Cookie consent banner
-Privacy policy page
-Data export/delete options
-Reliability
-99.9% uptime (Vercel SLA)
-Graceful error handling
-Auto-retry failed webhooks
-Email bounce handling
-Scalability
-Handle 1000 concurrent users
-Support 10k purchases/month
-No performance degradation
-
-23. RISKS & MITIGATION STRATEGIES
-Risk 1: Payment Webhook Fails
-Impact: User pays but doesn't get access
- Probability: Medium
- Mitigation:
-Implement retry logic (3 attempts)
-Poll Stripe API after 30s if webhook missing
-Manual reconciliation dashboard for admins
-Refund process for failed unlocks
-Risk 2: Low Conversion Rate (<3%)
-Impact: No revenue, project fails
- Probability: High (typical for new sites)
- Mitigation:
-A/B test headlines/pricing
-Add social proof (testimonials)
-Create demo video
-Offer money-back guarantee
-Add urgency (limited-time discount)
-Risk 3: Prompt Content Leaked
-Impact: Users share prompts publicly
- Probability: High
- Mitigation:
-Watermark prompts with buyer email
-DMCA takedown process
-Regular monitoring (search Twitter/Reddit)
-Accept some leakage (inevitable)
-Risk 4: Stripe Account Suspended
-Impact: Can't accept payments
- Probability: Low (if following ToS)
- Mitigation:
-Follow Stripe guidelines (clear refund policy)
-Keep Gumroad as backup
-Diversify payment methods
-Maintain good customer support
-Risk 5: Server Costs Exceed Revenue
-Impact: Lose money on hosting
- Probability: Low (Vercel free tier generous)
- Mitigation:
-Monitor Vercel usage dashboard
-Optimize API calls (cache aggressively)
-Upgrade plan only after $100/month revenue
-Risk 6: No Traffic/Marketing
-Impact: Nobody visits the site
- Probability: High (no brand awareness)
- Mitigation:
-Product Hunt launch (free exposure)
-Reddit posts (non-spammy, value-first)
-Twitter threads (build in public)
-SEO optimization (long-term)
-
-24. FINAL HANDOFF PACKAGE
-Folder Structure
-promptos/
-├── app/
-│   ├── page.tsx              # Landing page
-│   ├── checkout/
-│   │   └── page.tsx          # Checkout flow
-│   ├── unlock/
-│   │   └── page.tsx          # Unlock prompt page
-│   ├── dashboard/
-│   │   └── page.tsx          # User dashboard
-│   ├── auth/
-│   │   └── page.tsx          # Magic link verification
-│   └── api/
-│       ├── create-checkout/
-│       │   └── route.ts      # Stripe checkout API
-│       ├── webhook/
-│       │   └── stripe/
-│       │       └── route.ts  # Stripe webhook
-│       ├── send-magic-link/
-│       │   └── route.ts      # Email sender
-│       ├── verify-token/
-│       │   └── route.ts      # JWT verifier
-│       └── prompt/
-│           └── [id]/
-│               └── route.ts  # Get prompt content
-├── components/
-│   ├── PromptCard.tsx        # Prompt display card
-│   ├── PaymentButton.tsx     # Buy button
-│   ├── CopyButton.tsx        # Copy to clipboard
-│   └── MagicLinkForm.tsx     # Email input form
-├── lib/
-│   ├── stripe.ts             # Stripe client
-│   ├── kv.ts                 # Vercel KV client
-│   ├── email.ts              # Resend client
-│   ├── jwt.ts                # JWT utilities
-│   └── prompts.ts            # Prompt data
-├── public/
-│   ├── prompts/              # JSON files with prompts
-│   │   ├── 1.json
-│   │   ├── 2.json
-│   │   └── ...
-│   └── images/               # Assets
-├── .env.local                # Environment variables
-├── package.json
-├── tsconfig.json
-└── README.md
-
-Key Deliverables
-1. Codebase:
-[ ] Next.js project (TypeScript)
-[ ] All components built
-[ ] API routes functional
-[ ] Tests written
-2. Content:
-[ ] 9 prompts formatted (JSON files)
-[ ] Landing page copy
-[ ] Email templates
-[ ] FAQ answers
-3. Configuration:
-[ ] Stripe account setup
-[ ] Vercel project deployed
-[ ] KV database configured
-[ ] Domain connected
-4. Documentation:
-[ ] README (setup instructions)
-[ ] API documentation
-[ ] Deployment guide
-[ ] Troubleshooting guide
-5. Marketing:
-[ ] Product Hunt listing draft
-[ ] Reddit post templates
-[ ] Twitter thread outlines
-[ ] Demo video script
-Launch Checklist
-Pre-Launch:
-[ ] Test all payment flows
-[ ] Test on 3 devices
-[ ] Add Google Analytics
-[ ] Setup Plausible
-[ ] Enable error tracking (Sentry)
-[ ] Write Terms of Service
-[ ] Write Privacy Policy
-[ ] Write Refund Policy
-[ ] Create support email
-Launch Day:
-[ ] Deploy to production
-[ ] Post on Product Hunt (6am PT)
-[ ] Post on Reddit (5 subreddits)
-[ ] Post on Twitter (thread)
-[ ] Share in Discord channels
-[ ] Email personal network
-Post-Launch (Week 1):
-[ ] Monitor analytics daily
-[ ] Respond to all feedback
-[ ] Fix critical bugs
-[ ] Collect testimonials
-[ ] Iterate on copy/pricing
-
-SUMMARY
-PromptOS is a lean, conversion-optimized platform to sell your 9-prompt AI framework. It's designed for:
-⚡ Speed: Launch in 2-3 weeks
-💰 Revenue: Start earning on Day 1
-📱 Mobile: Works flawlessly on phones
-🔒 Simple: No complex auth, just email + pay
-🎨 Premium: Gen-Z aesthetic, Apple-inspired
-Tech Stack: Next.js + Tailwind + Vercel + Stripe + Resend
-Cost to Run: <$50/month (Vercel free tier covers most)
-Revenue Potential: $10-200/day organically (if marketed well)
-Next Steps:
-Copy this spec into your project
-Start with Phase 1 (Foundation)
-Build MVP in 2 weeks
-Launch on Product Hunt
-Iterate based on feedback
-You're ready to build. Let's make money. 🚀
-
+## END OF SPECIFICATION

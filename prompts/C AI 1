@@ -1,31 +1,45 @@
-🎯 What You Got
+# PROMPTOS QUICK START GUIDE
+# What You Get + Next Steps
+
+## What's Included
 24 complete sections covering everything:
-Landing page design (Gen-Z aesthetic)
-Payment system (Stripe + Gumroad)
-Email auth (magic links, no passwords)
-Unlock system (copy/download)
-Full tech stack (Next.js + Vercel = $0-50/month)
-Launch roadmap (Product Hunt, Reddit, Twitter)
-💡 Key Decisions Made For You
-Auth Solution: Email-only magic links
-User enters email → Gets link → Clicks → Unlocked
-No passwords, no signup forms
-Session lasts 30 days
-Payment Flow: Ultra-simple
-Click "Buy" → Stripe Checkout → Redirect to unlock
-Alternative: Gumroad buttons (even simpler)
-Webhook stores purchase → Sends email
-Tech Stack: Next.js + Vercel
-Why? Zero config, free hosting, auto-scaling
-Cost: $0 until you hit 100 sales/day
-Speed: 2-second page loads
-🚀 Your Next 3 Steps
-Week 1: Build landing page + Stripe integration
-Week 2: Add magic links + unlock system
-Week 3: Test + Launch on Product Hunt
-Want me to build the actual app now? I can create:
+- Landing page design (Gen-Z aesthetic)
+- Payment system (UPI for India)
+- Email auth (magic links, no passwords)
+- Unlock system (copy/download)
+- Full tech stack (Next.js + Vercel = $0-50/month)
+- Launch roadmap (Product Hunt, Reddit, Twitter)
+
+## Key Decisions Made
+
+### Auth Solution: Email-only magic links
+- User enters email → Gets link → Clicks → Unlocked
+- No passwords, no signup forms
+- Session lasts 30 days
+
+### Payment Flow: Ultra-simple
+- Click "Buy" → UPI Payment → Redirect to unlock
+- Options: PhonePe, GPay, Paytm, UPI ID
+- Webhook stores purchase → Sends email
+
+### Tech Stack: Next.js + Vercel
+- Why? Zero config, free hosting, auto-scaling
+- Cost: $0 until you hit 100 sales/day
+- Speed: 2-second page loads
+
+## Your Next 3 Steps
+
+### Week 1
+Build landing page + UPI integration
+
+### Week 2
+Add magic links + unlock system
+
+### Week 3
+Test + Launch on Product Hunt
+
+## Ready Features
 ✅ Landing page (React component)
 ✅ Payment buttons
 ✅ Prompt cards with pricing
 ✅ Mobile-responsive design
-Just say "build the landing page" or "build the full MVP" and I'll create working code in artifacts.
