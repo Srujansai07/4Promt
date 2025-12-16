@@ -1,52 +1,41 @@
-// src/config/products.ts
+// src/config/products.ts - Indian Payment Gateway (Razorpay/UPI)
+
 export const PRODUCT_CONFIG = {
-    gumroad: {
-        baseUrl: 'https://gumroad.com/l',
-        products: {
-            1: 'promptos-starter',      // Free - Create on Gumroad anyway for tracking
-            2: 'promptos-pro-builder',  // Free with form
-            3: 'promptos-industry',     // $3
-            4: 'promptos-universal',    // $4.30
-            5: 'promptos-ultimate',     // $6.90
-            6: 'promptos-master-pack',  // $12
-            7: 'promptos-debug',        // Coming soon
-            8: 'promptos-design',       // Coming soon
-            9: 'promptos-launch',       // Coming soon
+    razorpay: {
+        // Get these from: https://dashboard.razorpay.com/app/payment-pages
+        paymentPages: {
+            3: 'https://rzp.io/l/YOUR_LINK_TIER_3',
+            4: 'https://rzp.io/l/YOUR_LINK_TIER_4',
+            5: 'https://rzp.io/l/YOUR_LINK_TIER_5',
+            6: 'https://rzp.io/l/YOUR_LINK_TIER_6',
         }
     },
-    stripe: {
-        // Replace these with your actual Stripe Payment Links
-        paymentLinks: {
-            3: 'https://buy.stripe.com/test_REPLACE_WITH_YOUR_LINK_3',
-            4: 'https://buy.stripe.com/test_REPLACE_WITH_YOUR_LINK_4',
-            5: 'https://buy.stripe.com/test_REPLACE_WITH_YOUR_LINK_5',
-            6: 'https://buy.stripe.com/test_REPLACE_WITH_YOUR_LINK_6',
-        }
-    },
+    // INR Pricing
     prices: {
-        1: 0,
-        2: 0,
-        3: 3.00,
-        4: 4.30,
-        5: 6.90,
-        6: 12.00,
-        7: 4.00,
-        8: 5.00,
-        9: 5.00,
+        1: 0,      // Free
+        2: 0,      // Free
+        3: 249,    // ~$3 USD
+        4: 349,    // ~$4.30 USD
+        5: 549,    // ~$6.90 USD
+        6: 999,    // ~$12 USD
     }
 }
 
-export function getGumroadLink(promptId: number): string {
-    const slug = PRODUCT_CONFIG.gumroad.products[promptId as keyof typeof PRODUCT_CONFIG.gumroad.products]
-    return `${PRODUCT_CONFIG.gumroad.baseUrl}/${slug}`
-}
+// Archived: Stripe and Gumroad config moved to src/archive/
 
-export function getStripeLink(promptId: number): string {
-    const link = PRODUCT_CONFIG.stripe.paymentLinks[promptId as keyof typeof PRODUCT_CONFIG.stripe.paymentLinks]
+export function getRazorpayLink(promptId: number, email?: string): string {
+    const link = PRODUCT_CONFIG.razorpay.paymentPages[promptId as keyof typeof PRODUCT_CONFIG.razorpay.paymentPages]
+
     if (!link) {
-        console.error(`No Stripe link configured for prompt ${promptId}`)
+        console.error(`No Razorpay link configured for prompt ${promptId}`)
         return '#'
     }
+
+    // Add email as query param if provided
+    if (email) {
+        return `${link}?prefill[email]=${encodeURIComponent(email)}`
+    }
+
     return link
 }
 
