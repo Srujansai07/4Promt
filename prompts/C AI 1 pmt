@@ -216,68 +216,80 @@ PromptOS is a Gen-Z-optimized digital storefront for selling a premium 9-prompt 
 
 ---
 
-7. USER FLOW + SYSTEM FLOW
-Simple User Flow
+## 7. USER FLOW + SYSTEM FLOW
+
+### Simple User Flow
+```
 Visitor lands on homepage
- ↓
+        ↓
 Scrolls through 9 prompt modules
- ↓
+        ↓
 Clicks "Unlock Prompt 4 - $4.30"
- ↓
+        ↓
 Enters email + completes Stripe payment
- ↓
+        ↓
 Redirected to /unlock page
- ↓
+        ↓
 Sees full prompt + clicks "Copy"
- ↓
+        ↓
 Receives email with magic link
- ↓
+        ↓
 Can re-access anytime via magic link
-Advanced System Flow
+```
+
+### Advanced System Flow
+```
 User clicks "Buy Prompt 4"
-    ↓
+        ↓
 Frontend: Check if prompt already purchased (localStorage check)
-    ↓ NO
+        ↓ NO
 Frontend: Redirect to /checkout?prompt=4
-    ↓
+        ↓
 User enters email + card
-    ↓
+        ↓
 Stripe Checkout Session created
-    ↓
+        ↓
 Payment succeeded webhook → Backend
-    ↓
+        ↓
 Backend: Store purchase record (email + promptId + timestamp)
-    ↓
+        ↓
 Backend: Send confirmation email with magic link
-    ↓
+        ↓
 Frontend: Redirect to /unlock?email=XX&prompt=4
-    ↓
+        ↓
 Frontend: Fetch prompt from backend (verify purchase)
-    ↓
+        ↓
 Display prompt + Copy/Download buttons
-    ↓
+        ↓
 User clicks "Copy" → Prompt copied to clipboard
+```
 
+---
 
-8. OBJECTIVES
-Primary Objectives
-Generate first $100 in 7 days
-Get 50 visitors in first week
-Achieve 5% conversion rate (5 sales per 100 visitors)
-Zero payment errors
-Mobile-friendly (works on all devices)
-Secondary Objectives
-Get featured on Product Hunt (200+ upvotes)
-Build email list of 100 subscribers
-Get 3 organic testimonials
-Achieve 2-second page load time
-SEO-optimized for "AI prompts" keywords
-Tertiary Objectives
-Build affiliate program (10 affiliates)
-Launch bundle pricing
-Add 3 more prompts (expand to 12)
-Create YouTube demo video
-Get mentioned in AI newsletters
+## 8. OBJECTIVES
+
+### Primary Objectives
+- Generate first $100 in 7 days
+- Get 50 visitors in first week
+- Achieve 5% conversion rate (5 sales per 100 visitors)
+- Zero payment errors
+- Mobile-friendly (works on all devices)
+
+### Secondary Objectives
+- Get featured on Product Hunt (200+ upvotes)
+- Build email list of 100 subscribers
+- Get 3 organic testimonials
+- Achieve 2-second page load time
+- SEO-optimized for "AI prompts" keywords
+
+### Tertiary Objectives
+- Build affiliate program (10 affiliates)
+- Launch bundle pricing
+- Add 3 more prompts (expand to 12)
+- Create YouTube demo video
+- Get mentioned in AI newsletters
+
+---
 
 9. FULL FEATURE SPECIFICATIONS
 Feature 1: Payment Processing (Stripe)
