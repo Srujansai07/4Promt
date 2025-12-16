@@ -1046,37 +1046,45 @@ test('user can login with magic link', async ({ page }) => {
 
 ---
 
-22. NON-FUNCTIONAL REQUIREMENTS
-Speed
-Page load: <2 seconds (on 4G)
-Payment flow: <60 seconds total
-API response time: <500ms
-Email delivery: <30 seconds
-UX
-Mobile-first design (60% of traffic)
-One-click copy (no manual selection)
-Clear error messages (no technical jargon)
-Zero-friction auth (no passwords)
-Accessibility
-WCAG 2.1 AA compliance
-Keyboard navigation support
-Screen reader friendly
-High contrast mode
-Privacy
-GDPR compliant (EU users)
-CCPA compliant (CA users)
-Cookie consent banner
-Privacy policy page
-Data export/delete options
-Reliability
-99.9% uptime (Vercel SLA)
-Graceful error handling
-Auto-retry failed webhooks
-Email bounce handling
-Scalability
-Handle 1000 concurrent users
-Support 10k purchases/month
-No performance degradation
+## 22. NON-FUNCTIONAL REQUIREMENTS
+
+### Speed
+- Page load: <2 seconds (on 4G)
+- Payment flow: <60 seconds total
+- API response time: <500ms
+- Email delivery: <30 seconds
+
+### UX
+- Mobile-first design (60% of traffic)
+- One-click copy (no manual selection)
+- Clear error messages (no technical jargon)
+- Zero-friction auth (no passwords)
+
+### Accessibility
+- WCAG 2.1 AA compliance
+- Keyboard navigation support
+- Screen reader friendly
+- High contrast mode
+
+### Privacy
+- GDPR compliant (EU users)
+- CCPA compliant (CA users)
+- Cookie consent banner
+- Privacy policy page
+- Data export/delete options
+
+### Reliability
+- 99.9% uptime (Vercel SLA)
+- Graceful error handling
+- Auto-retry failed webhooks
+- Email bounce handling
+
+### Scalability
+- Handle 1000 concurrent users
+- Support 10k purchases/month
+- No performance degradation
+
+---
 
 23. RISKS & MITIGATION STRATEGIES
 Risk 1: Payment Webhook Fails
@@ -1128,8 +1136,10 @@ Reddit posts (non-spammy, value-first)
 Twitter threads (build in public)
 SEO optimization (long-term)
 
-24. FINAL HANDOFF PACKAGE
-Folder Structure
+## 24. FINAL HANDOFF PACKAGE
+
+### Folder Structure
+```
 promptos/
 ├── app/
 │   ├── page.tsx              # Landing page
@@ -1175,73 +1185,92 @@ promptos/
 ├── package.json
 ├── tsconfig.json
 └── README.md
+```
 
-Key Deliverables
-1. Codebase:
-[ ] Next.js project (TypeScript)
-[ ] All components built
-[ ] API routes functional
-[ ] Tests written
-2. Content:
-[ ] 9 prompts formatted (JSON files)
-[ ] Landing page copy
-[ ] Email templates
-[ ] FAQ answers
-3. Configuration:
-[ ] Stripe account setup
-[ ] Vercel project deployed
-[ ] KV database configured
-[ ] Domain connected
-4. Documentation:
-[ ] README (setup instructions)
-[ ] API documentation
-[ ] Deployment guide
-[ ] Troubleshooting guide
-5. Marketing:
-[ ] Product Hunt listing draft
-[ ] Reddit post templates
-[ ] Twitter thread outlines
-[ ] Demo video script
-Launch Checklist
-Pre-Launch:
-[ ] Test all payment flows
-[ ] Test on 3 devices
-[ ] Add Google Analytics
-[ ] Setup Plausible
-[ ] Enable error tracking (Sentry)
-[ ] Write Terms of Service
-[ ] Write Privacy Policy
-[ ] Write Refund Policy
-[ ] Create support email
-Launch Day:
-[ ] Deploy to production
-[ ] Post on Product Hunt (6am PT)
-[ ] Post on Reddit (5 subreddits)
-[ ] Post on Twitter (thread)
-[ ] Share in Discord channels
-[ ] Email personal network
-Post-Launch (Week 1):
-[ ] Monitor analytics daily
-[ ] Respond to all feedback
-[ ] Fix critical bugs
-[ ] Collect testimonials
-[ ] Iterate on copy/pricing
+### Key Deliverables
 
-SUMMARY
+**1. Codebase:**
+- [ ] Next.js project (TypeScript)
+- [ ] All components built
+- [ ] API routes functional
+- [ ] Tests written
+
+**2. Content:**
+- [ ] 9 prompts formatted (JSON files)
+- [ ] Landing page copy
+- [ ] Email templates
+- [ ] FAQ answers
+
+**3. Configuration:**
+- [ ] Stripe account setup
+- [ ] Vercel project deployed
+- [ ] KV database configured
+- [ ] Domain connected
+
+**4. Documentation:**
+- [ ] README (setup instructions)
+- [ ] API documentation
+- [ ] Deployment guide
+- [ ] Troubleshooting guide
+
+**5. Marketing:**
+- [ ] Product Hunt listing draft
+- [ ] Reddit post templates
+- [ ] Twitter thread outlines
+- [ ] Demo video script
+
+### Launch Checklist
+
+**Pre-Launch:**
+- [ ] Test all payment flows
+- [ ] Test on 3 devices
+- [ ] Add Google Analytics
+- [ ] Setup Plausible
+- [ ] Enable error tracking (Sentry)
+- [ ] Write Terms of Service
+- [ ] Write Privacy Policy
+- [ ] Write Refund Policy
+- [ ] Create support email
+
+**Launch Day:**
+- [ ] Deploy to production
+- [ ] Post on Product Hunt (6am PT)
+- [ ] Post on Reddit (5 subreddits)
+- [ ] Post on Twitter (thread)
+- [ ] Share in Discord channels
+- [ ] Email personal network
+
+**Post-Launch (Week 1):**
+- [ ] Monitor analytics daily
+- [ ] Respond to all feedback
+- [ ] Fix critical bugs
+- [ ] Collect testimonials
+- [ ] Iterate on copy/pricing
+
+---
+
+## SUMMARY
+
 PromptOS is a lean, conversion-optimized platform to sell your 9-prompt AI framework. It's designed for:
-⚡ Speed: Launch in 2-3 weeks
-💰 Revenue: Start earning on Day 1
-📱 Mobile: Works flawlessly on phones
-🔒 Simple: No complex auth, just email + pay
-🎨 Premium: Gen-Z aesthetic, Apple-inspired
-Tech Stack: Next.js + Tailwind + Vercel + Stripe + Resend
-Cost to Run: <$50/month (Vercel free tier covers most)
-Revenue Potential: $10-200/day organically (if marketed well)
-Next Steps:
-Copy this spec into your project
-Start with Phase 1 (Foundation)
-Build MVP in 2 weeks
-Launch on Product Hunt
-Iterate based on feedback
-You're ready to build. Let's make money. 🚀
+
+- ⚡ **Speed:** Launch in 2-3 weeks
+- 💰 **Revenue:** Start earning on Day 1
+- 📱 **Mobile:** Works flawlessly on phones
+- 🔒 **Simple:** No complex auth, just email + pay
+- 🎨 **Premium:** Gen-Z aesthetic, Apple-inspired
+
+**Tech Stack:** Next.js + Tailwind + Vercel + Stripe + Resend
+
+**Cost to Run:** <$50/month (Vercel free tier covers most)
+
+**Revenue Potential:** $10-200/day organically (if marketed well)
+
+### Next Steps:
+1. Copy this spec into your project
+2. Start with Phase 1 (Foundation)
+3. Build MVP in 2 weeks
+4. Launch on Product Hunt
+5. Iterate based on feedback
+
+**You're ready to build. Let's make money. 🚀**
 
