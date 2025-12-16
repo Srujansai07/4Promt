@@ -1,0 +1,577 @@
+================================================================================
+                    TIER 7-9 PROMPTS - COMING SOON COLLECTION
+================================================================================
+                Debug, Design, and Launch - Complete Prompt Pack
+================================================================================
+
+This folder contains 6 prompts (2 for each tier):
+- Format Prompt: Structured template for quick use
+- Comprehensive Prompt: Detailed prompt with all context
+
+================================================================================
+
+
+================================================================================
+                    TIER 7: DEBUG & OPTIMIZE FORMAT
+================================================================================
+
+RAW CODE/ERROR: [PASTE YOUR CODE OR ERROR HERE]
+
+CONTEXT:
+- Language/Framework: [e.g., React, Python, Node.js]
+- What you expected: [Expected behavior]
+- What happened: [Actual behavior/error]
+
+INSTRUCTIONS TO LLM:
+Analyze the provided code/error and produce a complete debugging report.
+
+OUTPUT REQUIRED:
+1. ROOT CAUSE ANALYSIS
+   - Identify the exact source of the issue
+   - Explain why this error occurs
+
+2. IMMEDIATE FIX
+   - Provide the corrected code
+   - Explain each change made
+
+3. EDGE CASES
+   - List potential edge cases that could cause similar issues
+   - Provide preventive code for each
+
+4. OPTIMIZATION SUGGESTIONS
+   - Performance improvements
+   - Code quality improvements
+   - Best practices to apply
+
+5. TEST CASES
+   - Unit tests to verify the fix
+   - Edge case tests
+   - Regression tests
+
+RULES:
+- Provide working code, not pseudocode
+- Include all necessary imports
+- Comment critical sections
+- Use modern syntax and best practices
+
+
+================================================================================
+                    TIER 7: DEBUG & OPTIMIZE COMPREHENSIVE
+================================================================================
+
+DEBUGGING CONTEXT:
+```
+[PASTE YOUR CODE, ERROR, OR DESCRIBE THE ISSUE HERE]
+```
+
+PROJECT DETAILS:
+- Project Type: [Web app / Mobile app / API / CLI / etc.]
+- Tech Stack: [List all technologies]
+- Environment: [Development / Staging / Production]
+- Frequency: [Always / Sometimes / Random]
+
+YOUR TASK AS AI DEBUGGER:
+You are an expert senior developer. Perform a comprehensive analysis and fix.
+
+MANDATORY OUTPUT STRUCTURE:
+
+---ISSUE IDENTIFICATION---
+1. Error Type Classification
+   - Syntax Error / Logic Error / Runtime Error / Type Error
+   - Severity: Critical / High / Medium / Low
+   
+2. Root Cause Analysis
+   - Line(s) causing issue
+   - Why this happens
+   - What triggers it
+
+---SOLUTION---
+3. Immediate Fix
+   ```[language]
+   // BEFORE
+   [original code]
+   
+   // AFTER
+   [fixed code with comments]
+   ```
+
+4. Step-by-Step Fix Explanation
+   - Change 1: [what and why]
+   - Change 2: [what and why]
+   - ...
+
+---PREVENTION---
+5. Common Patterns That Cause This Issue
+   - Pattern 1: [description]
+   - Pattern 2: [description]
+
+6. Defensive Coding Additions
+   - Input validation to add
+   - Error boundaries
+   - Null checks
+   - Type guards
+
+---TESTING---
+7. Unit Tests for the Fix
+   ```[language]
+   // Test 1: Verify fix works
+   // Test 2: Edge case
+   // Test 3: Regression
+   ```
+
+8. Manual Testing Steps
+   - Step 1: [action to take]
+   - Step 2: [expected result]
+
+---OPTIMIZATION---
+9. Performance Improvements
+   - Current performance issue
+   - Optimized approach
+   - Expected improvement
+
+10. Code Quality Improvements
+    - Cleaner syntax
+    - Better naming
+    - Documentation to add
+
+---CHECKLIST---
+□ Fix applied correctly
+□ No new bugs introduced
+□ Tests written and passing
+□ Edge cases handled
+□ Code reviewed for best practices
+□ Documentation updated
+
+RULES:
+- Assume production environment
+- Consider all edge cases
+- Provide copy-paste ready code
+- Include error handling
+
+
+================================================================================
+                    TIER 8: UI/UX DESIGNER FORMAT
+================================================================================
+
+APP IDEA: [DESCRIBE YOUR APP]
+
+DESIGN REQUIREMENTS:
+- Target Platform: [Web / Mobile / Desktop]
+- Style: [Modern / Minimal / Bold / Playful / Corporate]
+- Primary Colors: [Suggest or specify]
+- Target Audience: [Demographics]
+
+INSTRUCTIONS TO LLM:
+Generate a complete UI/UX specification for this app.
+
+OUTPUT REQUIRED:
+
+1. DESIGN SYSTEM
+   - Color palette (primary, secondary, accent, neutrals)
+   - Typography scale
+   - Spacing system (4px, 8px, 16px, etc.)
+   - Border radius values
+   - Shadow levels
+
+2. COMPONENT LIBRARY
+   - Button variants (primary, secondary, ghost, destructive)
+   - Input fields
+   - Cards
+   - Modals
+   - Navigation
+
+3. PAGE LAYOUTS
+   For each page provide:
+   - Wireframe (text description)
+   - Component placement
+   - Responsive breakpoints
+
+4. USER FLOWS
+   - Primary user journey
+   - Secondary actions
+   - Error states
+
+5. MICRO-INTERACTIONS
+   - Hover effects
+   - Loading states
+   - Transitions
+   - Animations
+
+6. ACCESSIBILITY
+   - Color contrast ratios
+   - Focus states
+   - Screen reader considerations
+
+RULES:
+- Use modern 2024 design trends
+- Mobile-first approach
+- Include dark mode variant
+- Provide CSS/Tailwind classes
+
+
+================================================================================
+                    TIER 8: UI/UX DESIGNER COMPREHENSIVE
+================================================================================
+
+PROJECT: [YOUR APP NAME]
+DESCRIPTION: [What does this app do?]
+
+YOUR ROLE: Senior UI/UX Designer + Frontend Developer
+
+CONTEXT:
+- Platform: [Web / iOS / Android / All]
+- Competitors: [List similar apps for inspiration]
+- Unique Value: [What makes this different?]
+- User Pain Points: [Problems you're solving]
+
+MANDATORY OUTPUT:
+
+---DESIGN FOUNDATIONS---
+
+1. BRAND IDENTITY
+   - Logo concept (text description)
+   - Brand voice (formal/casual/playful)
+   - Key brand attributes
+
+2. DESIGN TOKENS (JSON)
+   ```json
+   {
+     "colors": {
+       "primary": {"50": "#...", "100": "#...", ...},
+       "secondary": {},
+       "neutral": {},
+       "semantic": {
+         "success": "#...",
+         "error": "#...",
+         "warning": "#...",
+         "info": "#..."
+       }
+     },
+     "typography": {
+       "fontFamily": {},
+       "fontSize": {},
+       "fontWeight": {},
+       "lineHeight": {}
+     },
+     "spacing": {},
+     "borderRadius": {},
+     "shadows": {}
+   }
+   ```
+
+---COMPONENT SPECIFICATIONS---
+
+3. ATOMIC COMPONENTS
+   For each component provide:
+   - Visual description
+   - States (default, hover, active, disabled, focus)
+   - Variants
+   - Props/API
+   - Code snippet (React/HTML)
+
+4. MOLECULE COMPONENTS
+   - Form fields with labels
+   - Cards with content
+   - List items
+   - Navigation items
+
+5. ORGANISM COMPONENTS
+   - Header
+   - Footer
+   - Sidebar
+   - Feature sections
+
+---PAGE DESIGNS---
+
+6. PAGE SPECIFICATIONS
+   For each page:
+   
+   Page: [Name]
+   Purpose: [What user accomplishes]
+   Layout:
+   ```
+   ┌─────────────────────────────┐
+   │         HEADER              │
+   ├─────────────────────────────┤
+   │                             │
+   │         CONTENT             │
+   │                             │
+   ├─────────────────────────────┤
+   │         FOOTER              │
+   └─────────────────────────────┘
+   ```
+   Components Used: [List]
+   Interactions: [Describe]
+
+---RESPONSIVE DESIGN---
+
+7. BREAKPOINTS
+   - Mobile: 0-639px
+   - Tablet: 640-1023px
+   - Desktop: 1024px+
+   
+   Changes per breakpoint for each page.
+
+---ANIMATIONS---
+
+8. MOTION SYSTEM
+   - Transition duration: 150ms (quick), 300ms (normal), 500ms (slow)
+   - Easing: ease-out for enter, ease-in for exit
+   - Page transitions
+   - Component animations
+   - Loading animations (skeleton, spinner)
+
+---CSS OUTPUT---
+
+9. COMPLETE CSS/TAILWIND CONFIG
+   ```css
+   /* Global styles */
+   /* Component classes */
+   /* Utility classes */
+   ```
+
+---DARK MODE---
+
+10. DARK THEME TOKENS
+    Complete color mapping for dark mode.
+
+RULES:
+- WCAG 2.1 AA compliant
+- Touch targets minimum 44x44px
+- Performance-conscious animations
+- Provide production-ready code
+
+
+================================================================================
+                    TIER 9: LAUNCH & SCALE FORMAT
+================================================================================
+
+PROJECT: [YOUR APP NAME]
+TECH STACK: [List your technologies]
+CURRENT STATE: [MVP / Beta / Production]
+
+INSTRUCTIONS TO LLM:
+Create a complete launch and scaling strategy.
+
+OUTPUT REQUIRED:
+
+1. DEPLOYMENT CHECKLIST
+   - Pre-launch verification
+   - Environment setup
+   - Database migration
+   - DNS configuration
+
+2. HOSTING RECOMMENDATIONS
+   - Best platform for your stack
+   - Configuration settings
+   - Cost estimates
+
+3. CI/CD PIPELINE
+   - Build steps
+   - Test automation
+   - Deployment automation
+
+4. MONITORING SETUP
+   - Error tracking (Sentry/LogRocket)
+   - Performance monitoring
+   - Uptime monitoring
+   - Analytics setup
+
+5. SECURITY HARDENING
+   - Environment variables
+   - API security
+   - Rate limiting
+   - CORS configuration
+
+6. SCALING STRATEGY
+   - Database optimization
+   - Caching layers
+   - CDN setup
+   - Load balancing (when needed)
+
+7. BACKUP & RECOVERY
+   - Database backups
+   - Disaster recovery plan
+   - Rollback procedures
+
+RULES:
+- Provide exact commands
+- Include all configuration files
+- Cost-conscious recommendations
+- Prioritize by importance
+
+
+================================================================================
+                    TIER 9: LAUNCH & SCALE COMPREHENSIVE
+================================================================================
+
+PROJECT: [YOUR APP NAME]
+DESCRIPTION: [Brief description]
+TECH STACK: [Complete list]
+EXPECTED USERS: [Initial / 6 months / 1 year]
+BUDGET: [Monthly budget for infrastructure]
+
+YOUR ROLE: DevOps Engineer + Infrastructure Architect
+
+MANDATORY OUTPUT:
+
+---PRE-LAUNCH CHECKLIST---
+
+1. CODE READINESS
+   □ All tests passing
+   □ No console.logs in production code
+   □ Error boundaries implemented
+   □ Loading states for all async operations
+   □ 404 and error pages
+   □ Favicon and meta tags
+   □ robots.txt and sitemap.xml
+   □ Environment variables documented
+   □ README updated
+
+2. SECURITY CHECKLIST
+   □ HTTPS enforced
+   □ API keys not exposed
+   □ Input validation on all forms
+   □ SQL injection prevention
+   □ XSS prevention
+   □ CSRF protection
+   □ Rate limiting enabled
+   □ Authentication secure
+   □ Passwords hashed (bcrypt/argon2)
+
+---DEPLOYMENT---
+
+3. ENVIRONMENT CONFIGURATION
+   ```bash
+   # Production environment variables
+   NODE_ENV=production
+   DATABASE_URL=
+   API_KEY=
+   # ... complete list
+   ```
+
+4. HOSTING SETUP
+   Platform: [Recommended platform with reasoning]
+   
+   Setup Commands:
+   ```bash
+   # Step 1: Install CLI
+   # Step 2: Login
+   # Step 3: Initialize
+   # Step 4: Configure
+   # Step 5: Deploy
+   ```
+
+5. DOMAIN & SSL
+   - DNS records to add
+   - SSL certificate setup
+   - Redirect configuration
+
+6. CI/CD PIPELINE
+   ```yaml
+   # GitHub Actions / GitLab CI config
+   name: Deploy
+   on:
+     push:
+       branches: [main]
+   jobs:
+     # Build job
+     # Test job
+     # Deploy job
+   ```
+
+---MONITORING---
+
+7. ERROR TRACKING
+   Setup code for Sentry/similar:
+   ```javascript
+   // Initialization
+   // Error boundary
+   // Custom error logging
+   ```
+
+8. PERFORMANCE MONITORING
+   - Core Web Vitals tracking
+   - API response time monitoring
+   - Database query monitoring
+
+9. UPTIME MONITORING
+   - Service recommendation
+   - Alert configuration
+   - Status page setup
+
+10. ANALYTICS
+    - GA4 / Plausible / Mixpanel setup
+    - Custom events to track
+    - Conversion funnels
+
+---SCALING PREPARATION---
+
+11. DATABASE OPTIMIZATION
+    - Indexes to add
+    - Query optimization
+    - Connection pooling
+    - Read replicas (when needed)
+
+12. CACHING STRATEGY
+    ```javascript
+    // Browser caching headers
+    // API response caching
+    // Database query caching
+    // CDN caching
+    ```
+
+13. CDN SETUP
+    - Static asset optimization
+    - Image optimization
+    - Edge caching
+
+14. LOAD HANDLING
+    - Current capacity estimate
+    - Scaling triggers
+    - Auto-scaling configuration
+
+---OPERATIONS---
+
+15. BACKUP STRATEGY
+    - Database backup schedule
+    - File backup
+    - Configuration backup
+    - Tested restore procedure
+
+16. INCIDENT RESPONSE
+    - On-call rotation (if team)
+    - Incident severity levels
+    - Response procedures
+    - Post-mortem template
+
+17. COST OPTIMIZATION
+    - Current estimated costs
+    - Cost monitoring
+    - Optimization opportunities
+
+---LAUNCH DAY---
+
+18. LAUNCH CHECKLIST
+    □ Final smoke test
+    □ Monitoring dashboards open
+    □ Team on standby
+    □ Rollback plan ready
+    □ Communication channels set
+    □ Launch announcement scheduled
+
+19. POST-LAUNCH (24-48 hours)
+    - Metrics to watch
+    - Common issues and fixes
+    - Success criteria
+
+RULES:
+- Provide complete configuration files
+- Include cost estimates
+- Prioritize by business impact
+- Give exact commands that work
+
+
+================================================================================
+                            END OF TIER 7-9 PROMPTS
+================================================================================

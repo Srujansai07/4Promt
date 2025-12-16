@@ -38,6 +38,7 @@ export default function UnlockClient({ prompt, email, promptId }: UnlockClientPr
         if (prompt.id === 6) {
             if (activeTab === 'markdown') return extractSection(prompt.content, 'MARKDOWN MASTER SUPER')
             if (activeTab === 'json') return extractSection(prompt.content, 'JSON MASTER SUPER')
+            if (activeTab === 'toml') return extractSection(prompt.content, 'TOML MASTER SUPER')
             if (activeTab === 'main') return extractSection(prompt.content, 'HIGH - LEVEL SUMMARY', 'BONUS:')
         }
         return prompt.content
@@ -73,6 +74,7 @@ export default function UnlockClient({ prompt, email, promptId }: UnlockClientPr
             if (activeTab === 'main') contentToShow = extractSection(prompt.content, 'HIGH - LEVEL SUMMARY', 'BONUS:')
             else if (activeTab === 'markdown') contentToShow = extractSection(prompt.content, 'MARKDOWN MASTER SUPER')
             else if (activeTab === 'json') contentToShow = extractSection(prompt.content, 'JSON MASTER SUPER')
+            else if (activeTab === 'toml') contentToShow = extractSection(prompt.content, 'TOML MASTER SUPER')
         }
 
         return (
@@ -115,19 +117,25 @@ export default function UnlockClient({ prompt, email, promptId }: UnlockClientPr
                                     onClick={() => setActiveTab('main')}
                                     className={`px-4 py-2 rounded-md text-sm font-medium transition ${activeTab === 'main' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'}`}
                                 >
-                                    Strategy
+                                    Base
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('markdown')}
                                     className={`px-4 py-2 rounded-md text-sm font-medium transition ${activeTab === 'markdown' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'}`}
                                 >
-                                    Markdown
+                                    MD
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('json')}
                                     className={`px-4 py-2 rounded-md text-sm font-medium transition ${activeTab === 'json' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'}`}
                                 >
                                     JSON
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('toml')}
+                                    className={`px-4 py-2 rounded-md text-sm font-medium transition ${activeTab === 'toml' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'}`}
+                                >
+                                    TOML
                                 </button>
                             </div>
                         ) : (
