@@ -4,17 +4,40 @@
                     The Ultimate Combined Prompt (All-in-One)
 ================================================================================
 
-MASTER SUPER FORMAT 
+HOW TO USE:
+1. Replace [YOUR IDEA HERE] with your actual app/website idea
+2. The more detail you provide, the better the output
+3. Paste this entire prompt into ChatGPT, Claude, or any AI
+4. Receive a COMPLETE specification covering ALL aspects
 
-RAW IDEA: "IDEAK"
+Price: $12 (Master Pack)
+Best For: Complete project specifications, production-ready blueprints
+
+================================================================================
+                         MASTER SUPER FORMAT
+================================================================================
+
+---BEGIN PROMPT---
+
+MASTER SUPER FORMAT: THE ULTIMATE ALL-IN-ONE PROMPT
+
+RAW IDEA: 
+"""
+[YOUR IDEA HERE - Be as detailed as possible:
+
+Example: "I want to build a meal planning app that suggests healthy recipes based 
+on dietary restrictions, generates shopping lists, and tracks nutrition. Target 
+users are busy professionals aged 25-45 who want to eat healthier but don't have 
+time to plan meals. Should have a mobile app and web dashboard."
+
+Write your idea here:]
+
+
+"""
 
 INSTRUCTIONS TO LLM:
-Expand the RAW IDEA into a full, combined, multi-layer specification that merges:
-- Simple expansion clarity (Format 1)
-- Industry website-builder style (Format 2)
-- Engineering interpretation style (Format 3)
-- Universal LLM structure (Format 4)
-- Ultimate deep A→Z system design (Format 5)
+Expand the above RAW IDEA into a comprehensive, combined, multi-layer specification.
+This combines the best of all 5 formats into one ultimate output.
 
 Your output MUST include ALL SECTIONS BELOW.
 Do NOT remove or merge sections.  
@@ -22,120 +45,212 @@ Do NOT shorten.
 Do NOT skip any part.  
 Produce the FULL expanded version.
 
-------------------------------------------------------------------
-1. HIGH-LEVEL SUMMARY (Format 1)
-------------------------------------------------------------------
+================================================================================
+                           OUTPUT SECTIONS
+================================================================================
 
 ------------------------------------------------------------------
-2. CORE FEATURES (Simple + Industry + Deep Acceptance Criteria)
+SECTION 1: HIGH-LEVEL SUMMARY
 ------------------------------------------------------------------
+What is this product? Who is it for? What problem does it solve?
 
 ------------------------------------------------------------------
-3. PRODUCT DESCRIPTION (Industry Standard)
+SECTION 2: CORE FEATURES
 ------------------------------------------------------------------
+List all features with:
+- Brief description
+- Why it matters
+- Acceptance criteria
 
 ------------------------------------------------------------------
-4. USER PERSONAS
+SECTION 3: PRODUCT DESCRIPTION
 ------------------------------------------------------------------
+2-3 paragraphs describing the product as if for a landing page.
 
 ------------------------------------------------------------------
-5. USER STORIES (Basic + Detailed)
+SECTION 4: USER PERSONAS
 ------------------------------------------------------------------
+At least 3 detailed user personas with:
+- Name and demographics
+- Goals and motivations
+- Pain points
+- How they'll use this product
 
 ------------------------------------------------------------------
-6. SCREEN / PAGE MAP (Website Builder Format)
+SECTION 5: USER STORIES
 ------------------------------------------------------------------
+Both simple and detailed format:
+- Simple: "User can [action]"
+- Detailed: "As a [role], I want [feature], so that [benefit]"
 
 ------------------------------------------------------------------
-7. USER FLOW (Simple) + SYSTEM FLOW (Advanced)
+SECTION 6: SCREEN / PAGE MAP
 ------------------------------------------------------------------
+All pages/screens needed:
+- Page name
+- Purpose
+- Key components
 
 ------------------------------------------------------------------
-8. OBJECTIVES (Primary, Secondary, Tertiary)
+SECTION 7: USER FLOW & SYSTEM FLOW
 ------------------------------------------------------------------
+USER FLOW: Step-by-step journey from signup to achieving goal
+SYSTEM FLOW: Backend processes triggered by user actions
 
 ------------------------------------------------------------------
-9. FULL FEATURE SPECIFICATIONS (With Acceptance Criteria)
+SECTION 8: OBJECTIVES
 ------------------------------------------------------------------
+PRIMARY: Main goals (must achieve)
+SECONDARY: Nice-to-have goals
+TERTIARY: Future expansion goals
 
 ------------------------------------------------------------------
-10. DATA MODEL (JSON + Relationships)
+SECTION 9: FEATURE SPECIFICATIONS
 ------------------------------------------------------------------
+Detailed specs for each feature:
+- Description
+- Inputs/outputs
+- Acceptance criteria
+- Priority (P0/P1/P2)
 
 ------------------------------------------------------------------
-11. API BLUEPRINT 
-- Endpoints
-- Request/Response
-- Auth flows
+SECTION 10: DATA MODEL
 ------------------------------------------------------------------
+Complete JSON schema with:
+- All entities
+- Properties and types
+- Relationships explained
 
 ------------------------------------------------------------------
-12. SYSTEM ARCHITECTURE (Frontend + Backend + DB + Integrations)
+SECTION 11: API BLUEPRINT
 ------------------------------------------------------------------
+- All endpoints (REST format)
+- Request/response examples
+- Authentication requirements
+- Error handling
 
 ------------------------------------------------------------------
-13. LOGIC FLOW (Engineering Format)
+SECTION 12: SYSTEM ARCHITECTURE
 ------------------------------------------------------------------
+- Frontend (framework, structure)
+- Backend (language, framework)
+- Database (type, hosting)
+- Integrations (third-party services)
 
 ------------------------------------------------------------------
-14. PRD (Product Requirements Document)
-- Problem
-- Solution
+SECTION 13: LOGIC FLOW
+------------------------------------------------------------------
+How the system processes requests:
+- Input → Processing → Output
+- Edge cases handled
+
+------------------------------------------------------------------
+SECTION 14: PRD (Product Requirements Document)
+------------------------------------------------------------------
+- Problem Statement
+- Solution Overview
 - Constraints
-- KPIs
-------------------------------------------------------------------
+- KPIs/Success Metrics
 
 ------------------------------------------------------------------
-15. TECH STACK RECOMMENDATIONS
+SECTION 15: TECH STACK RECOMMENDATIONS
 ------------------------------------------------------------------
+Recommended technologies with reasoning:
+- Frontend
+- Backend
+- Database
+- Hosting
+- CI/CD
+- Monitoring
 
 ------------------------------------------------------------------
-16. IMPLEMENTATION PLAN (Phases + Sprints + Tasks)
+SECTION 16: IMPLEMENTATION PLAN
 ------------------------------------------------------------------
+- Phases (with timeline)
+- Sprints (2-week blocks)
+- Tasks (with estimates)
 
 ------------------------------------------------------------------
-17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
+SECTION 17: GIT BRANCH PLAN + COMMIT MESSAGES
 ------------------------------------------------------------------
+- Branch naming convention
+- Commit message format
+- PR template
 
 ------------------------------------------------------------------
-18. DEVELOPMENT ROADMAP (Timeline)
+SECTION 18: DEVELOPMENT ROADMAP
 ------------------------------------------------------------------
+Timeline with milestones:
+- Week 1-2: [Goals]
+- Week 3-4: [Goals]
+- etc.
 
 ------------------------------------------------------------------
-19. DEPLOYMENT & HOSTING PLAN (with CI/CD)
+SECTION 19: DEPLOYMENT & HOSTING PLAN
 ------------------------------------------------------------------
+- Hosting setup
+- CI/CD pipeline
+- Environment configuration
+- Domain setup
 
 ------------------------------------------------------------------
-20. TEST PLAN (Unit + Integration + End-to-end)
+SECTION 20: TEST PLAN
 ------------------------------------------------------------------
+- Unit tests (list what to test)
+- Integration tests
+- End-to-end tests
+- Testing tools
 
 ------------------------------------------------------------------
-21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
+SECTION 21: SECURITY & PERFORMANCE
 ------------------------------------------------------------------
+SECURITY:
+- Authentication best practices
+- Data protection
+- Common vulnerabilities to prevent
+
+PERFORMANCE:
+- Optimization strategies
+- Caching approach
+- Load handling
 
 ------------------------------------------------------------------
-22. NON-FUNCTIONAL REQUIREMENTS (Speed, UX, Privacy)
+SECTION 22: NON-FUNCTIONAL REQUIREMENTS
 ------------------------------------------------------------------
+- Speed/Performance targets
+- UX/Accessibility requirements
+- Privacy/Compliance
+- Scalability needs
 
 ------------------------------------------------------------------
-23. RISKS & MITIGATION STRATEGIES
+SECTION 23: RISKS & MITIGATION
 ------------------------------------------------------------------
+Potential risks with mitigation strategies:
+- Technical risks
+- Business risks
+- Timeline risks
 
 ------------------------------------------------------------------
-24. FINAL HANDOFF PACKAGE
-- All files/components the builder must generate
+SECTION 24: FINAL HANDOFF PACKAGE
+------------------------------------------------------------------
+Complete list of deliverables:
+- All files to generate
 - Folder structure
-- Key deliverables
-------------------------------------------------------------------
+- Key deliverables checklist
+- Ready for automated builder
 
-OUTPUT RULES:
-- Follow the exact order above.
-- Use clear headings.
-- Use numbered lists where they are logical.
-- Provide detailed content under every section.
-- Never shorten or summarise unless asked.
-- The output should be complete enough for an automated website-building LLM to generate the entire application end-to-end.
+================================================================================
+                             OUTPUT RULES
+================================================================================
+- Follow the exact order above
+- Use clear headings
+- Use numbered lists where logical
+- Provide detailed content under every section
+- Never shorten or summarize unless asked
+- The output should be complete enough for an automated website-building LLM 
+  to generate the entire application end-to-end
 
+---END PROMPT---
 
 ================================================================================
                          END OF PROMPT 6: MASTER PACK

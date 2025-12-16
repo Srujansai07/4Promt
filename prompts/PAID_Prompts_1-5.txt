@@ -4,93 +4,152 @@
                     All 5 Paid Tier Prompts in One File
 ================================================================================
 
+HOW TO USE:
+1. Copy the prompt for your tier
+2. Replace [YOUR IDEA HERE] with your actual app/website idea
+3. Paste into ChatGPT, Claude, or any AI tool
+4. Get your complete specification!
 
 ================================================================================
                         PROMPT 1: STARTER FORMAT (Tier 1)
 ================================================================================
-FORMAT 1: YOUR STYLE (Minimal → Expand Everything)
-RAW IDEA: IDEAK
+Price: FREE
+Best For: Quick idea expansion, simple apps, MVPs
+
+---BEGIN PROMPT---
+
+FORMAT 1: MINIMAL → EXPAND EVERYTHING
+
+RAW IDEA: 
+"""
+[YOUR IDEA HERE - Describe your app/website idea in 1-3 sentences]
+"""
 
 INSTRUCTIONS TO LLM:
 Expand this raw idea into a complete structured breakdown including:
-- Clear explanation
-- Feature list
-- User flow
-- Tech suggestions
-- Steps to build
-- Any missing improvements
+- Clear explanation of what this product does
+- Feature list (core and nice-to-have)
+- User flow from start to finish
+- Tech suggestions for implementation
+- Step-by-step build guide
+- Any missing improvements or enhancements
 
 OUTPUT FORMAT:
-1. Summary
-2. Core Features
-3. User Interaction Flow
+1. Summary (What is this product?)
+2. Core Features (Must-have features)
+3. User Interaction Flow (How users will use it)
 4. Recommended Tech Stack
 5. Basic Implementation Steps
-6. Notes / Improvements
+6. Notes / Improvements / Ideas
 
 Return all output in crisp, clean, simple structure.
+
+---END PROMPT---
 
 
 ================================================================================
                      PROMPT 2: PRO BUILDER FORMAT (Tier 2)
 ================================================================================
+Price: FREE
+Best For: Professional websites, business apps, client projects
+
+---BEGIN PROMPT---
+
 FORMAT 2: TOP WEBSITE-BUILDER STYLE (Industry Standard)
-PROJECT IDEA: IDEAK
+
+PROJECT IDEA: 
+"""
+[YOUR IDEA HERE - Describe your app/website idea in detail]
+"""
 
 TASK:
 Convert this idea into a full website-builder-ready specification.
 
 OUTPUT SECTIONS REQUIRED:
 1. PRODUCT DESCRIPTION (1–2 paragraphs)
-2. USER PERSONAS
-3. FEATURE LIST (MVP + Future)
-4. SCREEN / PAGE MAP
-5. FUNCTIONAL REQUIREMENTS
-6. NON-FUNCTIONAL REQUIREMENTS (speed, UX, security)
-7. DATA STRUCTURE (JSON only)
-8. API ENDPOINT PLAN
-9. DEVELOPMENT ROADMAP (phases)
-10. DEPLOYMENT FRAMEWORK (hosting, build system)
+2. USER PERSONAS (Who will use this?)
+3. FEATURE LIST (MVP + Future enhancements)
+4. SCREEN / PAGE MAP (All pages needed)
+5. FUNCTIONAL REQUIREMENTS (What it must do)
+6. NON-FUNCTIONAL REQUIREMENTS (Speed, UX, security, accessibility)
+7. DATA STRUCTURE (JSON format)
+8. API ENDPOINT PLAN (All backend routes)
+9. DEVELOPMENT ROADMAP (Phases and milestones)
+10. DEPLOYMENT FRAMEWORK (Hosting, build system, CI/CD)
 
 Ensure the final output can be directly used by an automated no-code/AI website builder.
+
+---END PROMPT---
 
 
 ================================================================================
                    PROMPT 3: INDUSTRY ENGINEER FORMAT (Tier 3)
 ================================================================================
+Price: $3 (Referral unlock available)
+Best For: Engineering teams, technical documentation, AI automation
+
+---BEGIN PROMPT---
+
 FORMAT 3: OFFICIAL LLM UNDERSTANDING TEMPLATE (Maximum Clarity for Any AI)
+
 IDEA INPUT:
-IDEAK
+"""
+[YOUR IDEA HERE - Include as much context as possible: target users, key features, business model]
+"""
 
 YOUR TASK:
 Interpret the idea and produce a complete structured document for downstream AI tools.
 
 MANDATORY OUTPUT STRUCTURE:
+
 ---CONCEPT---
-Explain the idea.
+Explain the idea in detail. What problem does it solve? Who is it for?
+
 ---OBJECTIVES---
-List primary, secondary, tertiary goals.
+List primary, secondary, and tertiary goals.
+
 ---FEATURES---
-Numbered features with purpose.
+Numbered features with clear purpose for each.
+
 ---DATA MODEL (JSON)---
-Provide clean schema.
+Provide clean database schema.
+
 ---LOGIC FLOW---
 Describe how the system works step-by-step.
----IMPLEMENTATION PLAN---
-List tasks with substeps.
----RISKS & OPTIMIZATIONS---
 
-Rules:
-- No fluff
-- No assumptions beyond the idea
+---IMPLEMENTATION PLAN---
+List all tasks with substeps.
+
+---RISKS & OPTIMIZATIONS---
+Potential issues and how to mitigate them.
+
+RULES:
+- No fluff or filler content
+- No assumptions beyond what's provided in the idea
 - Use precise engineering language
+- Be comprehensive and actionable
+
+---END PROMPT---
 
 
 ================================================================================
                    PROMPT 4: UNIVERSAL ARCHITECTURE (Tier 4)
 ================================================================================
+Price: $4.90
+Best For: Complex applications, multi-platform projects, team handoffs
+
+---BEGIN PROMPT---
+
 FORMAT 4: UNIVERSAL LLM FORMAT (Works on ANY Model, ANY Platform)
-INPUT IDEA: IDEAK
+
+INPUT IDEA: 
+"""
+[YOUR IDEA HERE - Be as detailed as possible. Include: 
+- What the product does
+- Who it's for
+- Key features you want
+- Any technical preferences]
+"""
 
 OUTPUT REQUIREMENT:
 Generate a universal specification that includes:
@@ -100,66 +159,113 @@ Generate a universal specification that includes:
 3. System Architecture Overview
 4. Data Flow Diagram (written description)
 5. API Blueprint
-6. UI/UX Layout (textual, not visual)
+6. UI/UX Layout (textual wireframes, not visual)
 7. Tasks & Milestones
 8. Final Deliverable Specification (for handoff to builder models)
 9. Additional Insights & Recommendations
-
 
 ADDITIONAL RULES:
 - Always maintain numbered lists
 - Always include JSON where needed
 - Keep consistent section names for easy parsing
-- Output must be comprehensive, expertly structured, and immediately actionable.
+- Output must be comprehensive, expertly structured, and immediately actionable
 - Maintain a confident, structured tone throughout
+- This output should work with ANY AI coding assistant
+
+---END PROMPT---
 
 
 ================================================================================
                   PROMPT 5: ULTIMATE A→Z BLUEPRINT (Tier 5)
 ================================================================================
-FORMAT 5: ULTIMATE A-TO-Z EXTREME DEPTH FORMAT (For Full System Generation)
-This one forces the LLM to output EVERYTHING needed for a full app build.
-IDEA: IDEAK
+Price: $6.90
+Best For: Full production apps, startup MVPs, complete system builds
+
+---BEGIN PROMPT---
+
+FORMAT 5: ULTIMATE A-TO-Z EXTREME DEPTH FORMAT (Full System Generation)
+
+This prompt forces the LLM to output EVERYTHING needed for a complete app build.
+
+IDEA: 
+"""
+[YOUR IDEA HERE - Provide maximum detail:
+- Product name (if you have one)
+- What problem it solves
+- Target users
+- Key features
+- Monetization (if applicable)
+- Any design preferences
+- Technical requirements/constraints]
+"""
 
 TASK:
 Expand this idea into a complete A→Z system blueprint ready for automated development.
 
-OUTPUT REQUIRED (MANDATORY):
+OUTPUT REQUIRED (MANDATORY - DO NOT SKIP ANY SECTION):
 
 1. EXECUTIVE SUMMARY
-2. FULL PRD
-3. USER STORIES (detailed)
-4. FEATURE SPECIFICATIONS (each with acceptance criteria)
+   - One paragraph overview
+
+2. FULL PRD (Product Requirements Document)
+   - Problem statement
+   - Solution overview
+   - Success metrics
+
+3. USER STORIES (Detailed)
+   - As a [user], I want [feature], so that [benefit]
+   - Include at least 10 user stories
+
+4. FEATURE SPECIFICATIONS
+   - Each feature with acceptance criteria
+   - Priority level (P0, P1, P2)
+
 5. DATA MODEL
-    - JSON schema
-    - Relations explained
+   - JSON schema for all entities
+   - Relationships explained
+
 6. SYSTEM ARCHITECTURE
-    - frontend
-    - backend
-    - DB
-    - integration points
+   - Frontend stack
+   - Backend stack
+   - Database choice
+   - Third-party integrations
+
 7. API DESIGN
-    - endpoints
-    - request/response examples
+   - All endpoints
+   - Request/response examples
+   - Authentication flow
+
 8. WORKFLOWS
-    - user flows
-    - system flows
+   - User flows (diagrams in text)
+   - System flows (backend processes)
+
 9. COMPLETE IMPLEMENTATION PLAN
-    - sprint-wise tasks
-    - Git branch naming
-    - commit messages
+   - Sprint-wise tasks
+   - Git branch naming conventions
+   - Commit message templates
+
 10. DEPLOYMENT GUIDE
-    - environment setup
-    - hosting steps
-    - CI/CD pipeline
+    - Environment setup
+    - Hosting steps
+    - CI/CD pipeline configuration
+
 11. TEST PLAN
-    - unit test list
-    - integration test list
+    - Unit test list
+    - Integration test list
+    - End-to-end test scenarios
+
 12. SECURITY + PERFORMANCE RULES
+    - Security best practices
+    - Performance optimization guidelines
+
 13. FINAL HANDOFF PACKAGE
-    - list of files the automated builder must generate
+    - List of all files the automated builder must generate
+    - Folder structure
+    - Key deliverables checklist
 
 Output everything in clean structured text. No missing sections.
+
+---END PROMPT---
 
 
 ================================================================================

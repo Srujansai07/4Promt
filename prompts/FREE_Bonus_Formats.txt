@@ -1,175 +1,369 @@
 ================================================================================
-                       PROMPTOS - FREE PROMPTS (3 Bonus)
+                       PROMPTOS - FREE BONUS FORMATS
 ================================================================================
              These 3 formats are FREE with Prompt 6 (Master Pack)
 ================================================================================
+
+WHAT'S INCLUDED:
+- Format 1: Markdown Version (human-readable, dev-friendly)
+- Format 2: JSON Version (for AI tools and structured builders)
+- Format 3: TOML Version (for configuration and automation)
+
+HOW TO USE:
+1. Choose the format that fits your tool
+2. Replace [YOUR IDEA HERE] with your actual idea
+3. Use with any AI system that accepts that format
+4. Perfect for automation pipelines!
 
 
 ================================================================================
                FREE FORMAT 1: MARKDOWN MASTER SUPER-PROMPT
 ================================================================================
-(Perfect for human readability + most dev tools)
+Perfect for: Human readability, GitHub, documentation, most dev tools
+
+---BEGIN PROMPT---
 
 # MASTER SUPER FORMAT (Markdown Output)
-Raw Idea: "IDEAK"
+
+## Your Idea
+"""
+[YOUR IDEA HERE - Describe your app/website idea]
+"""
 
 ## INSTRUCTIONS TO LLM
-Expand the raw idea into a complete multi-layer specification containing ALL sections below.  
+Expand the idea above into a complete multi-layer specification containing ALL sections below.  
 Output MUST be in **Markdown format only**.  
 Do NOT skip any section.
 
 ---
 
 # 1. High-Level Summary
+What is this product? Who is it for?
 
 # 2. Core Features
-- With basic description
-- With acceptance criteria
+- Feature 1: Description + acceptance criteria
+- Feature 2: Description + acceptance criteria
+- (continue for all features)
 
 # 3. Product Description
+2-3 paragraphs for landing page.
 
 # 4. User Personas
+| Persona | Demographics | Goals | Pain Points |
+|---------|--------------|-------|-------------|
+| User 1  | ...          | ...   | ...         |
 
 # 5. User Stories
-- Simple
-- Detailed
+## Simple
+- User can [action]
+
+## Detailed
+- As a [role], I want [feature], so that [benefit]
 
 # 6. Screen / Page Map
+| Page | Purpose | Components |
+|------|---------|------------|
+| Home | ...     | ...        |
 
 # 7. User Flow & System Flow
+## User Flow
+1. User visits site
+2. User signs up
+3. (continue...)
+
+## System Flow
+1. Request received
+2. Authentication check
+3. (continue...)
 
 # 8. Objectives
-- Primary
-- Secondary
-- Tertiary
+## Primary
+- [ ] Objective 1
+
+## Secondary
+- [ ] Objective 2
+
+## Tertiary
+- [ ] Objective 3
 
 # 9. Full Feature Specifications
-- With acceptance criteria
+| Feature | Description | Acceptance Criteria | Priority |
+|---------|-------------|---------------------|----------|
+| ...     | ...         | ...                 | P0       |
 
 # 10. Data Model
 ```json
-{ }
+{
+  "User": {
+    "id": "uuid",
+    "email": "string",
+    "created_at": "timestamp"
+  }
+}
 ```
-(Relationships explained in text)
+**Relationships:** User has many [items]...
 
 # 11. API Blueprint
-- Endpoints
-- Request/Response examples
-- Auth
+## Endpoints
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST   | /api/auth/signup | Create new user |
+
+## Example Request
+```json
+{ "email": "user@example.com", "password": "..." }
+```
 
 # 12. System Architecture
-- Frontend
-- Backend
-- Database
-- Integrations
+- **Frontend:** React/Next.js
+- **Backend:** Node.js/Python
+- **Database:** PostgreSQL
+- **Integrations:** Stripe, Auth0, etc.
 
 # 13. Logic Flow
+```
+Input → Validation → Processing → Database → Response
+```
 
 # 14. PRD (Product Requirements Document)
+## Problem
+What problem are we solving?
+
+## Solution
+How we solve it.
+
+## KPIs
+- Metric 1: Target
+- Metric 2: Target
 
 # 15. Tech Stack Recommendations
+| Layer | Technology | Reason |
+|-------|------------|--------|
+| Frontend | ... | ... |
 
 # 16. Implementation Plan
-- Phases
-- Sprints
-- Tasks
+## Phase 1: Foundation (Week 1-2)
+- [ ] Task 1
+- [ ] Task 2
+
+## Phase 2: Core Features (Week 3-4)
+- [ ] Task 3
 
 # 17. Git Branch Plan & Commit Messages
+```
+main
+├── develop
+├── feature/user-auth
+└── feature/dashboard
+```
+Commit format: `type(scope): description`
 
 # 18. Development Roadmap
+| Week | Milestone |
+|------|-----------|
+| 1-2  | Auth + DB |
+| 3-4  | Core features |
 
 # 19. Deployment & Hosting Plan (CI/CD included)
+- **Hosting:** Vercel/Railway
+- **CI/CD:** GitHub Actions
+- **Environments:** dev, staging, prod
 
 # 20. Test Plan
-- Unit tests
-- Integration tests
-- End-to-end
+## Unit Tests
+- [ ] Auth functions
+- [ ] API endpoints
+
+## Integration Tests
+- [ ] User flow
+
+## E2E Tests
+- [ ] Critical paths
 
 # 21. Security & Performance Guidelines
+## Security
+- [ ] HTTPS everywhere
+- [ ] Input validation
+- [ ] Rate limiting
+
+## Performance
+- [ ] CDN for static assets
+- [ ] Database indexing
 
 # 22. Non-Functional Requirements
+- Response time < 200ms
+- WCAG 2.1 AA compliance
+- GDPR compliant
 
 # 23. Risks & Mitigation
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| ...  | High   | ...        |
 
 # 24. Final Handoff Package
-- Required files
-- Folder structure
-- Deliverables
+## Required Files
+- [ ] All components
+- [ ] API routes
+- [ ] Database schema
+
+## Folder Structure
+```
+/src
+  /components
+  /pages
+  /api
+  /lib
+```
+
+---END PROMPT---
 
 
 ================================================================================
                  FREE FORMAT 2: JSON MASTER SUPER-PROMPT
 ================================================================================
-(Fits perfectly into LLMs that parse JSON or structured builders)
+Perfect for: LLMs that parse JSON, structured builders, automation pipelines
+
+---BEGIN PROMPT---
 
 {
-    "raw_idea": "IDEAK",
-    "instructions": "Expand into the full combined blueprint. Output MUST be valid JSON.",
+    "raw_idea": "[YOUR IDEA HERE - Describe your app/website idea]",
+    "instructions": "Expand into the full combined blueprint. Output MUST be valid JSON. Fill ALL fields below.",
+    
     "high_level_summary": "",
-    "core_features": [],
+    
+    "core_features": [
+        {
+            "name": "",
+            "description": "",
+            "acceptance_criteria": []
+        }
+    ],
+    
     "product_description": "",
-    "user_personas": [],
+    
+    "user_personas": [
+        {
+            "name": "",
+            "demographics": "",
+            "goals": [],
+            "pain_points": []
+        }
+    ],
+    
     "user_stories": {
         "simple": [],
         "detailed": []
     },
-    "screen_map": [],
+    
+    "screen_map": [
+        {
+            "page": "",
+            "purpose": "",
+            "components": []
+        }
+    ],
+    
     "flows": {
-        "user_flow": "",
-        "system_flow": ""
+        "user_flow": [],
+        "system_flow": []
     },
+    
     "objectives": {
         "primary": [],
         "secondary": [],
         "tertiary": []
     },
-    "feature_specifications": [],
+    
+    "feature_specifications": [
+        {
+            "name": "",
+            "description": "",
+            "acceptance_criteria": [],
+            "priority": "P0"
+        }
+    ],
+    
     "data_model": {
-        "schema_json": {},
-        "relations_explained": ""
+        "entities": {},
+        "relationships": ""
     },
+    
     "api_blueprint": {
-        "endpoints": [],
-        "examples": {}
+        "endpoints": [
+            {
+                "method": "",
+                "path": "",
+                "description": "",
+                "request": {},
+                "response": {}
+            }
+        ],
+        "authentication": ""
     },
+    
     "system_architecture": {
         "frontend": "",
         "backend": "",
         "database": "",
-        "integrations": ""
+        "integrations": []
     },
+    
     "logic_flow": "",
+    
     "prd": {
         "problem": "",
         "solution": "",
-        "constraints": "",
-        "kpis": ""
+        "constraints": [],
+        "kpis": []
     },
-    "tech_stack_recommendations": [],
+    
+    "tech_stack": {
+        "frontend": "",
+        "backend": "",
+        "database": "",
+        "hosting": "",
+        "ci_cd": ""
+    },
+    
     "implementation_plan": {
         "phases": [],
         "sprints": [],
         "tasks": []
     },
+    
     "git_plan": {
-        "branches": [],
-        "commit_messages": []
+        "branch_naming": "",
+        "commit_format": "",
+        "branches": []
     },
+    
     "development_roadmap": [],
+    
     "deployment_plan": {
         "environment": "",
         "hosting": "",
         "ci_cd": ""
     },
+    
     "test_plan": {
         "unit_tests": [],
         "integration_tests": [],
         "e2e_tests": []
     },
-    "security_guidelines": "",
-    "performance_guidelines": "",
+    
+    "security_guidelines": [],
+    "performance_guidelines": [],
+    
     "non_functional_requirements": [],
-    "risks_and_mitigations": [],
+    
+    "risks_and_mitigations": [
+        {
+            "risk": "",
+            "impact": "",
+            "mitigation": ""
+        }
+    ],
+    
     "final_handoff_package": {
         "files": [],
         "folder_structure": "",
@@ -177,13 +371,20 @@ Do NOT skip any section.
     }
 }
 
+---END PROMPT---
+
 
 ================================================================================
                  FREE FORMAT 3: TOML MASTER SUPER-PROMPT
 ================================================================================
-(Perfect for AI tools, configuration engines, structured automation)
+Perfect for: AI tools, configuration engines, structured automation, Rust/Python
 
-raw_idea = "IDEAK"
+---BEGIN PROMPT---
+
+# TOML MASTER SUPER FORMAT
+# Replace the raw_idea value with your actual idea
+
+raw_idea = "[YOUR IDEA HERE - Describe your app/website idea]"
 instructions = "Output MUST be valid TOML. Include all sections."
 
 [high_level_summary]
@@ -195,43 +396,49 @@ list = []
 [product_description]
 content = ""
 
-[user_personas]
-list = []
+[[user_personas]]
+name = ""
+demographics = ""
+goals = []
+pain_points = []
 
-[user_stories.simple]
-list = []
+[user_stories]
+simple = []
+detailed = []
 
-[user_stories.detailed]
-list = []
-
-[screen_map]
-pages = []
+[[screen_map]]
+page = ""
+purpose = ""
+components = []
 
 [flows]
-user_flow = ""
-system_flow = ""
+user_flow = []
+system_flow = []
 
 [objectives]
 primary = []
 secondary = []
 tertiary = []
 
-[feature_specifications]
-list = []
+[[feature_specifications]]
+name = ""
+description = ""
+acceptance_criteria = []
+priority = "P0"
 
 [data_model]
 schema_json = "{}"
-relations = ""
+relationships = ""
 
 [api_blueprint]
 endpoints = []
-examples = ""
+authentication = ""
 
 [system_architecture]
 frontend = ""
 backend = ""
 database = ""
-integrations = ""
+integrations = []
 
 [logic_flow]
 content = ""
@@ -239,11 +446,15 @@ content = ""
 [prd]
 problem = ""
 solution = ""
-constraints = ""
-kpis = ""
+constraints = []
+kpis = []
 
-[tech_stack_recommendations]
-list = []
+[tech_stack]
+frontend = ""
+backend = ""
+database = ""
+hosting = ""
+ci_cd = ""
 
 [implementation_plan]
 phases = []
@@ -251,8 +462,9 @@ sprints = []
 tasks = []
 
 [git_plan]
+branch_naming = ""
+commit_format = ""
 branches = []
-commit_messages = []
 
 [development_roadmap]
 milestones = []
@@ -268,21 +480,25 @@ integration = []
 e2e = []
 
 [security]
-guidelines = ""
+guidelines = []
 
 [performance]
-guidelines = ""
+guidelines = []
 
 [non_functional_requirements]
 list = []
 
-[risks_and_mitigations]
-list = []
+[[risks_and_mitigations]]
+risk = ""
+impact = ""
+mitigation = ""
 
 [final_handoff_package]
 files = []
 folder_structure = ""
 deliverables = []
+
+---END PROMPT---
 
 
 ================================================================================
