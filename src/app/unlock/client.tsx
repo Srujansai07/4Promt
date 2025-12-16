@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Copy, Download, Check, ArrowLeft, Share2 } from 'lucide-react'
 import Link from 'next/link'
+import ShareButton from '@/components/ShareButton'
 
 interface UnlockClientProps {
     prompt: {
@@ -192,20 +193,36 @@ export default function UnlockClient({ prompt, email, promptId }: UnlockClientPr
                     </div>
                 </div>
 
-                {/* Share Button */}
+                {/* Share Section */}
                 <div className="text-center mb-12">
-                    <p className="text-gray-400 text-sm mb-4">
-                        Love PromptOS? Share it with your friends!
-                    </p>
-                    <a
-                        href={`https://twitter.com/intent/tweet?text=Just%20unlocked%20the%20${encodeURIComponent(prompt.name)}%20from%20PromptOS!%20🚀%20Building%20AI%20apps%20has%20never%20been%20easier.&url=https://4-promt.vercel.app`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-secondary"
-                    >
-                        <Share2 className="w-4 h-4" /> Share on Twitter
-                    </a>
+                    {promptId === 3 ? (
+                        // Share-to-Unlock for Prompt 3
+                        <div className="glass rounded-2xl p-6">
+                            <h3 className="text-lg font-bold mb-2">🔓 Share-to-Unlock</h3>
+                            <ShareButton
+                                url="https://4-promt.vercel.app"
+                                text={`Just unlocked the ${prompt.name} from PromptOS! 🚀 Building AI apps has never been easier.`}
+                                onShareComplete={(platform) => console.log(`Shared on ${platform}`)}
+                            />
+                        </div>
+                    ) : (
+                        // Regular share for other prompts
+                        <>
+                            <p className="text-gray-400 text-sm mb-4">
+                                Love PromptOS? Share it with your friends!
+                            </p>
+                            <a
+                                href={`https://twitter.com/intent/tweet?text=Just%20unlocked%20the%20${encodeURIComponent(prompt.name)}%20from%20PromptOS!%20🚀%20Building%20AI%20apps%20has%20never%20been%20easier.&url=https://4-promt.vercel.app`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-secondary"
+                            >
+                                <Share2 className="w-4 h-4" /> Share on Twitter
+                            </a>
+                        </>
+                    )}
                 </div>
+
 
                 {/* Upgrade CTA */}
                 {promptId !== 6 && (
