@@ -782,73 +782,95 @@ Product Hunt featured
 
 ---
 
-17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
-Branch Strategy
-Main Branches:
-main - Production (always deployable)
-develop - Staging (merge features here first)
-Feature Branches:
-feature/landing-page
-feature/stripe-integration
-feature/magic-links
-feature/unlock-system
-feature/dashboard
-Commit Message Format
-Structure:
+## 17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
+
+### Branch Strategy
+
+**Main Branches:**
+- `main` - Production (always deployable)
+- `develop` - Staging (merge features here first)
+
+**Feature Branches:**
+- `feature/landing-page`
+- `feature/stripe-integration`
+- `feature/magic-links`
+- `feature/unlock-system`
+- `feature/dashboard`
+
+### Commit Message Format
+
+**Structure:**
+```
 <type>(<scope>): <subject>
 
 <body>
+```
 
-Types:
-feat - New feature
-fix - Bug fix
-style - UI/styling changes
-refactor - Code refactor
-test - Add tests
-docs - Documentation
-chore - Build, dependencies
-Examples:
+**Types:**
+- `feat` - New feature
+- `fix` - Bug fix
+- `style` - UI/styling changes
+- `refactor` - Code refactor
+- `test` - Add tests
+- `docs` - Documentation
+- `chore` - Build, dependencies
+
+**Examples:**
+```
 feat(payment): add stripe checkout integration
 
 - Create checkout session API endpoint
 - Add webhook handler for payment success
 - Store purchases in Vercel KV
+```
 
+```
 fix(mobile): responsive layout on iPhone SE
 
 - Fix card overflow on small screens
 - Adjust font sizes for readability
 - Test on devices <375px width
+```
 
+```
 style(landing): improve hero section animations
 
 - Add fade-in effect to headline
 - Smooth scroll to pricing section
 - Optimize button hover states
+```
 
+---
 
-18. DEVELOPMENT ROADMAP (Timeline)
-Week 1: Foundation
-Day 1-2: Project setup, Vercel, Stripe accounts
-Day 3-4: Landing page (hero + 9 cards)
-Day 5-7: Stripe integration + webhooks
-Week 2: Core Features
-Day 8-10: Magic link auth system
-Day 11-13: Unlock page + copy/download
-Day 14: Dashboard (purchased prompts)
-Week 3: Launch
-Day 15-16: Testing + bug fixes
-Day 17-18: Content + marketing prep
-Day 19-21: Launch (Product Hunt, Reddit, Twitter)
-Post-Launch (Month 1)
-Week 4: Monitor analytics, fix issues
-Week 5-6: Add share-to-unlock feature
-Week 7-8: Build affiliate system
-Long-Term (Month 2-3)
-Add bundle pricing
-Create more prompts (expand to 12)
-Build user testimonials section
-SEO optimization
+## 18. DEVELOPMENT ROADMAP (Timeline)
+
+### Week 1: Foundation
+- **Day 1-2:** Project setup, Vercel, Stripe accounts
+- **Day 3-4:** Landing page (hero + 9 cards)
+- **Day 5-7:** Stripe integration + webhooks
+
+### Week 2: Core Features
+- **Day 8-10:** Magic link auth system
+- **Day 11-13:** Unlock page + copy/download
+- **Day 14:** Dashboard (purchased prompts)
+
+### Week 3: Launch
+- **Day 15-16:** Testing + bug fixes
+- **Day 17-18:** Content + marketing prep
+- **Day 19-21:** Launch (Product Hunt, Reddit, Twitter)
+
+### Post-Launch (Month 1)
+- **Week 4:** Monitor analytics, fix issues
+- **Week 5-6:** Add share-to-unlock feature
+- **Week 7-8:** Build affiliate system
+
+### Long-Term (Month 2-3)
+- Add bundle pricing
+- Create more prompts (expand to 12)
+- Build user testimonials section
+- SEO optimization
+
+---
 
 19. DEPLOYMENT & HOSTING PLAN
 Hosting: Vercel
@@ -900,34 +922,43 @@ Plausible: User behavior (privacy-friendly)
 Sentry: Error tracking
 Stripe Dashboard: Payment monitoring
 
-20. TEST PLAN
-Unit Tests
-Frontend Components:
-[ ] Test prompt card renders correctly
-[ ] Test copy button copies text
-[ ] Test payment button redirects
-[ ] Test error states (payment fails)
-Backend APIs:
-[ ] Test /api/create-checkout returns URL
-[ ] Test webhook stores purchase correctly
-[ ] Test magic link sends email
-[ ] Test JWT token validation
-Integration Tests
-Payment Flow:
-Click "Buy Prompt 4"
-Enter email + card
-Complete payment
-Verify purchase stored in KV
-Verify email sent
-Verify redirect to /unlock
-Auth Flow:
-Enter email on dashboard
-Click magic link in email
-Verify token validated
-Verify session created
-Verify dashboard shows purchases
-End-to-End Tests (Playwright)
-E2E Test 1: Complete Purchase
+## 20. TEST PLAN
+
+### Unit Tests
+
+**Frontend Components:**
+- [ ] Test prompt card renders correctly
+- [ ] Test copy button copies text
+- [ ] Test payment button redirects
+- [ ] Test error states (payment fails)
+
+**Backend APIs:**
+- [ ] Test /api/create-checkout returns URL
+- [ ] Test webhook stores purchase correctly
+- [ ] Test magic link sends email
+- [ ] Test JWT token validation
+
+### Integration Tests
+
+**Payment Flow:**
+1. Click "Buy Prompt 4"
+2. Enter email + card
+3. Complete payment
+4. Verify purchase stored in KV
+5. Verify email sent
+6. Verify redirect to /unlock
+
+**Auth Flow:**
+1. Enter email on dashboard
+2. Click magic link in email
+3. Verify token validated
+4. Verify session created
+5. Verify dashboard shows purchases
+
+### End-to-End Tests (Playwright)
+
+**E2E Test 1: Complete Purchase**
+```typescript
 test('user can buy and unlock prompt', async ({ page }) => {
   await page.goto('/');
   await page.click('[data-prompt="4"]');
@@ -936,27 +967,33 @@ test('user can buy and unlock prompt', async ({ page }) => {
   await expect(page).toHaveURL('/unlock');
   await expect(page.locator('.prompt-content')).toBeVisible();
 });
+```
 
-E2E Test 2: Magic Link Login
+**E2E Test 2: Magic Link Login**
+```typescript
 test('user can login with magic link', async ({ page }) => {
   await page.goto('/dashboard');
   await page.fill('input[type="email"]', 'test@example.com');
   // ... intercept email, click link
   await expect(page).toHaveURL('/dashboard');
 });
+```
 
-Manual Testing Checklist
-Pre-Launch:
-[ ] Test on iPhone Safari
-[ ] Test on Android Chrome
-[ ] Test on desktop Chrome/Firefox
-[ ] Test with slow 3G connection
-[ ] Test payment in Stripe test mode
-[ ] Test payment with real card ($1)
-[ ] Test magic link on different device
-[ ] Test copy button on mobile
-[ ] Test PDF download works
-[ ] Test share buttons open dialogs
+### Manual Testing Checklist
+
+**Pre-Launch:**
+- [ ] Test on iPhone Safari
+- [ ] Test on Android Chrome
+- [ ] Test on desktop Chrome/Firefox
+- [ ] Test with slow 3G connection
+- [ ] Test payment in Stripe test mode
+- [ ] Test payment with real card ($1)
+- [ ] Test magic link on different device
+- [ ] Test copy button on mobile
+- [ ] Test PDF download works
+- [ ] Test share buttons open dialogs
+
+---
 
 21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
 Security
