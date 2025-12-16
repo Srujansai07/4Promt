@@ -4,6 +4,29 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM_EMAIL = 'PromptOS <onboarding@resend.dev>' // Use your verified domain
 
+// Simple in-memory rate limiting for emails
+const emailRateLimits = new Map<string, { count: number; resetTime: number }>()
+const RATE_LIMIT_MAX = 5 // Max emails per window
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000 // 1 hour in ms
+
+export function checkEmailRateLimit(email: string): { allowed: boolean; remainingAttempts: number } {
+    const now = Date.now()
+    const limit = emailRateLimits.get(email)
+
+    if (!limit || now > limit.resetTime) {
+        // Reset or create new rate limit entry
+        emailRateLimits.set(email, { count: 1, resetTime: now + RATE_LIMIT_WINDOW })
+        return { allowed: true, remainingAttempts: RATE_LIMIT_MAX - 1 }
+    }
+
+    if (limit.count >= RATE_LIMIT_MAX) {
+        return { allowed: false, remainingAttempts: 0 }
+    }
+
+    limit.count++
+    return { allowed: true, remainingAttempts: RATE_LIMIT_MAX - limit.count }
+}
+
 // Email Templates
 const getPromptName = (promptId: string): string => {
     const names: Record<string, string> = {
