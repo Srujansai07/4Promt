@@ -565,8 +565,8 @@ async function UnlockContent({ searchParams }: PageProps) {
     // Check for "paid" flag from UPI flow (simulated)
     const isPaid = searchParams.paid === 'true'
 
-    if (promptId === 1 || promptId === 2) {
-        hasAccess = true // Tier 1 and Tier 2 are free/instant
+    if (promptId === 1 || promptId === 2 || promptId === 3) {
+        hasAccess = true // Tier 1, Tier 2, and Tier 3 (Share-to-Unlock) are free/instant
     } else if (isPaid) {
         hasAccess = true // Simulated payment success
     } else if (email) {
