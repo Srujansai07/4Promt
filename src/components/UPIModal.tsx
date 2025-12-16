@@ -53,7 +53,7 @@ export function UPIModal({ isOpen, onClose, onSuccess, amount, tierName }: UPIMo
                         <Smartphone className="w-8 h-8 text-blue-400" />
                     </div>
                     <h3 className="text-2xl font-bold mb-2">Pay via UPI</h3>
-                    <p className="text-gray-400">Unlock {tierName} for ₹{amount * 85} (approx ${amount})</p>
+                    <p className="text-gray-400">Unlock {tierName} for ₹{amount}</p>
                 </div>
 
                 <div className="space-y-6">
