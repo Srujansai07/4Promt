@@ -711,62 +711,76 @@ Product Hunt featured
 
 ---
 
-16. IMPLEMENTATION PLAN
-Phase 1: Foundation (Week 1)
-Sprint 1.1: Setup (Days 1-2)
-[ ] Create Next.js project
-[ ] Install dependencies (Tailwind, shadcn, etc.)
-[ ] Setup Vercel project
-[ ] Connect GitHub repo
-[ ] Create Stripe account + get API keys
-[ ] Setup Vercel KV database
-Sprint 1.2: Landing Page (Days 3-4)
-[ ] Design hero section (bold headline + CTA)
-[ ] Create 9 prompt cards (pricing, description)
-[ ] Build FAQ section (5 questions)
-[ ] Add testimonials (placeholder)
-[ ] Mobile responsive check
-Sprint 1.3: Payment Integration (Days 5-7)
-[ ] Create Stripe Checkout sessions
-[ ] Add "Buy" buttons for each prompt
-[ ] Setup webhook endpoint
-[ ] Test payments (Stripe test mode)
-[ ] Handle success/failure redirects
-Phase 2: Core Features (Week 2)
-Sprint 2.1: Auth System (Days 8-10)
-[ ] Build magic link email sender
-[ ] Create JWT token generator
-[ ] Setup email templates (Resend)
-[ ] Build /auth?token=XXX page
-[ ] Test magic link flow
-Sprint 2.2: Unlock System (Days 11-13)
-[ ] Create /unlock page
-[ ] Build prompt display component
-[ ] Add copy-to-clipboard button
-[ ] Add PDF download (jsPDF)
-[ ] Store purchases in KV
-Sprint 2.3: Dashboard (Day 14)
-[ ] Build /dashboard page
-[ ] Show purchased prompts
-[ ] Add re-download links
-[ ] Display purchase history
-Phase 3: Polish & Launch (Week 3)
-Sprint 3.1: Testing (Days 15-16)
-[ ] Test all payment flows
-[ ] Test on mobile devices
-[ ] Fix bugs
-[ ] Load testing (100 concurrent users)
-Sprint 3.2: Content (Days 17-18)
-[ ] Write final copy (headlines, descriptions)
-[ ] Create demo video (30 seconds)
-[ ] Design social media graphics
-[ ] Prepare Product Hunt launch
-Sprint 3.3: Launch (Days 19-21)
-[ ] Deploy to production
-[ ] Setup custom domain
-[ ] Enable analytics
-[ ] Launch on Product Hunt
-[ ] Post on Reddit, Twitter, Discord
+## 16. IMPLEMENTATION PLAN
+
+### Phase 1: Foundation (Week 1)
+
+**Sprint 1.1: Setup (Days 1-2)**
+- [ ] Create Next.js project
+- [ ] Install dependencies (Tailwind, shadcn, etc.)
+- [ ] Setup Vercel project
+- [ ] Connect GitHub repo
+- [ ] Create Stripe account + get API keys
+- [ ] Setup Vercel KV database
+
+**Sprint 1.2: Landing Page (Days 3-4)**
+- [ ] Design hero section (bold headline + CTA)
+- [ ] Create 9 prompt cards (pricing, description)
+- [ ] Build FAQ section (5 questions)
+- [ ] Add testimonials (placeholder)
+- [ ] Mobile responsive check
+
+**Sprint 1.3: Payment Integration (Days 5-7)**
+- [ ] Create Stripe Checkout sessions
+- [ ] Add "Buy" buttons for each prompt
+- [ ] Setup webhook endpoint
+- [ ] Test payments (Stripe test mode)
+- [ ] Handle success/failure redirects
+
+### Phase 2: Core Features (Week 2)
+
+**Sprint 2.1: Auth System (Days 8-10)**
+- [ ] Build magic link email sender
+- [ ] Create JWT token generator
+- [ ] Setup email templates (Resend)
+- [ ] Build /auth?token=XXX page
+- [ ] Test magic link flow
+
+**Sprint 2.2: Unlock System (Days 11-13)**
+- [ ] Create /unlock page
+- [ ] Build prompt display component
+- [ ] Add copy-to-clipboard button
+- [ ] Add PDF download (jsPDF)
+- [ ] Store purchases in KV
+
+**Sprint 2.3: Dashboard (Day 14)**
+- [ ] Build /dashboard page
+- [ ] Show purchased prompts
+- [ ] Add re-download links
+- [ ] Display purchase history
+
+### Phase 3: Polish & Launch (Week 3)
+
+**Sprint 3.1: Testing (Days 15-16)**
+- [ ] Test all payment flows
+- [ ] Test on mobile devices
+- [ ] Fix bugs
+- [ ] Load testing (100 concurrent users)
+
+**Sprint 3.2: Content (Days 17-18)**
+- [ ] Write final copy (headlines, descriptions)
+- [ ] Create demo video (30 seconds)
+- [ ] Design social media graphics
+- [ ] Prepare Product Hunt launch
+
+**Sprint 3.3: Launch (Days 19-21)**
+- [ ] Deploy to production
+- [ ] Setup custom domain
+- [ ] Enable analytics
+- [ ] Launch on Product Hunt
+- [ ] Post on Reddit, Twitter, Discord
+
+---
 
 17. GIT BRANCH PLAN + COMMIT MESSAGE PLAN
 Branch Strategy
