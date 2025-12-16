@@ -10,18 +10,20 @@ export const PRODUCT_CONFIG = {
             6: 'https://rzp.io/l/YOUR_LINK_TIER_6',
         }
     },
-    // INR Pricing
+    // INR Pricing (Indian Rupees)
     prices: {
         1: 0,      // Free
         2: 0,      // Free
-        3: 249,    // ~$3 USD
-        4: 349,    // ~$4.30 USD
-        5: 549,    // ~$6.90 USD
-        6: 999,    // ~$12 USD
+        3: 29,     // ₹29
+        4: 49,     // ₹49
+        5: 69,     // ₹69
+        6: 99,     // ₹99
     }
 }
 
-// Archived: Stripe and Gumroad config moved to src/archive/
+// Archived USD prices for Stripe/Gumroad reference:
+// See src/archive/stripe/ and src/archive/gumroad/
+// USD: 3: $3.00, 4: $4.30, 5: $6.90, 6: $12.00
 
 export function getRazorpayLink(promptId: number, email?: string): string {
     const link = PRODUCT_CONFIG.razorpay.paymentPages[promptId as keyof typeof PRODUCT_CONFIG.razorpay.paymentPages]
