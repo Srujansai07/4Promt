@@ -1,7 +1,14 @@
 // src/lib/email.ts
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Lazy initialization to avoid build-time errors when RESEND_API_KEY is not set
+let resend: Resend | null = null
+function getResend(): Resend {
+    if (!resend) {
+        resend = new Resend(process.env.RESEND_API_KEY || '')
+    }
+    return resend
+}
 const FROM_EMAIL = 'PromptOS <onboarding@resend.dev>' // Use your verified domain
 
 // Simple in-memory rate limiting for emails
@@ -45,7 +52,7 @@ export async function sendPurchaseEmail(email: string, promptId: string) {
     const unlockUrl = `${process.env.NEXT_PUBLIC_APP_URL}/unlock?prompt=${promptId}&email=${encodeURIComponent(email)}`
 
     try {
-        const { data, error } = await resend.emails.send({
+        const { data, error } = await getResend().emails.send({
             from: FROM_EMAIL,
             to: email,
             subject: `🎉 Your ${promptName} is Ready!`,
@@ -112,7 +119,7 @@ export async function sendMagicLinkEmail(email: string, token: string) {
     const magicLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/verify?token=${token}`
 
     try {
-        const { data, error } = await resend.emails.send({
+        const { data, error } = await getResend().emails.send({
             from: FROM_EMAIL,
             to: email,
             subject: '✨ Your Magic Login Link',
@@ -162,7 +169,7 @@ export async function sendFormUnlockEmail(email: string, name: string, promptId:
     const unlockUrl = `${process.env.NEXT_PUBLIC_APP_URL}/unlock?prompt=${promptId}&email=${encodeURIComponent(email)}`
 
     try {
-        const { data, error } = await resend.emails.send({
+        const { data, error } = await getResend().emails.send({
             from: FROM_EMAIL,
             to: email,
             subject: `🎁 ${name}, Your Free ${promptName} is Ready!`,
