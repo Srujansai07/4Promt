@@ -995,45 +995,56 @@ test('user can login with magic link', async ({ page }) => {
 
 ---
 
-21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
-Security
-Payment Security:
-✅ Never store card numbers (Stripe handles)
-✅ Use HTTPS only (enforced by Vercel)
-✅ Verify webhook signatures (prevent spoofing)
-✅ Rate limit payment endpoints (prevent abuse)
-Auth Security:
-✅ JWT tokens expire in 24h
-✅ Tokens are single-use (burned after first click)
-✅ Email rate limiting (3 per hour per IP)
-✅ Session cookies are HttpOnly + Secure
-Data Security:
-✅ Encrypt emails in KV store
-✅ No PII in logs
-✅ GDPR-compliant (user data export/delete)
-✅ Regular backups (Vercel KV auto-backups)
-API Security:
-✅ CORS configured (only allow your domain)
-✅ Input validation (email format, prompt IDs)
-✅ SQL injection prevention (use ORMs)
-✅ XSS prevention (sanitize user input)
-Performance Optimization
-Frontend:
-✅ Image optimization (Next.js Image component)
-✅ Code splitting (dynamic imports)
-✅ Lazy load below-the-fold content
-✅ Minify CSS/JS (automatic in Next.js)
-✅ Use CDN for static assets
-Backend:
-✅ Cache prompt content (Redis)
-✅ Batch KV operations
-✅ Optimize database queries
-✅ Use serverless edge functions (faster)
-Target Metrics:
-⚡ First Contentful Paint: <1.5s
-⚡ Time to Interactive: <3s
-⚡ Lighthouse Score: 90+
-⚡ Core Web Vitals: All green
+## 21. SECURITY GUIDELINES + PERFORMANCE OPTIMIZATION
+
+### Security
+
+**Payment Security:**
+- ✅ Never store card numbers (Stripe handles)
+- ✅ Use HTTPS only (enforced by Vercel)
+- ✅ Verify webhook signatures (prevent spoofing)
+- ✅ Rate limit payment endpoints (prevent abuse)
+
+**Auth Security:**
+- ✅ JWT tokens expire in 24h
+- ✅ Tokens are single-use (burned after first click)
+- ✅ Email rate limiting (3 per hour per IP)
+- ✅ Session cookies are HttpOnly + Secure
+
+**Data Security:**
+- ✅ Encrypt emails in KV store
+- ✅ No PII in logs
+- ✅ GDPR-compliant (user data export/delete)
+- ✅ Regular backups (Vercel KV auto-backups)
+
+**API Security:**
+- ✅ CORS configured (only allow your domain)
+- ✅ Input validation (email format, prompt IDs)
+- ✅ SQL injection prevention (use ORMs)
+- ✅ XSS prevention (sanitize user input)
+
+### Performance Optimization
+
+**Frontend:**
+- ✅ Image optimization (Next.js Image component)
+- ✅ Code splitting (dynamic imports)
+- ✅ Lazy load below-the-fold content
+- ✅ Minify CSS/JS (automatic in Next.js)
+- ✅ Use CDN for static assets
+
+**Backend:**
+- ✅ Cache prompt content (Redis)
+- ✅ Batch KV operations
+- ✅ Optimize database queries
+- ✅ Use serverless edge functions (faster)
+
+**Target Metrics:**
+- ⚡ First Contentful Paint: <1.5s
+- ⚡ Time to Interactive: <3s
+- ⚡ Lighthouse Score: 90+
+- ⚡ Core Web Vitals: All green
+
+---
 
 22. NON-FUNCTIONAL REQUIREMENTS
 Speed
