@@ -1086,55 +1086,63 @@ test('user can login with magic link', async ({ page }) => {
 
 ---
 
-23. RISKS & MITIGATION STRATEGIES
-Risk 1: Payment Webhook Fails
-Impact: User pays but doesn't get access
- Probability: Medium
- Mitigation:
-Implement retry logic (3 attempts)
-Poll Stripe API after 30s if webhook missing
-Manual reconciliation dashboard for admins
-Refund process for failed unlocks
-Risk 2: Low Conversion Rate (<3%)
-Impact: No revenue, project fails
- Probability: High (typical for new sites)
- Mitigation:
-A/B test headlines/pricing
-Add social proof (testimonials)
-Create demo video
-Offer money-back guarantee
-Add urgency (limited-time discount)
-Risk 3: Prompt Content Leaked
-Impact: Users share prompts publicly
- Probability: High
- Mitigation:
-Watermark prompts with buyer email
-DMCA takedown process
-Regular monitoring (search Twitter/Reddit)
-Accept some leakage (inevitable)
-Risk 4: Stripe Account Suspended
-Impact: Can't accept payments
- Probability: Low (if following ToS)
- Mitigation:
-Follow Stripe guidelines (clear refund policy)
-Keep Gumroad as backup
-Diversify payment methods
-Maintain good customer support
-Risk 5: Server Costs Exceed Revenue
-Impact: Lose money on hosting
- Probability: Low (Vercel free tier generous)
- Mitigation:
-Monitor Vercel usage dashboard
-Optimize API calls (cache aggressively)
-Upgrade plan only after $100/month revenue
-Risk 6: No Traffic/Marketing
-Impact: Nobody visits the site
- Probability: High (no brand awareness)
- Mitigation:
-Product Hunt launch (free exposure)
-Reddit posts (non-spammy, value-first)
-Twitter threads (build in public)
-SEO optimization (long-term)
+## 23. RISKS & MITIGATION STRATEGIES
+
+### Risk 1: Payment Webhook Fails
+- **Impact:** User pays but doesn't get access
+- **Probability:** Medium
+- **Mitigation:**
+  - Implement retry logic (3 attempts)
+  - Poll Stripe API after 30s if webhook missing
+  - Manual reconciliation dashboard for admins
+  - Refund process for failed unlocks
+
+### Risk 2: Low Conversion Rate (<3%)
+- **Impact:** No revenue, project fails
+- **Probability:** High (typical for new sites)
+- **Mitigation:**
+  - A/B test headlines/pricing
+  - Add social proof (testimonials)
+  - Create demo video
+  - Offer money-back guarantee
+  - Add urgency (limited-time discount)
+
+### Risk 3: Prompt Content Leaked
+- **Impact:** Users share prompts publicly
+- **Probability:** High
+- **Mitigation:**
+  - Watermark prompts with buyer email
+  - DMCA takedown process
+  - Regular monitoring (search Twitter/Reddit)
+  - Accept some leakage (inevitable)
+
+### Risk 4: Stripe Account Suspended
+- **Impact:** Can't accept payments
+- **Probability:** Low (if following ToS)
+- **Mitigation:**
+  - Follow Stripe guidelines (clear refund policy)
+  - Keep Gumroad as backup
+  - Diversify payment methods
+  - Maintain good customer support
+
+### Risk 5: Server Costs Exceed Revenue
+- **Impact:** Lose money on hosting
+- **Probability:** Low (Vercel free tier generous)
+- **Mitigation:**
+  - Monitor Vercel usage dashboard
+  - Optimize API calls (cache aggressively)
+  - Upgrade plan only after $100/month revenue
+
+### Risk 6: No Traffic/Marketing
+- **Impact:** Nobody visits the site
+- **Probability:** High (no brand awareness)
+- **Mitigation:**
+  - Product Hunt launch (free exposure)
+  - Reddit posts (non-spammy, value-first)
+  - Twitter threads (build in public)
+  - SEO optimization (long-term)
+
+---
 
 ## 24. FINAL HANDOFF PACKAGE
 
