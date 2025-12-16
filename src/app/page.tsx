@@ -525,17 +525,13 @@ function Footer() {
 export default function Home() {
     const [selectedPrompt, setSelectedPrompt] = useState<typeof PROMPTS[0] | null>(null)
     const [showUPI, setShowUPI] = useState(false)
-    const [freeModalOpen, setFreeModalOpen] = useState(false)
 
     const handleUnlock = (id: number, type: string) => {
         const prompt = PROMPTS.find(p => p.id === id)
         if (!prompt) return
 
-        if (type === 'free') {
-            setSelectedPrompt(prompt)
-            setFreeModalOpen(true)
-        } else if (type === 'form') {
-            // Instant unlock for Tier 2
+        if (type === 'free' || type === 'form') {
+            // Instant unlock for Tier 1 and Tier 2 - no email required
             window.location.href = `/unlock?prompt=${id}`
         } else if (type === 'referral' || type === 'paid') {
             setSelectedPrompt(prompt)
@@ -560,8 +556,6 @@ export default function Home() {
             <FAQ />
             <CTASection />
             <Footer />
-
-            <FreeUnlockModal isOpen={freeModalOpen} onClose={() => setFreeModalOpen(false)} prompt={selectedPrompt} />
 
             <UPIModal
                 isOpen={showUPI}
