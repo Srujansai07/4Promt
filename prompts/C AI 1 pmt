@@ -521,38 +521,46 @@ Response:
 }
 
 Auth: None (rate limited)
+---
 
-12. SYSTEM ARCHITECTURE
-Frontend (Next.js)
-Framework: Next.js 14 (App Router)
-Styling: Tailwind CSS
-Hosting: Vercel
-State: Zustand (global state) + localStorage
-UI Library: shadcn/ui + lucide-react icons
-Backend (Serverless)
-Runtime: Vercel Serverless Functions
-Language: TypeScript
-Database: Vercel KV (Redis)
-Email: Resend.com
-Payments: Stripe + Gumroad
-Infrastructure
-CDN: Vercel Edge Network
-Domain: Namecheap or Vercel Domains
-SSL: Auto (Vercel handles)
-Analytics: Vercel Analytics + Plausible
-Data Flow
+## 12. SYSTEM ARCHITECTURE
+
+### Frontend (Next.js)
+- **Framework:** Next.js 14 (App Router)
+- **Styling:** Tailwind CSS
+- **Hosting:** Vercel
+- **State:** Zustand (global state) + localStorage
+- **UI Library:** shadcn/ui + lucide-react icons
+
+### Backend (Serverless)
+- **Runtime:** Vercel Serverless Functions
+- **Language:** TypeScript
+- **Database:** Vercel KV (Redis)
+- **Email:** Resend.com
+- **Payments:** Stripe + Gumroad
+
+### Infrastructure
+- **CDN:** Vercel Edge Network
+- **Domain:** Namecheap or Vercel Domains
+- **SSL:** Auto (Vercel handles)
+- **Analytics:** Vercel Analytics + Plausible
+
+### Data Flow
+```
 User Browser
-    ↓
+        ↓
 Next.js Frontend (Static + Client-Side)
-    ↓
+        ↓
 Vercel Serverless Functions (API)
-    ↓
+        ↓
 Vercel KV (Purchase Records)
-    ↓
+        ↓
 Stripe API (Payment Processing)
-    ↓
+        ↓
 Resend API (Email Sending)
+```
 
+---
 
 13. LOGIC FLOW
 Purchase Flow (Engineering Format)
@@ -671,31 +679,37 @@ Month 3:
 Product Hunt featured
 3 testimonials
 
-15. TECH STACK RECOMMENDATIONS
-Frontend
-Next.js 14 (App Router) - Fast, SEO-friendly, serverless-ready
-Tailwind CSS - Rapid styling, mobile-first
-shadcn/ui - Pre-built components (buttons, cards, dialogs)
-lucide-react - Icon library
-Framer Motion - Smooth animations
-react-markdown - Render prompts beautifully
-Backend
-Vercel Serverless Functions - Zero config, auto-scaling
-TypeScript - Type safety, fewer bugs
-Vercel KV - Redis-compatible, instant setup
-Stripe SDK - Payment processing
-Resend - Email sending (10k free/month)
-DevOps
-Vercel - Hosting, CI/CD, analytics (all-in-one)
-GitHub - Code repository
-Plausible - Privacy-friendly analytics
-Sentry - Error tracking
-Why This Stack?
-✅ Fast to build: Launch in 2 weeks
-✅ Low cost: <$50/month
-✅ Scalable: Handles 10k users without changes
-✅ Mobile-optimized: Works on all devices
-✅ SEO-friendly: Next.js SSR/SSG
+## 15. TECH STACK RECOMMENDATIONS
+
+### Frontend
+- **Next.js 14 (App Router)** - Fast, SEO-friendly, serverless-ready
+- **Tailwind CSS** - Rapid styling, mobile-first
+- **shadcn/ui** - Pre-built components (buttons, cards, dialogs)
+- **lucide-react** - Icon library
+- **Framer Motion** - Smooth animations
+- **react-markdown** - Render prompts beautifully
+
+### Backend
+- **Vercel Serverless Functions** - Zero config, auto-scaling
+- **TypeScript** - Type safety, fewer bugs
+- **Vercel KV** - Redis-compatible, instant setup
+- **Stripe SDK** - Payment processing
+- **Resend** - Email sending (10k free/month)
+
+### DevOps
+- **Vercel** - Hosting, CI/CD, analytics (all-in-one)
+- **GitHub** - Code repository
+- **Plausible** - Privacy-friendly analytics
+- **Sentry** - Error tracking
+
+### Why This Stack?
+- ✅ Fast to build: Launch in 2 weeks
+- ✅ Low cost: <$50/month
+- ✅ Scalable: Handles 10k users without changes
+- ✅ Mobile-optimized: Works on all devices
+- ✅ SEO-friendly: Next.js SSR/SSG
+
+---
 
 16. IMPLEMENTATION PLAN
 Phase 1: Foundation (Week 1)
