@@ -1,9 +1,10 @@
-🔧 Phase 2: Fixed Code Implementation
-2.1 Update Product Configuration
-src / config / products.ts - Complete
-Code
-// src/config/products.ts export const PRODUCT_CONFIG = { gumroad: { baseUrl: 'https://gumroad.com/l', products: { 1: 'promptos-starter', // Free - Create on Gumroad anyway for tracking 2: 'promptos-pr
+# 🔧 Phase 2: Fixed Code Implementation
 
+## 2.1 Update Product Configuration
+
+**File:** `src/config/products.ts` - Complete
+
+```typescript
 // src/config/products.ts
 export const PRODUCT_CONFIG = {
     gumroad: {
@@ -59,11 +60,16 @@ export function getStripeLink(promptId: number): string {
 export function getPromptPrice(promptId: number): number {
     return PRODUCT_CONFIG.prices[promptId as keyof typeof PRODUCT_CONFIG.prices] || 0
 }
+```
 
-2.2 Complete Stripe Webhook Handler
-src / app / api / webhook / stripe / route.ts - Production Ready
-Code
-// src/app/api/webhook/stripe/route.ts import { NextRequest, NextResponse } from 'next/server' import Stripe from 'stripe' import { kv } from '@vercel/kv' import { sendPurchaseEmail } from '@/lib/email' const stripe = new Stripe(process.env.STRIPE_S
+---
+
+## 2.2 Complete Stripe Webhook Handler
+
+**File:** `src/app/api/webhook/stripe/route.ts` - Production Ready
+
+```typescript
+
 
 // src/app/api/webhook/stripe/route.ts
 import { NextRequest, NextResponse } from 'next/server'
