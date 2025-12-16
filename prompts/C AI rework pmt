@@ -2,9 +2,9 @@
 
 ## 2.1 Update Product Configuration
 
-**File:** `src/config/products.ts` - Complete
+    ** File:** `src/config/products.ts` - Complete
 
-```typescript
+        ```typescript
 // src/config/products.ts
 export const PRODUCT_CONFIG = {
     gumroad: {
@@ -45,7 +45,7 @@ export const PRODUCT_CONFIG = {
 
 export function getGumroadLink(promptId: number): string {
     const slug = PRODUCT_CONFIG.gumroad.products[promptId as keyof typeof PRODUCT_CONFIG.gumroad.products]
-    return `${PRODUCT_CONFIG.gumroad.baseUrl}/${slug}`
+    return `${ PRODUCT_CONFIG.gumroad.baseUrl }/${slug}`
 }
 
 export function getStripeLink(promptId: number): string {
@@ -66,7 +66,7 @@ export function getPromptPrice(promptId: number): number {
 
 ## 2.2 Complete Stripe Webhook Handler
 
-**File:** `src/app/api/webhook/stripe/route.ts` - Production Ready
+**File:** `src / app / api / webhook / stripe / route.ts` - Production Ready
 
 ```typescript
 
@@ -188,15 +188,19 @@ export async function GET() {
         }
     })
 }
+```
 
-2.3 Complete Email System
-src / lib / email.ts - Production Ready
-Code
-// src/lib/email.ts import { Resend } from 'resend' import { kv } from '@vercel/kv' const resend = new Resend(process.env.RESEND_API_KEY) const FROM_EMAIL = 'PromptOS <onboarding@resend.dev>' // Use your verified domain // Email Templates const get
+---
 
+## 2.3 Complete Email System
+
+**File:** `src / lib / email.ts` - Production Ready
+
+```typescript
 // src/lib/email.ts
 import { Resend } from 'resend'
 import { kv } from '@vercel/kv'
+
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM_EMAIL = 'PromptOS <onboarding@resend.dev>' // Use your verified domain
