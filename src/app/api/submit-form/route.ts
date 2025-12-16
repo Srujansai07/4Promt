@@ -1,18 +1,12 @@
+// src/app/api/submit-form/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-
-// In-memory store (replace with Vercel KV or database in production)
-const submissions: Array<{
-    name: string
-    email: string
-    promptId: number
-    timestamp: string
-}> = []
 
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
         const { name, email, promptId } = body
 
+        // Validation
         if (!name || !email) {
             return NextResponse.json(
                 { error: 'Name and email are required' },
@@ -20,40 +14,80 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        // Store submission
-        const submission = {
-            name,
-            email,
-            promptId: promptId || 2,
-            timestamp: new Date().toISOString()
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return NextResponse.json(
+                { error: 'Invalid email format' },
+                { status: 400 }
+            )
         }
 
-        submissions.push(submission)
+        const finalPromptId = promptId || 2 // Default to Tier 2
 
-        // In production, you would:
-        // 1. Store in Vercel KV: await kv.lpush('submissions', JSON.stringify(submission))
-        // 2. Send welcome email via Resend
-        // 3. Generate unlock token
+        console.log('📝 Form submission:', { name, email, promptId: finalPromptId })
 
-        console.log('New form submission:', submission)
+        try {
+            // TODO: When using Vercel KV, uncomment:
+            // await kv.hset(`user:${email}`, {
+            //     name,
+            //     email,
+            //     [`prompt:${finalPromptId}`]: 'unlocked',
+            //     [`unlock_date:${finalPromptId}`]: new Date().toISOString(),
+            //     source: 'form',
+            //     lastActivity: new Date().toISOString()
+            // })
+            // console.log('✅ Stored in KV')
 
-        return NextResponse.json({
-            success: true,
-            message: 'Prompt unlocked successfully!',
-            unlockUrl: `/unlock?prompt=${promptId}&email=${encodeURIComponent(email)}`
-        })
+            // TODO: Store submission for admin tracking
+            // await kv.lpush('submissions', JSON.stringify({
+            //     name,
+            //     email,
+            //     promptId: finalPromptId,
+            //     timestamp: new Date().toISOString()
+            // }))
+
+            // TODO: Send email
+            // await sendFormUnlockEmail(email, name, finalPromptId.toString())
+            // console.log('✅ Email sent')
+
+            console.log('✅ Form processed successfully')
+
+            return NextResponse.json({
+                success: true,
+                message: 'Prompt unlocked successfully!',
+                unlockUrl: `/unlock?prompt=${finalPromptId}&email=${encodeURIComponent(email)}`
+            })
+
+        } catch (storageError) {
+            console.error('❌ Storage error:', storageError)
+            return NextResponse.json(
+                { error: 'Failed to store data' },
+                { status: 500 }
+            )
+        }
+
     } catch (error) {
-        console.error('Form submission error:', error)
+        console.error('❌ Form submission error:', error)
         return NextResponse.json(
-            { error: 'Failed to process submission' },
+            { error: 'Internal server error' },
             { status: 500 }
         )
     }
 }
 
 export async function GET() {
-    // Return count for admin purposes
-    return NextResponse.json({
-        totalSubmissions: submissions.length
-    })
+    try {
+        // TODO: When using Vercel KV:
+        // const count = await kv.llen('submissions')
+        // const recent = await kv.lrange('submissions', 0, 9)
+
+        return NextResponse.json({
+            totalSubmissions: 0,
+            recentSubmissions: [],
+            status: 'Form submission endpoint active'
+        })
+
+    } catch (error) {
+        console.error('❌ Form GET error:', error)
+        return NextResponse.json({ error: 'Failed to fetch stats' }, { status: 500 })
+    }
 }

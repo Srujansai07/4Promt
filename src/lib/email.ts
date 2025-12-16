@@ -1,81 +1,190 @@
+// src/lib/email.ts
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder')
+const resend = new Resend(process.env.RESEND_API_KEY)
+const FROM_EMAIL = 'PromptOS <onboarding@resend.dev>' // Use your verified domain
+
+// Email Templates
+const getPromptName = (promptId: string): string => {
+    const names: Record<string, string> = {
+        '1': 'Starter Format',
+        '2': 'Pro Builder Format',
+        '3': 'Industry Engineer Format',
+        '4': 'Universal Architecture',
+        '5': 'Ultimate A→Z Blueprint',
+        '6': 'Master Super Pack',
+    }
+    return names[promptId] || `Prompt #${promptId}`
+}
 
 export async function sendPurchaseEmail(email: string, promptId: string) {
-    if (!process.env.RESEND_API_KEY) {
-        console.log('Mocking email send to:', email)
-        return { success: true, id: 'mock-id' }
-    }
+    const promptName = getPromptName(promptId)
+    const unlockUrl = `${process.env.NEXT_PUBLIC_APP_URL}/unlock?prompt=${promptId}&email=${encodeURIComponent(email)}`
 
     try {
         const { data, error } = await resend.emails.send({
-            from: 'PromptOS <noreply@promptos.app>',
+            from: FROM_EMAIL,
             to: email,
-            subject: 'Your Prompt is Ready! 🚀',
+            subject: `🎉 Your ${promptName} is Ready!`,
             html: `
-                <h1>Thank you for your purchase!</h1>
-                <p>You have successfully unlocked Prompt #${promptId}.</p>
-                <p><a href="https://4-promt.vercel.app/unlock?prompt=${promptId}&email=${encodeURIComponent(email)}">Click here to access your prompt</a></p>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+        .header { background: linear-gradient(135deg, #0ea5e9, #a855f7); padding: 40px; border-radius: 12px 12px 0 0; text-align: center; }
+        .header h1 { color: white; margin: 0; font-size: 28px; }
+        .content { background: #f8fafc; padding: 40px; border-radius: 0 0 12px 12px; }
+        .button { display: inline-block; background: #0ea5e9; color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 20px 0; }
+        .footer { text-align: center; margin-top: 40px; color: #64748b; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Purchase Successful!</h1>
+        </div>
+        <div class="content">
+            <p>Hi there! 👋</p>
+            <p>Thank you for purchasing <strong>${promptName}</strong> from PromptOS!</p>
+            <p>Your prompt is ready to use. Click the button below to access it:</p>
+            <p style="text-align: center;">
+                <a href="${unlockUrl}" class="button">🚀 Access Your Prompt</a>
+            </p>
+            <p><strong>What's next?</strong></p>
+            <ul>
+                <li>Copy the prompt to your clipboard</li>
+                <li>Open ChatGPT, Claude, or any AI tool</li>
+                <li>Paste and start building!</li>
+            </ul>
+            <p>Need help? Reply to this email anytime.</p>
+            <p>Happy building! 🛠️<br><strong>The PromptOS Team</strong></p>
+        </div>
+        <div class="footer">
+            <p>© ${new Date().getFullYear()} PromptOS. All rights reserved.</p>
+            <p><a href="${process.env.NEXT_PUBLIC_APP_URL}">Visit PromptOS</a></p>
+        </div>
+    </div>
+</body>
+</html>
             `
         })
 
         if (error) {
-            console.error('Resend Error:', error)
+            console.error('❌ Email error:', error)
             throw error
         }
 
+        console.log('✅ Email sent:', data?.id)
         return { success: true, id: data?.id }
+
     } catch (error) {
-        console.error('Email Send Failed:', error)
+        console.error('❌ Failed to send email:', error)
         return { success: false, error }
     }
 }
 
 export async function sendMagicLinkEmail(email: string, token: string) {
-    if (!process.env.RESEND_API_KEY) {
-        console.log('Mocking Magic Link to:', email, 'Token:', token)
-        return { success: true, id: 'mock-id' }
-    }
-
-    const magicLink = `https://4-promt.vercel.app/api/auth/verify?token=${token}`
+    const magicLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/verify?token=${token}`
 
     try {
         const { data, error } = await resend.emails.send({
-            from: 'PromptOS <noreply@promptos.app>',
+            from: FROM_EMAIL,
             to: email,
             subject: '✨ Your Magic Login Link',
             html: `
-                <h1>Welcome back to PromptOS!</h1>
-                <p>Click the link below to sign in instantly:</p>
-                <p><a href="${magicLink}" style="padding: 12px 24px; background: #22c55e; color: white; text-decoration: none; border-radius: 6px;">Sign In Now</a></p>
-                <p>Or copy this link: ${magicLink}</p>
-                <p>This link expires in 24 hours.</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+        .content { background: #f8fafc; padding: 40px; border-radius: 12px; }
+        .button { display: inline-block; background: #0ea5e9; color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h2>🔐 Login to PromptOS</h2>
+            <p>Click the button below to log in. This link expires in 15 minutes.</p>
+            <p style="text-align: center;">
+                <a href="${magicLink}" class="button">🚀 Log In</a>
+            </p>
+            <p style="color: #64748b; font-size: 14px;">If you didn't request this link, you can safely ignore this email.</p>
+        </div>
+    </div>
+</body>
+</html>
             `
         })
 
-        if (error) throw error
+        if (error) {
+            console.error('❌ Magic link email error:', error)
+            throw error
+        }
+
+        console.log('✅ Magic link sent:', data?.id)
         return { success: true, id: data?.id }
+
     } catch (error) {
-        console.error('Magic Link Failed:', error)
+        console.error('❌ Failed to send magic link:', error)
         return { success: false, error }
     }
 }
 
-import { kv } from '@vercel/kv'
+export async function sendFormUnlockEmail(email: string, name: string, promptId: string) {
+    const promptName = getPromptName(promptId)
+    const unlockUrl = `${process.env.NEXT_PUBLIC_APP_URL}/unlock?prompt=${promptId}&email=${encodeURIComponent(email)}`
 
-export async function checkEmailRateLimit(email: string): Promise<boolean> {
-    const key = `rate_limit:email:${email}`
     try {
-        const count = await kv.incr(key)
-        if (count === 1) {
-            await kv.expire(key, 3600) // 1 hour
+        const { data, error } = await resend.emails.send({
+            from: FROM_EMAIL,
+            to: email,
+            subject: `🎁 ${name}, Your Free ${promptName} is Ready!`,
+            html: `
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+        .header { background: linear-gradient(135deg, #10b981, #3b82f6); padding: 40px; border-radius: 12px 12px 0 0; text-align: center; }
+        .header h1 { color: white; margin: 0; font-size: 28px; }
+        .content { background: #f8fafc; padding: 40px; border-radius: 0 0 12px 12px; }
+        .button { display: inline-block; background: #10b981; color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎁 Free Prompt Unlocked!</h1>
+        </div>
+        <div class="content">
+            <p>Hi ${name}! 👋</p>
+            <p>Thank you for signing up! Your <strong>${promptName}</strong> is ready to use.</p>
+            <p style="text-align: center;">
+                <a href="${unlockUrl}" class="button">🚀 Access Your Prompt</a>
+            </p>
+            <p>Happy building! 🛠️</p>
+        </div>
+    </div>
+</body>
+</html>
+            `
+        })
+
+        if (error) {
+            console.error('❌ Form unlock email error:', error)
+            throw error
         }
-        return count <= 3
+
+        console.log('✅ Form unlock email sent:', data?.id)
+        return { success: true, id: data?.id }
+
     } catch (error) {
-        console.error('Rate Limit Check Failed:', error)
-        return true // Fail open
+        console.error('❌ Failed to send form unlock email:', error)
+        return { success: false, error }
     }
 }
-
-
