@@ -686,18 +686,22 @@ async function getProgress(userId: string): Promise<ReferralProgress> {
         referredBy: data.referredBy as string
     }
 }
+```
 
-2.6 Complete Gumroad Webhook
-src / app / api / webhook / gumroad / route.ts - Production Ready
-Code
-// src/app/api/webhook/gumroad/route.ts import { NextRequest, NextResponse } from 'next/server' import { kv } from '@vercel/kv' import { sendPurchaseEmail } from '@/lib/email' export async function POST(request: NextRequest) { try { cons
+---
 
+## 2.6 Complete Gumroad Webhook
+
+**File:** `src / app / api / webhook / gumroad / route.ts` - Production Ready
+
+```typescript
 // src/app/api/webhook/gumroad/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { kv } from '@vercel/kv'
 import { sendPurchaseEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
+
     try {
         const formData = await request.formData()
 
