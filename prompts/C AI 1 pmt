@@ -291,75 +291,96 @@ User clicks "Copy" → Prompt copied to clipboard
 
 ---
 
-9. FULL FEATURE SPECIFICATIONS
-Feature 1: Payment Processing (Stripe)
-Description: Integrate Stripe Checkout for seamless payments
-Technical Details:
-Use Stripe Checkout (hosted page)
-Create payment link for each prompt tier
-Pass metadata: {email, promptId, price}
-Webhook endpoint to capture checkout.session.completed
-Store purchase in KV store: email:promptId → true
-Acceptance Criteria:
-✅ Payment completes in <60s
-✅ Supports all major cards (Visa, Mastercard, Amex)
-✅ Mobile-friendly checkout
-✅ Webhook fires 100% of the time
-✅ No duplicate charges
-Edge Cases:
-User refreshes during checkout → Resume session
-Payment fails → Show error + retry button
-Webhook delayed → Poll status after 30s
+## 9. FULL FEATURE SPECIFICATIONS
 
-Feature 2: Email-Based Auth (Magic Links)
-Description: Passwordless authentication via email magic links
-Technical Details:
-User enters email
-Generate JWT token (expires in 24h)
-Send email with link: /auth?token=XXX
-Verify token on click → Set session cookie (30 days)
-Session stored in localStorage
-Acceptance Criteria:
-✅ Email sent within 30s
-✅ Link works on any device
-✅ Expired links show clear error
-✅ No password required
-Security:
-JWT signed with secret key
-Rate limit: 3 emails per hour per IP
-Token single-use (burns after first click)
+### Feature 1: Payment Processing (Stripe)
+**Description:** Integrate Stripe Checkout for seamless payments
 
-Feature 3: Prompt Unlock System
-Description: Display purchased prompt with copy/download options
-Technical Details:
-Fetch prompt from JSON file or backend
-Render Markdown (code blocks, bold, lists)
-Copy button uses navigator.clipboard.writeText()
-Download PDF uses jsPDF library
-Mobile responsive (readable on small screens)
-Acceptance Criteria:
-✅ Prompt loads instantly (<1s)
-✅ Copy button works 100% of the time
-✅ PDF includes branding (logo, footer)
-✅ Markdown renders correctly
+**Technical Details:**
+- Use Stripe Checkout (hosted page)
+- Create payment link for each prompt tier
+- Pass metadata: {email, promptId, price}
+- Webhook endpoint to capture checkout.session.completed
+- Store purchase in KV store: email:promptId → true
 
-Feature 4: Share-to-Unlock (Prompt 3)
-Description: Unlock Prompt 3 by sharing to 3 platforms
-Technical Details:
-Share buttons for Twitter, LinkedIn, Reddit
-Each share opens native share dialog with pre-filled text
-Track shares via URL param: ?ref=user123
-Backend endpoint: /api/track-share?user=XX&platform=XX
-After 3 unique shares → Unlock prompt
-Prevent cheating: Check Referer header, rate limit
-Acceptance Criteria:
-✅ Share buttons work on mobile
-✅ Tracks shares accurately
-✅ Unlocks after 3 shares
-✅ Cannot game system (refresh = no count)
+**Acceptance Criteria:**
+- ✅ Payment completes in <60s
+- ✅ Supports all major cards (Visa, Mastercard, Amex)
+- ✅ Mobile-friendly checkout
+- ✅ Webhook fires 100% of the time
+- ✅ No duplicate charges
 
-10. DATA MODEL
-User Purchase Record (KV Store)
+**Edge Cases:**
+- User refreshes during checkout → Resume session
+- Payment fails → Show error + retry button
+- Webhook delayed → Poll status after 30s
+
+---
+
+### Feature 2: Email-Based Auth (Magic Links)
+**Description:** Passwordless authentication via email magic links
+
+**Technical Details:**
+- User enters email
+- Generate JWT token (expires in 24h)
+- Send email with link: /auth?token=XXX
+- Verify token on click → Set session cookie (30 days)
+- Session stored in localStorage
+
+**Acceptance Criteria:**
+- ✅ Email sent within 30s
+- ✅ Link works on any device
+- ✅ Expired links show clear error
+- ✅ No password required
+
+**Security:**
+- JWT signed with secret key
+- Rate limit: 3 emails per hour per IP
+- Token single-use (burns after first click)
+
+---
+
+### Feature 3: Prompt Unlock System
+**Description:** Display purchased prompt with copy/download options
+
+**Technical Details:**
+- Fetch prompt from JSON file or backend
+- Render Markdown (code blocks, bold, lists)
+- Copy button uses navigator.clipboard.writeText()
+- Download PDF uses jsPDF library
+- Mobile responsive (readable on small screens)
+
+**Acceptance Criteria:**
+- ✅ Prompt loads instantly (<1s)
+- ✅ Copy button works 100% of the time
+- ✅ PDF includes branding (logo, footer)
+- ✅ Markdown renders correctly
+
+---
+
+### Feature 4: Share-to-Unlock (Prompt 3)
+**Description:** Unlock Prompt 3 by sharing to 3 platforms
+
+**Technical Details:**
+- Share buttons for Twitter, LinkedIn, Reddit
+- Each share opens native share dialog with pre-filled text
+- Track shares via URL param: ?ref=user123
+- Backend endpoint: /api/track-share?user=XX&platform=XX
+- After 3 unique shares → Unlock prompt
+- Prevent cheating: Check Referer header, rate limit
+
+**Acceptance Criteria:**
+- ✅ Share buttons work on mobile
+- ✅ Tracks shares accurately
+- ✅ Unlocks after 3 shares
+- ✅ Cannot game system (refresh = no count)
+
+---
+
+## 10. DATA MODEL
+
+### User Purchase Record (KV Store)
+```json
 {
   "email": "alex@example.com",
   "purchases": [
@@ -373,8 +394,10 @@ User Purchase Record (KV Store)
   "createdAt": "2025-12-12T10:30:00Z",
   "lastAccessed": "2025-12-12T12:00:00Z"
 }
+```
 
-Prompt Data (JSON)
+### Prompt Data (JSON)
+```json
 {
   "id": 4,
   "name": "Universal Architecture Format",
@@ -385,18 +408,24 @@ Prompt Data (JSON)
   "unlockMethod": "payment",
   "featured": true
 }
+```
 
-Session Token (JWT)
+### Session Token (JWT)
+```json
 {
   "email": "alex@example.com",
   "iat": 1702382400,
   "exp": 1702468800,
   "jti": "unique-token-id"
 }
+```
 
+---
 
-11. API BLUEPRINT
-Endpoints
+## 11. API BLUEPRINT
+
+### Endpoints
+
 1. Create Checkout Session
 POST /api/create-checkout
 Request:
