@@ -9,22 +9,11 @@ const PROMPT_CONTENT: Record<number, { name: string; icon: string; content: stri
     1: {
         name: 'Starter Format',
         icon: '🌱',
-        content: `================================================================================
-                        PROMPT 1: STARTER FORMAT (Tier 1)
-================================================================================
-Price: FREE
-Best For: Quick idea expansion, simple apps, MVPs
-
----BEGIN PROMPT---
-
-FORMAT 1: MINIMAL → EXPAND EVERYTHING
-
-RAW IDEA: 
+        content: `RAW IDEA: 
 """
-[YOUR IDEA HERE - Describe your app/website idea in 1-3 sentences]
+[YOUR IDEA HERE]
 """
 
-INSTRUCTIONS TO LLM:
 Expand this raw idea into a complete structured breakdown including:
 - Clear explanation of what this product does
 - Feature list (core and nice-to-have)
@@ -41,29 +30,16 @@ OUTPUT FORMAT:
 5. Basic Implementation Steps
 6. Notes / Improvements / Ideas
 
-Return all output in crisp, clean, simple structure.
-
----END PROMPT---`
+Return all output in crisp, clean, simple structure.`
     },
     2: {
         name: 'Pro Builder Format',
         icon: '⚡',
-        content: `================================================================================
-                     PROMPT 2: PRO BUILDER FORMAT (Tier 2)
-================================================================================
-Price: FREE
-Best For: Professional websites, business apps, client projects
-
----BEGIN PROMPT---
-
-FORMAT 2: TOP WEBSITE-BUILDER STYLE (Industry Standard)
-
-PROJECT IDEA: 
+        content: `PROJECT IDEA: 
 """
-[YOUR IDEA HERE - Describe your app/website idea in detail]
+[YOUR IDEA HERE]
 """
 
-TASK:
 Convert this idea into a full website-builder-ready specification.
 
 OUTPUT SECTIONS REQUIRED:
@@ -78,30 +54,17 @@ OUTPUT SECTIONS REQUIRED:
 9. DEVELOPMENT ROADMAP (Phases and milestones)
 10. DEPLOYMENT FRAMEWORK (Hosting, build system, CI/CD)
 
-Ensure the final output can be directly used by an automated no-code/AI website builder.
-
----END PROMPT---`
+Ensure the final output can be directly used by an automated no-code/AI website builder.`
     },
     3: {
         name: 'Industry Engineer Format',
         icon: '🏭',
-        content: `================================================================================
-                   PROMPT 3: INDUSTRY ENGINEER FORMAT (Tier 3)
-================================================================================
-Price: $3 (Referral unlock available)
-Best For: Engineering teams, technical documentation, AI automation
-
----BEGIN PROMPT---
-
-FORMAT 3: OFFICIAL LLM UNDERSTANDING TEMPLATE (Maximum Clarity for Any AI)
-
-IDEA INPUT:
+        content: `IDEA INPUT:
 """
-[YOUR IDEA HERE - Include as much context as possible: target users, key features, business model]
+[YOUR IDEA HERE]
 """
 
-YOUR TASK:
-Interpret the idea and produce a complete structured document for downstream AI tools.
+Interpret this idea and produce a complete structured document for downstream AI tools.
 
 MANDATORY OUTPUT STRUCTURE:
 
@@ -130,33 +93,16 @@ RULES:
 - No fluff or filler content
 - No assumptions beyond what's provided in the idea
 - Use precise engineering language
-- Be comprehensive and actionable
-
----END PROMPT---`
+- Be comprehensive and actionable`
     },
     4: {
         name: 'Universal Architecture',
         icon: '🌐',
-        content: `================================================================================
-                   PROMPT 4: UNIVERSAL ARCHITECTURE (Tier 4)
-================================================================================
-Price: $4.90
-Best For: Complex applications, multi-platform projects, team handoffs
-
----BEGIN PROMPT---
-
-FORMAT 4: UNIVERSAL LLM FORMAT (Works on ANY Model, ANY Platform)
-
-INPUT IDEA: 
+        content: `INPUT IDEA: 
 """
-[YOUR IDEA HERE - Be as detailed as possible. Include: 
-- What the product does
-- Who it's for
-- Key features you want
-- Any technical preferences]
+[YOUR IDEA HERE]
 """
 
-OUTPUT REQUIREMENT:
 Generate a universal specification that includes:
 
 1. High-Level Summary
@@ -169,47 +115,24 @@ Generate a universal specification that includes:
 8. Final Deliverable Specification (for handoff to builder models)
 9. Additional Insights & Recommendations
 
-ADDITIONAL RULES:
+RULES:
 - Always maintain numbered lists
 - Always include JSON where needed
 - Keep consistent section names for easy parsing
 - Output must be comprehensive, expertly structured, and immediately actionable
-- Maintain a confident, structured tone throughout
-- This output should work with ANY AI coding assistant
-
----END PROMPT---`
+- Maintain a confident, structured tone throughout`
     },
     5: {
         name: 'Ultimate A→Z Blueprint',
         icon: '🗺️',
-        content: `================================================================================
-                  PROMPT 5: ULTIMATE A→Z BLUEPRINT (Tier 5)
-================================================================================
-Price: $6.90
-Best For: Full production apps, startup MVPs, complete system builds
-
----BEGIN PROMPT---
-
-FORMAT 5: ULTIMATE A-TO-Z EXTREME DEPTH FORMAT (Full System Generation)
-
-This prompt forces the LLM to output EVERYTHING needed for a complete app build.
-
-IDEA: 
+        content: `IDEA: 
 """
-[YOUR IDEA HERE - Provide maximum detail:
-- Product name (if you have one)
-- What problem it solves
-- Target users
-- Key features
-- Monetization (if applicable)
-- Any design preferences
-- Technical requirements/constraints]
+[YOUR IDEA HERE]
 """
 
-TASK:
 Expand this idea into a complete A→Z system blueprint ready for automated development.
 
-OUTPUT REQUIRED (MANDATORY - DO NOT SKIP ANY SECTION):
+OUTPUT REQUIRED (MANDATORY):
 
 1. EXECUTIVE SUMMARY
    - One paragraph overview
@@ -270,9 +193,7 @@ OUTPUT REQUIRED (MANDATORY - DO NOT SKIP ANY SECTION):
     - Folder structure
     - Key deliverables checklist
 
-Output everything in clean structured text. No missing sections.
-
----END PROMPT---`
+Output everything in clean structured text. No missing sections.`
     },
     6: {
         name: 'Master Super Pack',
