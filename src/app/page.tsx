@@ -169,42 +169,33 @@ function HowItWorks() {
 }
 
 function PromptCard({ prompt, onUnlock }: { prompt: typeof PROMPTS[0], onUnlock: (id: number, type: string) => void }) {
-    const isComingSoon = prompt.unlockType === 'coming-soon'
     const isFree = prompt.unlockType === 'free' || prompt.unlockType === 'form'
 
     const getButtonText = () => {
         switch (prompt.unlockType) {
             case 'free': return '🎁 Get FREE Now'
             case 'form': return '⚡ Instant Unlock (Free)'
-            case 'referral': return '🔓 Unlock (₹249 or Refer)'
-            case 'paid': return `💳 Unlock ₹${prompt.price}`
-            case 'coming-soon': return '🔔 Coming Soon'
+            case 'paid': return `💳 Pay ₹${prompt.price}`
             default: return '🔓 Unlock'
         }
     }
 
     const getButtonClass = () => {
-        if (isComingSoon) return 'btn btn-secondary opacity-60 cursor-not-allowed'
         if (isFree) return 'btn bg-green-600 hover:bg-green-700 text-white'
         if (prompt.isMaster) return 'btn btn-master'
         return 'btn btn-unlock'
     }
 
     return (
-        <div className={`prompt-card ${prompt.popular ? 'featured' : ''} ${prompt.isMaster ? 'master' : ''} ${isComingSoon ? 'opacity-70' : ''}`}>
+        <div className={`prompt-card ${prompt.popular ? 'featured' : ''} ${prompt.isMaster ? 'master' : ''}`}>
             {prompt.popular && (
                 <div className="absolute -top-3 left-4 px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full">
                     🔥 Popular
                 </div>
             )}
-            {isFree && (
+            {isFree && !prompt.popular && (
                 <div className="absolute -top-3 left-4 px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
                     🎁 FREE
-                </div>
-            )}
-            {isComingSoon && (
-                <div className="absolute -top-3 left-4 px-3 py-1 bg-gray-600 text-white text-xs font-semibold rounded-full flex items-center gap-1">
-                    <Clock className="w-3 h-3" /> Coming Soon
                 </div>
             )}
 
@@ -215,14 +206,13 @@ function PromptCard({ prompt, onUnlock }: { prompt: typeof PROMPTS[0], onUnlock:
                 <p className="text-gray-400 text-sm">{prompt.description}</p>
 
                 <div className="flex items-baseline gap-1">
-                    <span className={`text-2xl font-bold ${prompt.unlockType === 'free' || prompt.unlockType === 'form' ? 'text-green-400' : ''}`}>
+                    <span className={`text-2xl font-bold ${isFree ? 'text-green-400' : ''}`}>
                         {prompt.priceLabel}
                     </span>
                 </div>
 
                 <button
-                    onClick={() => !isComingSoon && onUnlock(prompt.id, prompt.unlockType)}
-                    disabled={isComingSoon}
+                    onClick={() => onUnlock(prompt.id, prompt.unlockType)}
                     className={`${getButtonClass()} w-full`}
                 >
                     {getButtonText()}
