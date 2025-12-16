@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
         }
 
         // 1. Rate Limit
-        const allowed = await checkEmailRateLimit(email)
+        const { allowed } = checkEmailRateLimit(email)
         if (!allowed) {
             return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
         }
